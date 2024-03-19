@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../css/StatusFilter.css"
 const StatusFilter = () => {
   const filerCategory = [
@@ -10,31 +10,49 @@ const StatusFilter = () => {
 
   const [checkedList, setCheckedList] = useState([])
 
-  const onChecked = (index) => {
-    const newList = [...checkedList];
-    newList[index] = !newList[index];
-    setCheckedList(newList);
+  const onCheckBoxChecked = (index) => {
+    const newCheckedList = [...checkedList]; // Create a copy
+    const alreadyChecked = newCheckedList.includes(index);
+    const checkbox = document.getElementById(`checkBox${index}`);
+    if (alreadyChecked) {
+      // Remove the index if it's already present
+      const indexToRemove = newCheckedList.indexOf(index); // Find the index to remove
+      newCheckedList.splice(indexToRemove, 1); // Remove it
+      checkbox.checked = false;
+      setCheckedList(newCheckedList);
+      
+    } else {
+      // Add the index if it's not present
+      newCheckedList.push(index);
+      checkbox.checked = true;
+      setCheckedList(newCheckedList);
+    }
+    
   };
 
-  return (
-    <div className='h-[100%]'>
-        <div className='flex justify-between items-center h-[100%]'>
-          <div className=''>
-            <ul className='flex'>
-              {filerCategory.map((data, index)=>{
-                // const isChecked = checkedList.some((checkboxID) => checkboxID === index)
-                const isChecked = checkedList[index] || false;
-                return (               
-                  <li key={index} className='pr-4 pl-[5px]'>
-                    <div className={`${isChecked ? 'border-2 border-[#008000] transition: transform 0.3s ease;' : 'border-2 border-transparent transition: transform 0.3s ease;'} flex items-center gap-4 shadow rounded-[25px] h-[40px] p-4 bg-white text-[#959DB3] cursor-pointer` }>
-                      <div className='text-[16px]'>{data}</div>
-                      <input type="checkbox" className='checkboxes w-[16px] h-[16px]' id={`checkBox${index}`} onChange={() => {onChecked(index)}} /> 
-                      <label htmlFor={`checkBox${index}`} className='checkbox-label'></label>
-                       </div>
-                       
-                  </li>
-                )
-              })}    
+      useEffect(() => {
+        setCheckedList([])
+      }, []);
+
+    return (
+      <div className='h-[100%]'>
+          <div className='flex justify-between items-center h-[100%]'>
+            <div className=''>
+              <ul className='flex'>
+                {filerCategory.map((data, index)=>{
+                  const isChecked = checkedList.some((checkboxID) => checkboxID === index);
+                  // const isChecked = checkedList[index] || false;
+                  return (               
+                    <li key={index} className='pr-4 pl-[5px]'>
+                      <div className={`${isChecked ? 'border-2 border-[#008000]' : 'border-2 border-transparent'} transition ease-in-out duration-300 flex items-center gap-3 shadow rounded-[25px] h-[40px] p-4 bg-white text-[#959DB3] cursor-pointer` } onClick={() => onCheckBoxChecked(index)}>
+                        <div className='text-[16px]'>{data}</div>
+                        <input type="checkbox" className='checkboxes w-[17px] h-[17px]' id={`checkBox${index}`} onChange={() => onCheckBoxChecked(index)} disabled/> 
+                        <label htmlFor={`checkBox${index}`} className='checkbox-label' ></label>
+                      </div>
+                        
+                    </li>
+                  )
+                })}    
             </ul>
           </div>
           <div>

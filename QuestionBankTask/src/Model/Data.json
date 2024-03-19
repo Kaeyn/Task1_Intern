@@ -1,0 +1,200 @@
+{
+    "Module":[
+		{
+			"id":"M.001",
+			"moduleName":"NHÂN SỰ",
+			"category":[
+                {
+                  "id" : "C.001",
+                  "name" : "ĐÁNH GIÁ NHÂN SỰ",
+                  "icons" : ["icon_CheckList.png", "checklist.png"],
+                  "catechild" : [
+                    {
+                      "id" : "B.001",
+                      "name": "",
+                      "icon":["question-white.png"],
+                      "content" : [
+                        {
+                          "id" : "Q.001",
+                          "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
+                          "type" : "Dạng một câu lựa chọn",
+                          "group" : ["Thương hiệu, văn hoá cty"],
+                          "timelimit" : "30",
+                          "status" : "0"                        
+                        },
+                        {
+                          "id" : "Q.002",
+                          "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
+                          "type" : "Dạng một câu lựa chọn",
+                          "group" : ["Thương hiệu, văn hoá cty"],
+                          "timelimit" : "30",
+                          "status" : "0"                        
+                        },
+                        {
+                          "id" : "Q.003",
+                          "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
+                          "type" : "Dạng một câu lựa chọn",
+                          "group" : ["Thương hiệu, văn hoá cty"],
+                          "timelimit" : "30",
+                          "status" : "0"                        
+                        },
+                        {
+                          "id": "Q.004",
+                          "stringques": "Sứ mệnh của Hachi Hachi là gì?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương hiệu, văn hoá cty"],
+                          "timelimit": "165", 
+                          "status": "3"
+                        },
+                        {
+                          "id": "Q.005",
+                          "stringques": "Giá trị cốt lõi của Hachi Hachi là gì?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương hiệu, văn hoá cty"],
+                          "timelimit": "180",  
+                          "status": "4"
+                        },
+                        {
+                          "id": "Q.006",
+                          "stringques": "Hachi Hachi có bán sản phẩm gì?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Sản phẩm"],
+                          "timelimit": "120",  
+                          "status": "0"
+                        },
+                        {
+                          "id": "Q.007",
+                          "stringques": "Sản phẩm nào bán chạy nhất của Hachi Hachi?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Sản phẩm"],
+                          "timelimit": "135",  
+                          "status": "1"
+                        },
+                        {
+                          "id": "Q.008",
+                          "stringques": "Giá cả sản phẩm của Hachi Hachi như thế nào?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Sản phẩm"],
+                          "timelimit": "150",  
+                          "status": "2"
+                        },
+                        {
+                          "id": "Q.009",
+                          "stringques": "Chất lượng sản phẩm của Hachi Hachi có tốt không?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Sản phẩm"],
+                          "timelimit": "165",  
+                          "status": "3"
+                        },
+                        {
+                          "id": "Q.010",
+                          "stringques": "Hachi Hachi có chương trình khuyến mãi nào không?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Sản phẩm"],
+                          "timelimit": "180",  
+                          "status": "4"
+                        },
+                        {
+                          "id": "Q.011",
+                          "stringques": "Hachi Hachi có dịch vụ giao hàng không?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Dịch vụ"],
+                          "timelimit": "120",  
+                          "status": "0"
+                        },
+                        {
+                          "id": "Q.013",
+                          "stringques": "Thời gian giao hàng của Hachi Hachi là bao lâu?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Dịch vụ"],
+                          "timelimit": "60",  
+                          "status": "0"
+                        },
+                        {
+                          "id": "Q.014",
+                          "stringques": "Hachi Hachi có chính sách đổi trả hàng không?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Dịch vụ"],
+                          "timelimit": "65",  
+                          "status": "1"
+                        },
+                        {
+                          "id": "Q.015",
+                          "stringques": "Phương thức thanh toán nào được chấp nhận tại Hachi Hachi?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Dịch vụ"],
+                          "timelimit": "70",  
+                          "status": "2"
+                        },
+                        {
+                          "id": "Q.016",
+                          "stringques": "Hachi Hachi có cửa hàng online không?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương mại điện tử"],
+                          "timelimit": "30",  
+                          "status": "3"
+                        },
+                        {
+                          "id": "Q.017",
+                          "stringques": "Ưu điểm của mua hàng online tại Hachi Hachi là gì?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương mại điện tử"],
+                          "timelimit": "35", 
+                          "status": "4"
+                        },
+                        {
+                          "id": "Q.018",
+                          "stringques": "Nhược điểm của mua hàng online tại Hachi Hachi là gì?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương mại điện tử"],
+                          "timelimit": "40",  
+                          "status": "0"
+                        },
+                        {
+                          "id": "Q.019",
+                          "stringques": "Mã giảm giá của Hachi Hachi lấy ở đâu?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương mại điện tử"],
+                          "timelimit": "45",  
+                          "status": "1"
+                        },
+                        {
+                          "id": "Q.020",
+                          "stringques": "Cách sử dụng mã giảm giá của Hachi Hachi như thế nào?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Thương mại điện tử"],
+                          "timelimit": "50", 
+                          "status": "2"
+                        },
+                        {
+                          "id": "Q.021",
+                          "stringques": "Hachi Hachi có hỗ trợ khách hàng qua kênh nào?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Chăm sóc khách hàng"],
+                          "timelimit": "30",  
+                          "status": "3"
+                        },
+                        {
+                          "id": "Q.022",
+                          "stringques": "Thời gian hoạt động của bộ phận chăm sóc khách hàng?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Chăm sóc khách hàng"],
+                          "timelimit": "35", 
+                          "status": "4"
+                        },
+                        {
+                          "id": "Q.023",
+                          "stringques": "Ý kiến của bạn về dịch vụ chăm sóc khách hàng của Hachi Hachi?",
+                          "type": "Dạng một câu lựa chọn",
+                          "group": ["Chăm sóc khách hàng"]
+                        }
+                      ]
+                    }
+                  ]
+                  
+                }
+              
+            ]
+		}
+	]
+}

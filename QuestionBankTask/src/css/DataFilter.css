@@ -1,0 +1,8 @@
+.shadow-bottom-right {
+    box-shadow: 5px 5px 10px -2px rgb(0 0 0 / 0.1);
+}
+  
+.shadow-bottom-left {
+    box-shadow: -5px 5px 10px -2px rgb(0 0 0 / 0.1);
+}
+

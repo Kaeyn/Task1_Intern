@@ -1,0 +1,15 @@
+.grid-cus {
+    grid-template-columns: 3% 49% 15% 15% 15% 3%;
+    
+}
+.three-dots-hover:hover{
+    background-color: #BDC2D2;
+    color: white;
+}
+
+.func-parent > div:hover {
+    /* Styles for hover state */
+    background-color: #979797;  /* Example hover background color */
+     /* Example hover text color */
+    cursor: pointer;  /* Indicate clickable element on hover */
+  }

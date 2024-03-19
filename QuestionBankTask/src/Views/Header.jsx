@@ -11,7 +11,7 @@ const Header = () => {
         }
     }
     useEffect(() => {
-        setSelected(7)
+        setSelected(6)
       }, [])
     
   return (
@@ -35,7 +35,7 @@ const Header = () => {
                         <li className='text-[#BBBBBB] cursor-pointer' onClick={() => selectCategory(6)}>------------</li>
                         <div className='w-[2px] h-[30px] bg-[#C4C4C4] rounded-[3px]'></div>
                         <li  className='relative h-[100%] flex flex-col justify-center cursor-pointer' onClick={() => selectCategory(7)}>{selected === 7 ? 
-                        (<div><div className='text-[#008000] font-[600]'>NHÂN SỰ</div> <div className='absolute bg-[#008000] w-[80px] h-[5px] rounded-[3px] bottom-0'></div></div>) : (<div className='text-[#008000] font-[600]'>NHÂN SỰ</div>)}</li>
+                        (<div className=''><div className='text-[#008000] font-[600]'>NHÂN SỰ</div> <div className='absolute bg-[#008000] w-[80px] h-[5px] rounded-[3px] bottom-0 '></div></div>) : (<div className='text-[#BBBBBB] font-[600]'>NHÂN SỰ</div>)}</li>
                 </ul>
             </div>
             <div className='self-center'>
