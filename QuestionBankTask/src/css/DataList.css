@@ -1,5 +1,5 @@
 .grid-cus {
-    grid-template-columns: 3% 49% 15% 15% 15% 3%;
+    grid-template-columns: 3% 52% 14% 14% 14% 3%;
     
 }
 .three-dots-hover:hover{
@@ -12,4 +12,41 @@
     background-color: #979797;  /* Example hover background color */
      /* Example hover text color */
     cursor: pointer;  /* Indicate clickable element on hover */
+  }
+
+
+  .checkboxes {
+    display: none; /* Hide the default checkbox */
+  }
+  
+  .checkbox-label {
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 2px solid #959DB3;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .checkbox-label:before {
+    content: '\2714';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #008000; 
+    color: white;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 17px;
+    padding-left: 1px;
+    transform: translate(-50%, -50%) scale(0); 
+    transition: transform 0.3s ease;
+    
+  }
+  
+  .checkboxes:checked + .checkbox-label:before {
+    transform: translate(-50%, -50%) scale(1); 
   }

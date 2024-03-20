@@ -11,7 +11,7 @@
                   "catechild" : [
                     {
                       "id" : "B.001",
-                      "name": "",
+                      "name": "Ngân hàng câu hỏi",
                       "icon":["question-white.png"],
                       "content" : [
                         {
@@ -181,13 +181,7 @@
                           "group": ["Chăm sóc khách hàng"],
                           "timelimit": "35", 
                           "status": "4"
-                        },
-                        {
-                          "id": "Q.023",
-                          "stringques": "Ý kiến của bạn về dịch vụ chăm sóc khách hàng của Hachi Hachi?",
-                          "type": "Dạng một câu lựa chọn",
-                          "group": ["Chăm sóc khách hàng"]
-                        }
+                        }                     
                       ]
                     }
                   ]

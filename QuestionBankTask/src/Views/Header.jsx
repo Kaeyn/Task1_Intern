@@ -2,12 +2,13 @@ import React, { useState } from 'react'
 import "../css/Header.css"
 import { useEffect } from 'react';
 
-const Header = () => {
+const Header = ({setSelectedCate}) => {
     const [selected, setSelected] = useState(1);
     const selectCategory = (index) =>{
         const tempSelected = selected;
         if(index != tempSelected){
             setSelected(index)
+            setSelectedCate(index)
         }
     }
     useEffect(() => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import "../css/StatusFilter.css"
-const StatusFilter = () => {
+const StatusFilter = ({listStatusFilter, resetStatus}) => {
   const filerCategory = [
     "Đang soạn thảo",
     "Gửi duyệt",
@@ -11,27 +11,27 @@ const StatusFilter = () => {
   const [checkedList, setCheckedList] = useState([])
 
   const onCheckBoxChecked = (index) => {
-    const newCheckedList = [...checkedList]; // Create a copy
+    const newCheckedList = [...checkedList];
     const alreadyChecked = newCheckedList.includes(index);
     const checkbox = document.getElementById(`checkBox${index}`);
     if (alreadyChecked) {
-      // Remove the index if it's already present
-      const indexToRemove = newCheckedList.indexOf(index); // Find the index to remove
-      newCheckedList.splice(indexToRemove, 1); // Remove it
+      const indexToRemove = newCheckedList.indexOf(index); 
+      newCheckedList.splice(indexToRemove, 1); 
       checkbox.checked = false;
       setCheckedList(newCheckedList);
+      listStatusFilter(newCheckedList);
       
     } else {
-      // Add the index if it's not present
       newCheckedList.push(index);
       checkbox.checked = true;
       setCheckedList(newCheckedList);
+      listStatusFilter(newCheckedList);
     }
     
   };
 
       useEffect(() => {
-        setCheckedList([])
+        onCheckBoxChecked(0)
       }, []);
 
     return (
