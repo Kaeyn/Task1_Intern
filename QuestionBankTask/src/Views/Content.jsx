@@ -3,6 +3,7 @@ import StatusFilter from './StatusFilter'
 import DataFilter from './DataFilter'
 import DataList from './DataList'
 import PageFilter from './PageFilter'
+import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
 
@@ -13,6 +14,7 @@ const Content = ({contentData}) => {
   const [searchInputFilter, setSearchInputFilter] = useState("");
   const [alertBoxData, setAlertBoxData] = useState([]);
   const [showAlertBox, setShowAlertBox] = useState(false);
+  const [listItemToDelete, setListItemToDelete] = useState([]);
   const filterData = () =>{
     let filterByStatus = [];
     if (statusFilter.length === 0) {
@@ -25,7 +27,6 @@ const Content = ({contentData}) => {
     let filterBySearch = [];
     if(searchInputFilter.trim() === ""){
       filterBySearch = filterByStatus;
-      console.log("No")
     }else{
       let searchText = searchInputFilter.toLowerCase();
       // filterBySearch = filterByStatus.filter(item => statusFilter.includes(item.id.toLowerCase().includes(searchText) && item.stringques.toLowerCase().includes(searchText)));
@@ -39,16 +40,24 @@ const Content = ({contentData}) => {
   }
 
   const ShowAlertBox = (questList)=>{
-    
-    setAlertBoxData(questList);
-    console.log(questList)
+    setListItemToDelete(questList)
+    setAlertBoxData(getAlertBoxContent(questList));
     setShowAlertBox(true);
   }
 
   const confirmDeleteItem = () =>{
-
+    const idsToDelete = listItemToDelete.map(question => question.id);
+    const updatedFilteredData = FilteredData.filter(item => !idsToDelete.includes(item.id));
+    setFilteredData(updatedFilteredData);
   }
   
+  const getAlertBoxContent = (questList) =>{
+    const contentList = questList.slice(0, 3).map(question => {
+      const limitedContent = question.stringques.slice(0, 38);
+      return limitedContent;});
+    return contentList;
+  }
+
   const resetContent = () =>{
     setFilteredData(Data);
     setstatusFilter([0]);
@@ -90,14 +99,15 @@ const Content = ({contentData}) => {
     filterData();
   },[searchInputFilter, contentData])
 
+
   return (
-    <div className=' h-[100%] relative'>
+    <div className=' h-[100%] relative wrapper'>
         <div className='w-[100%] h-[8%] max-h-[8%] flex flex-col'><StatusFilter listStatusFilter={setstatusFilter} /></div>
-        <div className='border-[1px] border-[#BDC2D2] w-[100%]'></div>
+        <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
         <div className='w-[100%] h-[9%] max-h-[9%] flex pb-[4px]'><DataFilter searchInput={setSearchInputFilter} resetContent={resetContent}/></div>
-        <div className='border-[1px] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={FilteredData} confirmDeleteItem={confirmDeleteItem} ShowAlertBox={ShowAlertBox}/></div>
-        <div className='w-[100%] h-[7%] max-h-[76%] flex p-[4px]'><PageFilter Data={Data} curpageData={setData}/></div>
+        <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
+        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={FilteredData} ShowAlertBox={ShowAlertBox}/></div>
+        <div className='w-[100%] h-[7%] max-h-[76%] flex p-[4px]'><PageFilter Data={Data} curpageData={setData}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 
@@ -109,17 +119,17 @@ const Content = ({contentData}) => {
                 <div className='w-[100%] h-[60%] flex flex-col justify-center'>
                 <div className='flex-col justify-center text-center items-center p-[7px]'>
                   <div className='text-[17px]'>Bạn chắc chắn muốn xóa phân nhóm</div>
-                  {alertBoxData.length == 1 && <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata.chunk}</div>}
+                  {alertBoxData.length == 1 && <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>}
                   {alertBoxData.length == 2 && 
                                               <div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata.chunk}</div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata.chunk1}</div>
+                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
+                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
                                               </div>                  
                   } 
-                  {alertBoxData.length == 3 && 
+                  {alertBoxData.length >= 3 && 
                                               <div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata[0]}</div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata[1]}</div>
+                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
+                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
                                                 <div className='text-[16px] text-[#36C8CF] font-bold'>...</div>
                                               </div>                  
                   }      

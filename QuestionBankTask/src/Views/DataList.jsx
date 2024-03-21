@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import '../css/DataList.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash} from "@fortawesome/free-solid-svg-icons"
+import { faArrowRotateLeft, faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash} from "@fortawesome/free-solid-svg-icons"
 const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
 
   const [datafContent, setDataFContent] = useState([]);
   const [isHoverOrFocus, setIsHoverOrFocus] = useState(false);
   const [showTooltip, setShowTooltip] = useState(false);
-  
+  const [showMultiTooltip, setShowMultiTooltip] = useState(false);
+  const [listMultiToolFunc, setListMultiToolFunc] = useState([]);
   const [selectedTooltipID, setSelectedTooltipID] = useState(-1);
   const [funcList , setFuncList] = useState([]);
   const [checkBoxList, setCheckBoxList] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(false);
+
 
   const handleToolTipClick = (status, index, id) =>{
       setSelectedTooltipID(index)
@@ -25,10 +27,14 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
         setIsHoverOrFocus(true)
       }
     }
-    useEffect(() => {     
-      setShowTooltip(showTooltip);
-      
-    }, [funcList,showTooltip])
+
+  const handleCloseMultiToolTip = () =>{
+      setShowMultiTooltip(false);
+      unCheckBoxesOnCloseToolTip();
+  }
+    
+
+    
 
     const handleCheckBoxCheck = (index) =>{
       const newCheckedList = [...checkBoxList];
@@ -56,6 +62,14 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       console.log(checkBoxList)
     }
 
+    const handleCheckBoxUpdate = () =>{
+      
+      checkBoxList.forEach(checkboxID => {
+        const checkBox = document.getElementById(checkboxID);
+        checkBox.checked = true;
+      });
+    }
+
     const checkAllBoxes = (checkboxes) =>{
       const newCheckedList = []; 
       checkboxes.forEach((checkbox) => {
@@ -73,6 +87,17 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       setIsAllChecked(false);
       setCheckBoxList([]);
     }
+    
+    const unCheckBoxesOnCloseToolTip = () =>{
+      checkBoxList.forEach((id) => {  
+        const checkbox = document.getElementById(`${id}`)   
+        checkbox.checked = false;         
+      });
+      setIsAllChecked(false);
+      setCheckBoxList([]);
+    }
+
+
 
     const handleBoxesChecking = () =>{
       const parentcheckBox = document.querySelector('.parentCheckBox');
@@ -85,11 +110,11 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
     }
 
     const seeDetailsItem = (id) =>{
-        alert("Clicked see detial on item: " + id)
+        alert("Clicked see detail on item: " + id)
     }
 
     const editItem = (id) =>{
-        alert("Clicked see detial on item: " + id)
+        alert("Clicked edit item: " + id)
     }
 
     const requestApproveItem = (id) =>{
@@ -116,6 +141,7 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       }
     }
 
+    
     const returnItem = (id) =>{
       const index = datafContent.findIndex(item => item.id === id);
       if (index !== -1) {
@@ -124,23 +150,101 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       }
     }
 
+    const requestApproveListItem = () =>{
+      checkBoxList.forEach(itemID => {
+        const status = getItemStatus(itemID);     
+        if(status != null && (status === "0" || status === "4")){
+          requestApproveItem(itemID)
+        }
+        
+      });
+      unCheckBoxesOnCloseToolTip();
+    }
+
+    const approveListItem = () =>{
+      checkBoxList.forEach(itemID => {
+        const status = getItemStatus(itemID);
+        if(status != null && (status === "1" || status === "3")){
+          approveItem(itemID)
+        }
+        
+      });
+      unCheckBoxesOnCloseToolTip();
+    }
+
+    const stopDisplayListItem = () =>{      
+      checkBoxList.forEach(itemID => {
+        const status = getItemStatus(itemID);
+        if(status != null && (status === "2")){
+          stopDisplayItem(itemID)
+        }
+      });
+      unCheckBoxesOnCloseToolTip();
+    }
+
+    const returnListItem = (id) =>{
+      checkBoxList.forEach(itemID => {
+        const status = getItemStatus(itemID);
+        if(status != null && (status === "1" || status === "3")){
+          returnItem(itemID)
+        } 
+      });
+      unCheckBoxesOnCloseToolTip();
+    }
+
+    const deleteMultiItem = () =>{
+      let questionList = [];
+      checkBoxList.forEach(id => {
+        const itemToDelete = datafContent.find(item => item.id === id);    
+        if(itemToDelete){
+            questionList.push(itemToDelete);                     
+        }
+      });
+         
+      ShowAlertBox(questionList)
+  }
+
+    const getItemStatus = (id) =>{
+      const item = datafContent.find(item => item.id === id);
+      return item ? item.status : null;
+    }
+
     const deleteItem = (id) =>{
         const itemToDelete = datafContent.find(item => item.id === id);
         let questionList = []
           if(itemToDelete){
-              let stringques = itemToDelete.stringques
-              const chunkSize = 30;       
-              let chunk = stringques.slice(0,chunkSize);
-              questionList.push({chunk});                     
+              questionList.push(itemToDelete);                     
           }
         
-        confirmDeleteItem = confirmDelete(id)
         ShowAlertBox(questionList)
     }
     
-    const confirmDelete = (id) =>{
-      setDataFContent(prevData => prevData.filter(item => item.id !== id));
+
+    const getListMultitool = () =>{
+      let listStatus = []
+      let listFunc = []
+      checkBoxList.forEach(id => {
+        const status = getItemStatus(id);
+        if(status != null){
+          const isContained = listStatus.find(item => item === status);
+          if(!isContained){
+            listStatus.push(status)
+          }    
+        }  
+      }); 
+      listStatus.forEach(status => {
+          let func = handleFuncOnStatusMultiTool(status)
+          func.forEach(f => {
+            if(!listFunc.includes(f)) {
+                listFunc.push(f);
+            }
+        });
+      });       
+      listFunc.sort((a, b) => a.id - b.id);    
+      setListMultiToolFunc(listFunc)
+      console.log(listFunc)
     }
+    
 
     const iconFuncList = [
       { icon: faEye, text: "Xem chi tiết", action: seeDetailsItem},
@@ -148,8 +252,16 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       { icon: faShare, text: "Gửi duyệt" , action: requestApproveItem},
       { icon: faCircleCheck, text: "Phê duyệt", action: approveItem},
       { icon: faCircleMinus, text: "Ngưng hiển thị", action: stopDisplayItem},
-      { icon: faShare, text: "Trả về", action: returnItem},
+      { icon: faArrowRotateLeft, text: "Trả về", action: returnItem},
       { icon: faTrash, text: "Xoá câu hỏi", action: deleteItem},
+    ];
+
+    const multiToolFuncList = [
+      { id: 1,icon: faShare, text: "Gửi duyệt" , action: requestApproveListItem},
+      { id: 3,icon: faCircleCheck, text: "Duyệt áp dụng", action: approveListItem},
+      { id: 4,icon: faCircleMinus, text: "Ngừng áp dụng", action: stopDisplayListItem},
+      { id: 2,icon: faArrowRotateLeft, text: "Trả về", action: returnListItem},
+      { id: 5,icon: faTrash, text: "Xoá câu hỏi", action: deleteMultiItem}
     ];
   
   
@@ -164,9 +276,21 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
           <FontAwesomeIcon icon={classIcon} style={iconSize} />
       )
     }
+    
+    const Icon20px = ({ classIcon, color }) => {
+      const iconSize = {
+          width: "20px",
+          height: "20px",
+          color: color,
+          cursor: "pointer"
+      };
+      return (
+          <FontAwesomeIcon icon={classIcon} style={iconSize} />
+      )
+    }
   
 
-    const handleFunctionOnStatus = (status) =>{
+  const handleFunctionOnStatus = (status) =>{
       const statusID = parseInt(status)
       switch (statusID){
         case 0:        
@@ -193,12 +317,45 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
           ]; 
         default: return;
       }     
+    } 
+
+    const handleFuncOnStatusMultiTool = (status) => {
+      const statusID = parseInt(status)
+      switch (statusID){
+        case 0:        
+          return [
+            multiToolFuncList[0], multiToolFuncList[4]      
+        ];
+        case 1:
+          return [  
+            multiToolFuncList[1], multiToolFuncList[3]
+        ];
+        case 2:
+          return [  
+            multiToolFuncList[2]
+            
+          ]; 
+        case 3:
+          return [  
+            multiToolFuncList[1], multiToolFuncList[3]
+          ]; 
+        case 4:
+          return [  
+            multiToolFuncList[0]    
+            
+          ]; 
+        default: return;
+      }     
     }
     
     const handleActionClicked = (action, dataid) =>{
         action(dataid)
         setShowTooltip(false)
     }
+
+    const handleMultitoolActionClicked = (action) =>{
+      action()   
+  }
 
 
     const formatTime = (seconds) => {
@@ -241,11 +398,27 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
       setDataFContent(dataFromContent);
     }, [dataFromContent])
 
-    useEffect(() => {     
-      handleBoxesChecking();
-      
+    useEffect(() => {        
+      handleCheckBoxUpdate();
+      handleBoxesChecking();     
     }, [checkBoxList])
 
+    useEffect(() => {     
+      setShowTooltip(showTooltip);
+      
+    }, [funcList,showTooltip])
+
+    useEffect(() => {     
+      if(checkBoxList.length > 0){
+        setShowMultiTooltip(true)
+      }else{
+        setShowMultiTooltip(false)
+      }     
+    }, [checkBoxList])
+
+    useEffect(() =>{
+      getListMultitool();
+    },[checkBoxList])
     
   return (
     <div className='w-[100%] h-[100%]'>
@@ -266,7 +439,7 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
               </div>              
             </div>
             <div className='w-[100%] '>
-              <div className='flex h-[100%] justify-center items-center'>
+              <div className='flex w-[90%] h-[100%] justify-center items-center'>
                 <div className='text-[#5A6276] font-[600]'>Thời gian làm</div>
               </div> 
             </div>
@@ -281,68 +454,91 @@ const DataList = ({dataFromContent, ShowAlertBox, confirmDeleteItem}) => {
                 </div>
             </div>
         </div>
-        <div className='w-[100%] h-[64vh] overflow-y-auto'>
-        {datafContent && datafContent.map((data,index) => (                  
-            <div className='w-[100%] h-[90px] grid grid-cus p-[5px]' key={index}  >                
-              <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px]` }>
-                  <div className='flex justify-center items-center h-[100%] gap-2 '>
-                    <div><input type="checkbox" name="" id={data.id} className='datacheckBox' onChange={() =>(handleCheckBoxCheck(data.id))}/>
+        <div className='w-[100%] h-[64vh] z-0 scroll-container '>
+          {showMultiTooltip === true && 
+          <div  className='h-[100px] bg-white fixed top-[65%] -translate-x-1/2 left-[60%] -translate-y-1/2 rounded-[6px] shadow-sm'>
+            
+                    <div className='h-[100%] p-[10px] flex items-center'>
+                          <div className='w-[120px] h-[100%] bg-[#008000] mr-[10px] flex flex-col justify-center items-center text-white rounded-l-[4px]'>
+                            <div className='font-bold text-[26px]'>{checkBoxList.length}</div>
+                            <div className=''>Đã chọn</div>
+                          </div>             
+                      {listMultiToolFunc.map((item, index) => (           
+                        <div key={index} className={`w-[120px] h-[85%] ml-[10px] mr-[10px] flex flex-col justify-center items-center text-[15px] gap-1 ${item.id == 5 ? "text-[#FD7676]" : "text-[#26282E]"} cursor-pointer hover:bg-[#26282e18] `} onClick={() => handleMultitoolActionClicked(item.action)}>
+                            <div><Icon20px classIcon={item.icon} color={item.id == 5 ? "#FD7676" : "#959DB3"} ></Icon20px></div>
+                            <div>{item.text}</div>
+                          </div> 
+                          ))}                                           
+                          <div className='w-[120px] h-[85%]  ml-[10px] flex justify-center items-center border-[#BDC2D2] border-l-2 text-[20px] text-[#26282E] cursor-pointer hover:bg-[#26282e18] rounded-r-[4px]' onClick={() => handleCloseMultiToolTip()}>
+                          <div>X</div>
+                          </div>
                     </div>
-                  </div>
-              </div>  
-                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`}>
-                  
-                    <div className='flex items-center h-[100%] gap-2 '>
-                      
-                      <div className='flex flex-col justify-center h-[100%]'>
-                        <div className='font-[700]'>{data.stringques}</div>
-                        <div className='flex gap-2 items-center'>
-                          <div>{data.id}</div>
-                          <div className='w-[2px] h-[18px] bg-[#C4C4C4] rounded-[3px]'></div>
-                          <div>{data.type}</div>
-                        </div>
-                        </div>
+                  </div>} 
+          
+          
+          {datafContent && datafContent.map((data,index) => (                  
+              <div className='w-[100%] h-[90px] grid grid-cus p-[5px]' key={index}  >                
+                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px]` }>
+                    <div className='flex justify-center items-center h-[100%] gap-2 '>
+                      <div><input type="checkbox" name="" id={data.id} className='datacheckBox' onChange={() =>(handleCheckBoxCheck(data.id))}/>
+                      </div>
                     </div>
-                </div>
-                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`}>
-                  <div className='flex items-center h-[100%]'>
-                    <div className=''>Thương hiệu, văn hoá cty</div>
-                  </div>              
-                </div>
-                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`}>
-                  <div className='flex h-[100%] justify-center items-center'>
-                    <div className='font-[700]'>{formatTime(data.timelimit)}</div>
-                  </div> 
-                </div>
-                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`}>
-                  <div className='flex justify-end items-center h-[100%] w-[78%]'>
-                      <div className={`${data.status == "0" ? "" : data.status == "1" ? "text-[#31ADFF]" : data.status =="2" ? "text-[#008000]" : data.status == "3" ? "text-[#FB311C]" : data.status == "4" ? "text-[#B7B92F]" : "text-black"} `}>{formatStatus(data.status)}</div>
-                      </div> 
-                </div>
-                
-                <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] bg-[#FFFFFF] ml-[1px] p-[9px]`}>
-                  <div className='flex justify-center items-center h-[100%] gap-2 '>
-                  <div className={`${(selectedTooltipID === index && isHoverOrFocus) ? "bg-[#BDC2D2] text-white": ""} w-[50px] rounded-[3px] text-center three-dots-hover text-black cursor-pointer relative`} key={index}>
-                      {(selectedTooltipID === index && showTooltip) ?
-                        (<div className='absolute top-0 -left-[159px] w-[160px] bg-[#BDC2D2] '>
-                            <div className=' flex flex-col w-[100%] text-white func-parent '>
-                            {funcList.map((item, funcindex) => (
-                                
-                                <div key={funcindex} className='flex w-[100%] p-2 gap-3 text-[15px]' onClick={() => handleActionClicked(item.action, data.id)} >
-                                  <Icon24px classIcon={item.icon} color={"#FFFFFF"} />
-                                  {item.text}
-                                </div>
-                              ))}
-                            </div>                      
-                        </div>): ""}
-                      <div className={`font-[700] w-[30px] h-[30px] tracking-wide`} id={data.id} onClick={() => handleToolTipClick(data.status, index, data.id)}>...</div>
-                      
-                    </div>       
+                </div>  
+                  <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`}>
                     
+                      <div className='flex items-center h-[100%] gap-2 '>
+                        
+                        <div className='flex flex-col justify-center h-[100%]'>
+                          <div className='font-[700]'>{data.stringques}</div>
+                          <div className='flex gap-2 items-center'>
+                            <div>{data.id}</div>
+                            <div className='w-[2px] h-[18px] bg-[#C4C4C4] rounded-[3px]'></div>
+                            <div>{data.type}</div>
+                          </div>
+                          </div>
+                      </div>
                   </div>
-              </div> 
-            </div>                    
-        ))}
+                  <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`}>
+                    <div className='flex items-center h-[100%]'>
+                      <div className=''>Thương hiệu, văn hoá cty</div>
+                    </div>              
+                  </div>
+                  <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`}>
+                    <div className='flex h-[100%] justify-center items-center'>
+                      <div className='font-[700]'>{formatTime(data.timelimit)}</div>
+                    </div> 
+                  </div>
+                  <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`}>
+                    <div className='flex justify-end items-center h-[100%] w-[76%]'>
+                        <div className={`${data.status == "0" ? "" : data.status == "1" ? "text-[#31ADFF]" : data.status =="2" ? "text-[#008000]" : data.status == "3" ? "text-[#FB311C]" : data.status == "4" ? "text-[#B7B92F]" : "text-black"} `}>{formatStatus(data.status)}</div>
+                        </div> 
+                  </div>
+                  
+                  <div className={`${checkBoxList.includes(data.id) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] bg-[#FFFFFF] ml-[1px] p-[9px]`}>
+                    <div className='flex justify-center items-center h-[100%] gap-2 '>
+                    <div className={`${(selectedTooltipID === index && isHoverOrFocus) ? "bg-[#BDC2D2] text-white": ""} w-[50px] rounded-[3px] text-center three-dots-hover text-black cursor-pointer relative`} key={index}>
+                        {(selectedTooltipID === index && showTooltip) ?
+                          (<div className='absolute top-0 -left-[159px] w-[160px] bg-[#BDC2D2] '>
+                              <div className=' flex flex-col w-[100%] text-white func-parent '>
+                              {funcList.map((item, funcindex) => (
+                                  
+                                  <div key={funcindex} className='flex w-[100%] p-2 gap-3 text-[15px]' onClick={() => handleActionClicked(item.action, data.id)} >
+                                    <Icon24px classIcon={item.icon} color={"#FFFFFF"}/>
+                                    {item.text}
+                                  </div>
+                                ))}
+                              </div>                      
+                          </div>): ""}
+                        <div className={`font-[700] w-[30px] h-[30px] tracking-wide`} id={data.id} onClick={() => handleToolTipClick(data.status, index, data.id)}>...</div>
+                        
+                      </div>       
+                      
+                    </div>
+                </div> 
+              </div>  
+                                
+          ))}
+          
         </div>
     </div>
   )

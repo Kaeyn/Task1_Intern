@@ -50,3 +50,37 @@
   .checkboxes:checked + .checkbox-label:before {
     transform: translate(-50%, -50%) scale(1); 
   }
+
+
+.scroll-container {
+  height: calc(100vh - header-height);
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+
+.scroll-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+.scroll-container *::-scrollbar {
+  width: 10px; 
+}
+
+.scroll-container *::-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.scroll-container *::-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px; 
+}

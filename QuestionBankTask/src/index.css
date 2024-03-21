@@ -8,6 +8,6 @@
 
 body {
   margin: 0;
-  
+  overflow: initial;
   font-family: "Mulish", sans-serif;
 }
