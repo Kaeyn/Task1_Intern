@@ -11,6 +11,7 @@ const QuestionBank = () => {
   const [contentData, setContentData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [childCategoryData, setChildCategoryData] = useState([]);
+  const [isFuncDisable, setIsFuncDisable] = useState(false);
 
   const getContentData = (childCateId) => {
     const moduleData = dataList?.Module || [];
@@ -28,14 +29,18 @@ const QuestionBank = () => {
       setChildCategoryData([]);
     }
     
-    console.log(childCateId);
+
     
   };
 
   useEffect(() =>{
     getContentData(selectedCategoryChild) 
-    
   },[selectedCategoryChild])
+
+  useEffect(() =>{
+    
+    
+  },[selectedCategory])
 
   useEffect(() => {     
     setDataList(data);
@@ -46,8 +51,8 @@ const QuestionBank = () => {
         <div className='sidebar-header display: flex  bg-[#EDEFF3] '>                 
             <div className='w-[15%] min-h-[100vh] pt-[5px]'><Sidebar sidebarData={dataList} selectedCate={selectedCategory} selectedChildCate={setSelectedCategoryChild}/></div>
             <div className='w-[85%] min-h-[100vh] p-[5px] flex flex-col'>
-              <div className='w-[100%] h-[7%] max-h-[7%] bg-white flex flex-col justify-center'><Header setSelectedCate={setSelectedCategory}/></div>
-                {(selectedCategory === cateNhanSu && selectedCategoryChild === childCategoryData[0]?.id)  && <Content contentData={contentData}/>}          
+              <div className={`w-[100%] h-[7%] max-h-[7%] bg-white flex flex-col justify-center ${isFuncDisable ? "pointer-events-none" : ""}`}><Header setSelectedCate={setSelectedCategory}/></div>
+                {(selectedCategory === cateNhanSu && selectedCategoryChild === childCategoryData[0]?.id)  && <Content contentData={contentData} setIsFuncDisable ={setIsFuncDisable}/>}          
             </div>
             
         </div>

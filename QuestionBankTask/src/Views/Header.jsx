@@ -3,7 +3,7 @@ import "../css/Header.css"
 import { useEffect } from 'react';
 
 const Header = ({setSelectedCate}) => {
-    const [selected, setSelected] = useState(1);
+    const [selected, setSelected] = useState(6);
     const selectCategory = (index) =>{
         const tempSelected = selected;
         if(index != tempSelected){
@@ -20,7 +20,7 @@ const Header = ({setSelectedCate}) => {
     <div className='justify-center h-[100%]'>
         <div className='flex justify-between shadow-lg h-[100%]'>
             <div className='self-center h-[100%]'>
-                <ul className='flex items-center gap-5 px-5 h-[100%]'>            
+                <ul className='flex items-center gap-5 px-5 h-[100%]'>                          
                         <li className='text-[#BBBBBB] cursor-pointer' onClick={() => selectCategory(0)}>------------</li>
                         <div className='w-[2px] h-[30px] bg-[#C4C4C4] rounded-[3px]'></div>
                         <li className='text-[#BBBBBB] cursor-pointer' onClick={() => selectCategory(1)}>------------</li>

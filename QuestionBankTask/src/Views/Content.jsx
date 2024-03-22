@@ -7,7 +7,7 @@ import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
 
-const Content = ({contentData}) => {
+const Content = ({contentData , setIsFuncDisable}) => {
   const [Data, setData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
   const [statusFilter, setstatusFilter] = useState([]);
@@ -15,12 +15,18 @@ const Content = ({contentData}) => {
   const [alertBoxData, setAlertBoxData] = useState([]);
   const [showAlertBox, setShowAlertBox] = useState(false);
   const [listItemToDelete, setListItemToDelete] = useState([]);
+  const [resetStatusFunc, setResetStatusFunc] = useState(false);
+  const [isFuncFilterDisable, setIsFuncFilterDisable] = useState(false);
   const filterData = () =>{
     let filterByStatus = [];
     if (statusFilter.length === 0) {
       filterByStatus = Data;
     } else {
-      const tempListData = Data.filter(item => statusFilter.includes(parseInt(item.status)) )
+      let updatedStatusFilter = [...statusFilter]; 
+      if (updatedStatusFilter.includes(0)) {
+          updatedStatusFilter.push(4);
+      }
+      const tempListData = Data.filter(item => updatedStatusFilter.includes(parseInt(item.status)));
       filterByStatus = tempListData;
     }
 
@@ -58,10 +64,10 @@ const Content = ({contentData}) => {
     return contentList;
   }
 
-  const resetContent = () =>{
-    setFilteredData(Data);
-    setstatusFilter([0]);
-    setSearchInputFilter("");
+  const resetFilter = () =>{
+    setFilteredData(Data)
+    setResetStatusFunc(!resetStatusFunc)
+    filterData()
   }
 
   const Icon = ({ classIcon, color }) => {
@@ -99,15 +105,19 @@ const Content = ({contentData}) => {
     filterData();
   },[searchInputFilter, contentData])
 
+  useEffect(() =>{
+      setIsFuncDisable(isFuncFilterDisable)
+  }, [isFuncFilterDisable])
+
 
   return (
     <div className=' h-[100%] relative wrapper'>
-        <div className='w-[100%] h-[8%] max-h-[8%] flex flex-col'><StatusFilter listStatusFilter={setstatusFilter} /></div>
+        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><StatusFilter listStatusFilter={setstatusFilter} resetFilter={resetStatusFunc} /></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[9%] max-h-[9%] flex pb-[4px]'><DataFilter searchInput={setSearchInputFilter} resetContent={resetContent}/></div>
+        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><DataFilter searchInput={setSearchInputFilter} resetFilter={resetFilter}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={FilteredData} ShowAlertBox={ShowAlertBox}/></div>
-        <div className='w-[100%] h-[7%] max-h-[76%] flex p-[4px]'><PageFilter Data={Data} curpageData={setData}/></div>      
+        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={FilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable}/></div>
+        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><PageFilter Data={Data} setCurpageData={setData}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 
