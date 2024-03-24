@@ -84,3 +84,10 @@
   background: #888; 
   border-radius: 5px; 
 }
+
+.question-text-limit {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 650px; 
+}

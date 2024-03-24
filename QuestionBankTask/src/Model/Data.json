@@ -16,7 +16,7 @@
                         "content" : [
                           {
                             "id" : "Q.001",
-                            "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
+                            "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Có bao nhiêu mặt hàng",
                             "type" : "",
                             "group" : ["Thương hiệu, văn hoá cty"],
                             "timelimit" : "30",
@@ -48,7 +48,7 @@
                           },
                           {
                             "id": "Q.005",
-                            "stringques": "Giá trị cốt lõi của Hachi Hachi là gì?",
+                            "stringques": "",
                             "type": "Dạng một câu lựa chọn",
                             "group": ["Thương hiệu, văn hoá cty"],
                             "timelimit": "180",  
@@ -152,7 +152,7 @@
                           },
                           {
                             "id": "Q.019",
-                            "stringques": "Mã giảm giá của Hachi Hachi lấy ở đâu?",
+                            "stringques": "",
                             "type": "Dạng một câu lựa chọn",
                             "group": ["Thương mại điện tử"],
                             "timelimit": "45",  
@@ -181,7 +181,87 @@
                             "group": ["Chăm sóc khách hàng"],
                             "timelimit": "35", 
                             "status": "4"
-                          }                     
+                          },
+                          {
+                            "id": "Q.023",
+                            "stringques": "Làm thế nào để liên hệ với bộ phận kỹ thuật?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Hỗ trợ kỹ thuật"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.024",
+                            "stringques": "Các phương thức thanh toán được chấp nhận là gì?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "25",
+                            "status": "2"
+                          },
+                          {
+                            "id": "Q.025",
+                            "stringques": "Chính sách đổi trả hàng của Hachi Hachi như thế nào?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Chính sách đổi trả"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.026",
+                            "stringques": "Làm thế nào để đăng ký tài khoản thành viên?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.027",
+                            "stringques": "Bộ phận chăm sóc khách hàng làm việc vào các ngày nào trong tuần?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Chăm sóc khách hàng"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.028",
+                            "stringques": "Làm thế nào để kiểm tra tình trạng đơn hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đơn hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.029",
+                            "stringques": "Hachi Hachi có cung cấp dịch vụ giao hàng tận nơi không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giao hàng"],
+                            "timelimit": "25",
+                            "status": "2"
+                          },
+                          {
+                            "id": "Q.030",
+                            "stringques": "Làm thế nào để tra cứu thông tin về sản phẩm?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Sản phẩm"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.031",
+                            "stringques": "Có cần phải đăng ký tài khoản để mua hàng trên Hachi Hachi không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.032",
+                            "stringques": "Làm thế nào để liên hệ với bộ phận hỗ trợ kỹ thuật?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Hỗ trợ kỹ thuật"],
+                            "timelimit": "35",
+                            "status": "4"
+                          }                
                         ]
                       }
                     ]

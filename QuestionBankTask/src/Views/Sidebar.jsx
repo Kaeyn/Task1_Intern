@@ -40,7 +40,7 @@ const Sidebar = ({sidebarData, selectedCate, selectedChildCate}) => {
     <div className='w-[100%] h-[100%] bg-[#5A6276]'>
         <div></div>
         <div className='w-[100%] h-[65px] imgContainer bg-white'>
-            <div className='w-[100%] h-[100%] flex justify-center gap-[60px]'>
+            <div className='w-[100%] h-[100%] flex justify-center gap-[60px]' title='HachiHachi'>
                 <img src="./assest/Hachilogo.png" alt="" className='h-[100%] cursor-pointer' />
                 <img src="./assest/down-arrow.png" alt="" className='size-5 self-center cursor-pointer'/>
             </div>
@@ -51,7 +51,7 @@ const Sidebar = ({sidebarData, selectedCate, selectedChildCate}) => {
             <div className=''>
                 {sidebarList.map((data) => (
                     <ul className='' key={data.name}>                       
-                      <div className='flex w-[100%] h-[50px] items-center bg-[#1A2334] cursor-pointer' onClick={() => {handleCategoryClick()}}>
+                      <div className='flex w-[100%] h-[50px] items-center bg-[#1A2334] cursor-pointer' title={`${data.name}`} onClick={() => {handleCategoryClick()}}>
                           <div className={`${isExpanded ? 'bg-[#5CB800]' : ' bg-white'} w-[6px] h-[100%] transition duration-200`}></div>
                               <div className='flex items-center gap-4 pl-4 pr-2 text-[16px]'>
                                   <img src={`${isExpanded ? `./assest/${data.icons[0]}` : `./assest/${data.icons[1]}`}`} className={`${isExpanded ? 'size-[20px]' : ' size-[21px]'} transition duration-200`} alt="" />
@@ -65,12 +65,12 @@ const Sidebar = ({sidebarData, selectedCate, selectedChildCate}) => {
                       {isExpanded ? 
                             data.catechild.map((childData) =>(
                             <li key={childData.id}>
-                                <div className='flex w-[100%] h-[50px] items-center bg-[#1A2334] cursor-pointer' onClick={() => {handleChildCategoryClick(childData.id)}}>
+                                <div className='flex w-[100%] h-[50px] items-center bg-[#1A2334] cursor-pointer' title={`${childData.name}`}  onClick={() => {handleChildCategoryClick(childData.id)}}>
                                 <div className={`${isChildExpanded ? 'opacity-100' : 'opacity-[0.35]' } transition duration-200 bg-white w-[6px] h-[100%]`}></div>
                                     <div className='flex items-center gap-4 pl-4 pr-2 text-[16px]'>
                                         <img src={`./assest/${childData.icon[0]}`} className={`${isChildExpanded ? 'opacity-100' : 'opacity-[0.35]'} transition duration-200`} alt="" />
                                         <div className='flex gap-5 items-center '>
-                                            <div className={`${isChildExpanded ? 'opacity-100' : 'opacity-[0.35] '} text-white font-[500] transition duration-200`}>{childData.name}</div>                     
+                                            <div className={`${isChildExpanded ? 'opacity-100' : 'opacity-[0.35] '} text-white font-[500] transition duration-200`} >{childData.name}</div>                     
                                         </div>
                                         
                                     </div>                       

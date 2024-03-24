@@ -3,17 +3,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from 'react'
 import '../css/PageFilter.css'
 
-const PageFilter = ({Data , setCurpageData}) => {
-    const [dataLength, setDataLength] = useState(25);
+const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter}) => {
     const [isItemLimitShowed, setIsItemLimitShowed] = useState(false);
-    const [itemsLimit, setItemsLimit] = useState(25);
+    const [itemsLimit, setItemsLimit] = useState(5);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentPageList, setCurrentPageList] = useState([]);
-    const [startPage, setStartPage] = useState(0);
-    
     const [totalPage, setTotalPage] = useState(0);
-    const [startIndex, setStartIndex] = useState(0);
-    const [endIndex, setEndIndex] = useState(0);
+    const [prevState, setPrevState] = useState(true);
     const origLimitList = [5, 50, 75, 100]
     const [limitList, setlimitList] = useState([
         5, 75, 100
@@ -33,35 +29,34 @@ const PageFilter = ({Data , setCurpageData}) => {
 
     const getTotalPage = () =>{
         const totalPage = Math.ceil(Data.length / itemsLimit)
-        const startIndex = (currentPage - 1) * itemsLimit
-        const endIndex = startIndex + itemsLimit
         setTotalPage(totalPage);
-        setStartIndex(startIndex)
-        setEndIndex(endIndex)
+        getCurrentPageItems();
     }
 
     const getCurrentPageItems = () =>{
-        const items = Data.slice(startIndex, endIndex)
-        // setCurpageData(items)
-        console.log(items)
+        const startIndex = (currentPage - 1) * itemsLimit;
+        const endIndex = Math.min(startIndex + itemsLimit, Data.length);
+        const currentPageItems = Data.slice(startIndex, endIndex);
+        setCurpageData(currentPageItems)
+        setPrevState(!prevState)
+        setIsPageFilter(!prevState)    
+        console.log(currentPage)
+        console.log(startIndex)
+        console.log(endIndex)
+        console.log(currentPageItems)
     }
 
-    const getPageList = () => {
+    const getPageList = (totalPage) => {
         const pageList = [];
         for (let i = 1; i <= totalPage; i++) {
             pageList.push(i);
         }
+
         setCurrentPageList(pageList);
         
-        let startPage = 1;
-        if(startPage > 2){
-            
-        }
     };
 
-    const handleItemLimitSelector = () =>{
-        setIsItemLimitShowed(!isItemLimitShowed)
-    }
+    
 
     const handleListItemLimitSelected = (item) =>{
         setIsItemLimitShowed(item);
@@ -69,6 +64,10 @@ const PageFilter = ({Data , setCurpageData}) => {
         const tempList = origLimitList.filter((limit) => limit != item)
         setlimitList(tempList);  
         handleItemLimitSelector(); 
+    }
+
+    const handleItemLimitSelector = () =>{
+        setIsItemLimitShowed(!isItemLimitShowed)
     }
 
     const goToPage = (page) => {
@@ -87,24 +86,111 @@ const PageFilter = ({Data , setCurpageData}) => {
         }
     };
 
-    useEffect(() =>{
-        setDataLength(Data)
-    },[Data])
+    const generatePaginationButtons = () => {
+        console.log("current Total Page: " + totalPage)
+        const paginationButtons = [];
+        // paginationButtons.push(
+        //     <div key={i} className={`flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px] ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
+        //         {i}
+        //     </div>
+        // );
+
+        // <div key={index} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' onClick={() => goToPage(page)}>
+        //                 {page === 1 && currentPage > 3 ? "..." : page} 
+        //             </div>
+        if(totalPage == 1){
+            paginationButtons.push(
+                <div key={1} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer ${currentPage === 1 ? 'bg-gray-400 text-[white]' : ''}`} onClick={() => goToPage(1)}>
+                    {1}
+                </div>
+            )
+            
+        }
+        else if(totalPage <= 3){
+            for (let i = 1; i <= totalPage; i++) {
+                paginationButtons.push(
+                    <div key={i} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
+                        {i}
+                    </div>
+                )             
+            }            
+        }else {
+            let startPage = Math.max(1, currentPage - 1);
+            let endPage = Math.min(totalPage, currentPage + 1);
+
+            if (currentPage >= 3) {
+                paginationButtons.push(
+                    <div key={'leftEllipsis'} className='flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer' onClick={() => goToPage(currentPage - 2)}>
+                        ...
+                    </div>
+                );
+            }
+            // else{
+            //     paginationButtons.push(
+            //         <div key={'leftEllipsis'} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' disabled>
+            //             ...
+            //         </div>
+            //     );
+            // }
+            
+            if(currentPage == 1){
+                endPage = Math.min(totalPage, currentPage + 2);
+            }
+
+            if(currentPage == totalPage){
+                startPage = Math.max(1, currentPage - 2);
+            }
+            
+    
+            for (let i = startPage; i <= endPage; i++) {
+                paginationButtons.push(
+                    <div key={i} className={`flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
+                        {i}
+                    </div>
+                );
+            }
+        
+            if (currentPage <= totalPage - 2) {
+                paginationButtons.push(
+                    <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer' onClick={() => goToPage(currentPage + 2)}>
+                        ...
+                    </div>
+                );
+            }
+            
+        }
+    
+        return paginationButtons;
+    };
+    
 
     useEffect(() =>{
         getTotalPage();
     },[itemsLimit])
 
-    useEffect(() =>{
+    useEffect(() => { 
+        getPageList(totalPage);
+    }, [totalPage]);
+
+    useEffect(() => {
         getCurrentPageItems();
-    },[currentPage])
-    
+    }, [currentPage]);
+
+    useEffect(() =>{
+        getTotalPage();
+    },[originData])
+
+    useEffect(() =>{
+        getTotalPage();
+        setCurrentPage(1)
+    },[contentIsFilter])
+
   return (
     <div className='w-[100%] h-[100%] flex justify-between'>
         <div className='w-[50%] h-[100%] flex gap-1 pl-[8px]'>
             <div className='w-[20vh] self-center'>Hiển thị mỗi trang</div>
             <div className='w-[100%] flex'>
-                <div className='w-[70px] flex self-center justify-center items-center gap-2 hover:bg-[#F5F6F8] cursor-pointer pt-[6px] pb-[6px]' onClick={() => handleItemLimitSelector()}>
+                <div className='w-[70px] flex self-center justify-center items-center gap-2 hover:bg-[#F5F6F8] cursor-pointer pt-[6px] pb-[6px]' onClick={handleItemLimitSelector}>
                     <div>{itemsLimit}</div>
                     <Icon16px classIcon={faChevronUp} color={"#959DB3"} />
                 </div>
@@ -123,38 +209,34 @@ const PageFilter = ({Data , setCurpageData}) => {
             </div>
         </div>
         <div className='flex items-center gap-2'>
-            {currentPageList.map((page, index) => (
-                <div key={index}>
-                    <div className='pagination-button' onClick={() => goToPage(1)} disabled={currentPage === 1}>
-                        Đầu
+                    <div className={`flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px]  ${currentPage === 1 ? "": "cursor-pointer"}`} onClick={() => goToPage(1)} disabled={currentPage === 1 ? true : false}>
+                        <div>Đầu</div>
                     </div>
                     
-                    <div className='' onClick={prevPage()} disabled={currentPage === 1}>
+                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === 1 ? "": "cursor-pointer"}`} onClick={prevPage} disabled={currentPage === 1 ? true : false}>
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
-                    {currentPageList[0] > 1 ? 
-                    <div className=''>
+                    {/* {currentPage > 3? 
+                    <div className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]'>
                         ...
                     </div>: ""}
-                    
-                    <div className='' onClick={() => goToPage(page)}>
-                        {page}
-                    </div>
-                    {currentPageList.endIndex < totalPage ?
-                    <div className=''>
+                    {currentPageList.map((page, index) => (
+                    <div key={index} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' onClick={() => goToPage(page)}>
+                        {page === 1 && currentPage > 3 ? "..." : page} 
+                    </div>))} */}
+                    {generatePaginationButtons()}
+                    {/* {currentPageList[currentPageList.length - 1] < totalPage - 2 ?
+                    <div className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]'>
                         ...
-                    </div>: ""} 
-                    <div className='' onClick={nextPage()} disabled={currentPage === totalPage}>
+                    </div>: ""}  */}
+                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === totalPage ? "": "cursor-pointer"}`} onClick={nextPage} disabled={currentPage === totalPage ? true : false}>
                         <FontAwesomeIcon icon={faChevronRight} />
-                    </div>
-                    
-                    <div className='pagination-button' onClick={() => goToPage(totalPage)} disabled={currentPage === totalPage}>
+                    </div>                   
+                
+                    <div className={`pagination-button flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === totalPage ? "": "cursor-pointer"}`} onClick={() => goToPage(totalPage)} disabled={currentPage === totalPage ? true : false}>
                         Cuối
                     </div>
-            </div>
-            ))}
-                
-            </div>
+                </div>
     </div>
   )
 }

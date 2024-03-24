@@ -7,9 +7,12 @@ import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
 
-const Content = ({contentData , setIsFuncDisable}) => {
+const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
   const [Data, setData] = useState([]);
+  const [preFilteredData, setPreFilteredData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
+  const [isPageFilter, setIsPageFilter] = useState(true);
+  const [isFiltering, setIsFiltering] = useState(true);
   const [statusFilter, setstatusFilter] = useState([]);
   const [searchInputFilter, setSearchInputFilter] = useState("");
   const [alertBoxData, setAlertBoxData] = useState([]);
@@ -17,10 +20,12 @@ const Content = ({contentData , setIsFuncDisable}) => {
   const [listItemToDelete, setListItemToDelete] = useState([]);
   const [resetStatusFunc, setResetStatusFunc] = useState(false);
   const [isFuncFilterDisable, setIsFuncFilterDisable] = useState(false);
+
   const filterData = () =>{
+
     let filterByStatus = [];
     if (statusFilter.length === 0) {
-      filterByStatus = Data;
+      filterByStatus = contentData;
     } else {
       let updatedStatusFilter = [...statusFilter]; 
       if (updatedStatusFilter.includes(0)) {
@@ -43,6 +48,7 @@ const Content = ({contentData , setIsFuncDisable}) => {
     }
     
     setFilteredData(filterBySearch);
+    setPreFilteredData(filterBySearch)
   }
 
   const ShowAlertBox = (questList)=>{
@@ -69,6 +75,7 @@ const Content = ({contentData , setIsFuncDisable}) => {
     setResetStatusFunc(!resetStatusFunc)
     filterData()
   }
+
 
   const Icon = ({ classIcon, color }) => {
     const iconSize = {
@@ -98,17 +105,21 @@ const Content = ({contentData , setIsFuncDisable}) => {
     setData(contentData);
   }, [contentData])
 
+ 
   useEffect(() =>{
     filterData();
+    setIsFiltering(!isFiltering)
   },[statusFilter,contentData])
   useEffect(() =>{
     filterData();
+    setIsFiltering(!isFiltering)
   },[searchInputFilter, contentData])
 
   useEffect(() =>{
       setIsFuncDisable(isFuncFilterDisable)
   }, [isFuncFilterDisable])
 
+  
 
   return (
     <div className=' h-[100%] relative wrapper'>
@@ -116,8 +127,8 @@ const Content = ({contentData , setIsFuncDisable}) => {
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
         <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><DataFilter searchInput={setSearchInputFilter} resetFilter={resetFilter}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={FilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable}/></div>
-        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><PageFilter Data={Data} setCurpageData={setData}/></div>      
+        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} setAlertMessage={setAlertMessage}/></div>
+        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 
