@@ -19,37 +19,10 @@
     display: none; /* Hide the default checkbox */
   }
   
-  .checkbox-label {
-    width: 15px;
-    height: 15px;
-    background-color: white;
-    border: 2px solid #959DB3;
-    border-radius: 4px;
-    cursor: pointer;
-    position: relative;
+  input[type = "checkbox"]{
+      accent-color: #008000;
   }
-  
-  .checkbox-label:before {
-    content: '\2714';
-    display: block;
-    width: 16px;
-    height: 16px;
-    background-color: #008000; 
-    color: white;
-    border-radius: 4px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    line-height: 17px;
-    padding-left: 1px;
-    transform: translate(-50%, -50%) scale(0); 
-    transition: transform 0.3s ease;
-    
-  }
-  
-  .checkboxes:checked + .checkbox-label:before {
-    transform: translate(-50%, -50%) scale(1); 
-  }
+ 
 
 
 .scroll-container {

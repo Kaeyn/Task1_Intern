@@ -8,7 +8,7 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
     "Ngưng áp dụng"
   ];
 
-  const [checkedList, setCheckedList] = useState([])
+  const [checkedList, setCheckedList] = useState([0])
 
   const onCheckBoxChecked = (index) => {
     const newCheckedList = [...checkedList];
@@ -29,11 +29,21 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
     }
     
   };
+  const unCheckStatusList = () =>{
+    const checkBoxes = document.querySelectorAll(".statusCheckBoxes")
+    const firstCheckBox = document.getElementById("checkBox0")
+    checkBoxes.forEach(checkbox => {
+      checkbox.checked = false;
+    });
+    
+    listStatusFilter([0]);
+    setCheckedList([0])
+    firstCheckBox.checked = true;
+  } 
 
-      useEffect(() => {
-        onCheckBoxChecked(0)
-      }, []);
-
+    useEffect(() =>{
+      unCheckStatusList();
+    },[resetStatus])
     return (
       <div className='h-[100%]'>
           <div className='flex justify-between items-center h-[100%]'>
@@ -44,9 +54,9 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
                   // const isChecked = checkedList[index] || false;
                   return (               
                     <li key={index} className='pr-4 pl-[5px]'>
-                      <div className={`${isChecked ? 'border-2 border-[#008000]' : 'border-2 border-transparent'} transition ease-in-out duration-300 flex items-center gap-3 shadow rounded-[25px] h-[40px] p-4 bg-white text-[#959DB3] cursor-pointer` } title={data} onClick={() => onCheckBoxChecked(index)}>
+                      <div className={`${isChecked ? 'border-2 border-[#008000]' : 'border-2 border-transparent'} status-hover transition ease-in-out duration-300 flex items-center gap-3 shadow rounded-[25px] h-[40px] p-4 bg-white text-[#959DB3] cursor-pointer` } title={data} onClick={() => onCheckBoxChecked(index)}>
                         <div className='text-[16px]'>{data}</div>
-                        <input type="checkbox" className='checkboxes w-[17px] h-[17px]' id={`checkBox${index}`} onChange={() => onCheckBoxChecked(index)} disabled/> 
+                        <input type="checkbox" className='checkboxes w-[17px] h-[17px] statusCheckBoxes' id={`checkBox${index}`} onChange={() => onCheckBoxChecked(index)} disabled/> 
                         <label htmlFor={`checkBox${index}`} className='checkbox-label' ></label>
                       </div>
                         
@@ -57,9 +67,9 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
           </div>
           <div>
             <ul className='flex gap-4 pr-[18px]'>
-                <li><div className='w-[42px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer'  title='Import Excel'><img src="./assest/Import.png" alt="" className='w-[18px] h-[21px] self-center'/></div></li>
-                <li><div className='w-[42px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer'  title='Export Excel'><img src="./assest/export.png" alt="" className='w-[18px] h-[21px] self-center' /></div></li>
-                <li><div className='w-[130px] h-[40px] bg-[#1A6634] shadow rounded-[3px] flex justify-center gap-2 cursor-pointer'  title='Thêm mới'><img src="./assest/add.png" alt="" className='w-[18px] h-[21px] self-center '/><div className='self-center text-white'>Thêm mới</div></div></li>
+                <li><div className='w-[42px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer hover:border-[2px]'  title='Import Excel'><img src="./assest/Import.png" alt="" className='w-[18px] h-[21px] self-center'/></div></li>
+                <li><div className='w-[120px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer gap-2 hover:border-[2px]'  title='Export Excel'><img src="./assest/export.png" alt="" className='w-[18px] h-[21px] self-center' /><div className='self-center text-[#959DB3]'>Template</div></div></li>
+                <li><div className='w-[130px] h-[40px] bg-[#1A6634] shadow-lg shadow-[#ADDEF6] rounded-[3px] flex justify-center gap-2 cursor-pointer'  title='Thêm mới'><img src="./assest/add.png" alt="" className='w-[18px] h-[21px] self-center '/><div className='self-center text-white'>Thêm mới</div></div></li>
             </ul>
           </div>
             

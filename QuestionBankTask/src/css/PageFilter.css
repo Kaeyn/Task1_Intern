@@ -1,3 +1,9 @@
 .ul-parent-child li div:hover{
     background-color: #F5F6F8;
 }
+
+.hover-page-child:hover{
+    background-color: #959DB3;
+    color: white;
+    transition: 0.25s ease-in-out;
+}

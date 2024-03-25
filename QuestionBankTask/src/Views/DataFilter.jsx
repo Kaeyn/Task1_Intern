@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
 import '../css/DataList.css'
 const DataFilter = ({searchInput, resetContent}) => {
+  const [resetState, setResetState] = useState(false)
   const handleSearch = () =>{
     const input = document.getElementById('inputbox');
     const searchText = input.value.trim();
@@ -12,9 +13,14 @@ const DataFilter = ({searchInput, resetContent}) => {
       handleSearch();
     }
   }
-  const resetFilter = () =>{
-    resetContent();
+  const resetFilter =() =>{
+    const inputBox = document.getElementById('inputbox');
+    inputBox.value = "";
+    searchInput("");
+    resetContent(!resetState);
+    setResetState(!resetState)
   }
+  
   
   return (
     <div className='w-[100%] h-[100%] grid grid-cols-2 p-[6px]'>

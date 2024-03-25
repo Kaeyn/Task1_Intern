@@ -3,16 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from 'react'
 import '../css/PageFilter.css'
 
-const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter}) => {
+const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete}) => {
     const [isItemLimitShowed, setIsItemLimitShowed] = useState(false);
     const [itemsLimit, setItemsLimit] = useState(5);
+    const [allItemTotalPage, setAllItemTotalPage] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [currentPageList, setCurrentPageList] = useState([]);
     const [totalPage, setTotalPage] = useState(0);
     const [prevState, setPrevState] = useState(true);
-    const origLimitList = [5, 50, 75, 100]
+    const origLimitList = [5, 25, 50, 100]
     const [limitList, setlimitList] = useState([
-        5, 75, 100
+        25, 50, 100
     ])
     const Icon16px = ({ classIcon, color }) => {
         const iconSize = {
@@ -28,22 +29,31 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
     
 
     const getTotalPage = () =>{
-        const totalPage = Math.ceil(Data.length / itemsLimit)
+        let totalPage = 0
+        if(isDelete == true){
+            totalPage = Math.ceil(baseData.length / itemsLimit)
+        }else{
+            totalPage = Math.ceil(Data.length / itemsLimit)
+        }
         setTotalPage(totalPage);
         getCurrentPageItems();
     }
 
     const getCurrentPageItems = () =>{
         const startIndex = (currentPage - 1) * itemsLimit;
-        const endIndex = Math.min(startIndex + itemsLimit, Data.length);
-        const currentPageItems = Data.slice(startIndex, endIndex);
+        let endIndex = 0
+        let currentPageItems = []
+        if(isDelete == true){
+            endIndex = Math.min(startIndex + itemsLimit, baseData.length);
+            currentPageItems = baseData.slice(startIndex, endIndex);
+        }else{
+            endIndex = Math.min(startIndex + itemsLimit, Data.length);
+            currentPageItems = Data.slice(startIndex, endIndex);
+        }
         setCurpageData(currentPageItems)
         setPrevState(!prevState)
-        setIsPageFilter(!prevState)    
-        console.log(currentPage)
-        console.log(startIndex)
-        console.log(endIndex)
-        console.log(currentPageItems)
+        setIsPageFilter(!prevState)  
+    
     }
 
     const getPageList = (totalPage) => {
@@ -87,20 +97,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
     };
 
     const generatePaginationButtons = () => {
-        console.log("current Total Page: " + totalPage)
-        const paginationButtons = [];
-        // paginationButtons.push(
-        //     <div key={i} className={`flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px] ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
-        //         {i}
-        //     </div>
-        // );
 
-        // <div key={index} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' onClick={() => goToPage(page)}>
-        //                 {page === 1 && currentPage > 3 ? "..." : page} 
-        //             </div>
+        const paginationButtons = [];
         if(totalPage == 1){
             paginationButtons.push(
-                <div key={1} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer ${currentPage === 1 ? 'bg-gray-400 text-[white]' : ''}`} onClick={() => goToPage(1)}>
+                <div key={1} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child ${currentPage === 1 ? 'bg-gray-400 text-[white]' : ''}`} onClick={() => goToPage(1)}>
                     {1}
                 </div>
             )
@@ -109,7 +110,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
         else if(totalPage <= 3){
             for (let i = 1; i <= totalPage; i++) {
                 paginationButtons.push(
-                    <div key={i} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
+                    <div key={i} className={`flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child ${currentPage === i ? 'bg-gray-400 text-white' : ''}`} onClick={() => goToPage(i)}>
                         {i}
                     </div>
                 )             
@@ -119,19 +120,21 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
             let endPage = Math.min(totalPage, currentPage + 1);
 
             if (currentPage >= 3) {
-                paginationButtons.push(
-                    <div key={'leftEllipsis'} className='flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer' onClick={() => goToPage(currentPage - 2)}>
-                        ...
-                    </div>
-                );
-            }
-            // else{
-            //     paginationButtons.push(
-            //         <div key={'leftEllipsis'} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' disabled>
-            //             ...
-            //         </div>
-            //     );
-            // }
+                if (currentPage == totalPage){
+                    paginationButtons.push(
+                        <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage + 3)}>
+                            ...
+                        </div>
+                    );
+                }else{
+                    paginationButtons.push(
+                        <div key={'leftEllipsis'} className='flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage - 2)}>
+                            ...
+                        </div>
+                    );
+                }
+                
+            }       
             
             if(currentPage == 1){
                 endPage = Math.min(totalPage, currentPage + 2);
@@ -144,18 +147,28 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
     
             for (let i = startPage; i <= endPage; i++) {
                 paginationButtons.push(
-                    <div key={i} className={`flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer ${currentPage === i ? 'bg-gray-400' : ''}`} onClick={() => goToPage(i)}>
+                    <div key={i} className={`flex w-[25px] h-[33px] justify-center items-center rounded-[3px] cursor-pointer hover-page-child ${currentPage === i ? 'bg-[#959DB3] text-white' : ''}`} onClick={() => goToPage(i)}>
                         {i}
                     </div>
                 );
             }
-        
+            
+            
             if (currentPage <= totalPage - 2) {
-                paginationButtons.push(
-                    <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer' onClick={() => goToPage(currentPage + 2)}>
-                        ...
-                    </div>
-                );
+                if (currentPage == 1 && currentPage <= totalPage - 2 ){
+                    paginationButtons.push(
+                        <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage + 3)}>
+                            ...
+                        </div>
+                    );
+                }
+                else{
+                    paginationButtons.push(
+                        <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage + 2)}>
+                            ...
+                        </div>
+                    );
+                }
             }
             
         }
@@ -178,6 +191,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
 
     useEffect(() =>{
         getTotalPage();
+        setAllItemTotalPage(originData);
     },[originData])
 
     useEffect(() =>{
@@ -185,8 +199,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
         setCurrentPage(1)
     },[contentIsFilter])
 
+    useEffect(() =>{
+        getTotalPage();
+    },[isDelete, baseData])
   return (
-    <div className='w-[100%] h-[100%] flex justify-between'>
+    <div className='w-[100%] h-[100%] flex justify-between pl-2 pr-2'>
         <div className='w-[50%] h-[100%] flex gap-1 pl-[8px]'>
             <div className='w-[20vh] self-center'>Hiển thị mỗi trang</div>
             <div className='w-[100%] flex'>
@@ -209,11 +226,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
             </div>
         </div>
         <div className='flex items-center gap-2'>
-                    <div className={`flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px]  ${currentPage === 1 ? "": "cursor-pointer"}`} onClick={() => goToPage(1)} disabled={currentPage === 1 ? true : false}>
+                    <div className={`flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md  ${currentPage === 1 ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={() => goToPage(1)} disabled={currentPage === 1 ? true : false}>
                         <div>Đầu</div>
                     </div>
                     
-                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === 1 ? "": "cursor-pointer"}`} onClick={prevPage} disabled={currentPage === 1 ? true : false}>
+                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md ${currentPage === 1 ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={prevPage} disabled={currentPage === 1 ? true : false}>
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
                     {/* {currentPage > 3? 
@@ -229,11 +246,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
                     <div className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]'>
                         ...
                     </div>: ""}  */}
-                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === totalPage ? "": "cursor-pointer"}`} onClick={nextPage} disabled={currentPage === totalPage ? true : false}>
+                    <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md  ${currentPage === totalPage ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={nextPage} disabled={currentPage === totalPage ? true : false}>
                         <FontAwesomeIcon icon={faChevronRight} />
                     </div>                   
                 
-                    <div className={`pagination-button flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] ${currentPage === totalPage ? "": "cursor-pointer"}`} onClick={() => goToPage(totalPage)} disabled={currentPage === totalPage ? true : false}>
+                    <div className={`pagination-button flex pagination-button w-[50px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md ${currentPage === totalPage ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={() => goToPage(totalPage)} disabled={currentPage === totalPage ? true : false}>
                         Cuối
                     </div>
                 </div>

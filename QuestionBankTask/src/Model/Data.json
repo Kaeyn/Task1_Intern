@@ -23,7 +23,7 @@
                             "status" : "0"                        
                           },
                           {
-                            "id" : "",
+                            "id" : "Q.002",
                             "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
                             "type" : "Dạng một câu lựa chọn",
                             "group" : ["Thương hiệu, văn hoá cty"],
@@ -176,7 +176,7 @@
                           },
                           {
                             "id": "Q.022",
-                            "stringques": "Thời gian hoạt động của bộ phận chăm sóc khách hàng?",
+                            "stringques": "Thời gian hoạt động của bộ phận chăm sóc khách hàng? Thời gian hoạt động của bộ phận chăm sóc khách hàng? Thời gian hoạt động của bộ phận chăm sóc khách hàng?",
                             "type": "Dạng một câu lựa chọn",
                             "group": ["Chăm sóc khách hàng"],
                             "timelimit": "35", 

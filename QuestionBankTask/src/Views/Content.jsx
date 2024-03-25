@@ -7,12 +7,15 @@ import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
 
-const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
+const Content = ({contentData , setIsFuncDisable, showToast}) => {
   const [Data, setData] = useState([]);
+  const [baseData, setBaseData] = useState([]);
   const [preFilteredData, setPreFilteredData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
   const [isPageFilter, setIsPageFilter] = useState(true);
   const [isFiltering, setIsFiltering] = useState(true);
+  const [isDelete, setIsDelete] = useState(false);
+  const [isConfirmDelete, setIsConfirmDelete] = useState(false);
   const [statusFilter, setstatusFilter] = useState([]);
   const [searchInputFilter, setSearchInputFilter] = useState("");
   const [alertBoxData, setAlertBoxData] = useState([]);
@@ -20,6 +23,7 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
   const [listItemToDelete, setListItemToDelete] = useState([]);
   const [resetStatusFunc, setResetStatusFunc] = useState(false);
   const [isFuncFilterDisable, setIsFuncFilterDisable] = useState(false);
+  const [resetContentTrig, setResetContentTrig] = useState(false);
 
   const filterData = () =>{
 
@@ -48,7 +52,8 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
     }
     
     setFilteredData(filterBySearch);
-    setPreFilteredData(filterBySearch)
+    setBaseData(filterBySearch)
+    setPreFilteredData(filterBySearch);
   }
 
   const ShowAlertBox = (questList)=>{
@@ -57,10 +62,26 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
     setShowAlertBox(true);
   }
 
+  const handleFormartMessage = (messageInput, typeInput) =>{
+    return [{message : messageInput, type : typeInput}]
+  }
+
   const confirmDeleteItem = () =>{
     const idsToDelete = listItemToDelete.map(question => question.id);
-    const updatedFilteredData = FilteredData.filter(item => !idsToDelete.includes(item.id));
-    setFilteredData(updatedFilteredData);
+    const updatedFilteredData = preFilteredData.filter(item => !idsToDelete.includes(item.id));
+    const updatedFilteredBaseData = baseData.filter(item => !idsToDelete.includes(item.id));
+    const message = "Xoá thành công " + listItemToDelete.length +" item"
+    const type = "success"
+    showToast(message, type)
+    setBaseData(updatedFilteredBaseData)
+    setIsDelete(true);
+    setIsConfirmDelete(true);
+    setPreFilteredData(updatedFilteredData);
+  }
+
+  const unConfirmDelete = () =>{
+    setShowAlertBox(false)
+    setIsConfirmDelete(false)
   }
   
   const getAlertBoxContent = (questList) =>{
@@ -71,9 +92,10 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
   }
 
   const resetFilter = () =>{
+    console.log("Reset")
     setFilteredData(Data)
     setResetStatusFunc(!resetStatusFunc)
-    filterData()
+    filterData();
   }
 
 
@@ -110,6 +132,7 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
     filterData();
     setIsFiltering(!isFiltering)
   },[statusFilter,contentData])
+
   useEffect(() =>{
     filterData();
     setIsFiltering(!isFiltering)
@@ -119,16 +142,18 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
       setIsFuncDisable(isFuncFilterDisable)
   }, [isFuncFilterDisable])
 
-  
+  useEffect(() =>{
+    resetFilter();
+  }, [resetContentTrig])
 
   return (
     <div className=' h-[100%] relative wrapper'>
-        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><StatusFilter listStatusFilter={setstatusFilter} resetFilter={resetStatusFunc} /></div>
+        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><DataFilter searchInput={setSearchInputFilter} resetFilter={resetFilter}/></div>
+        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} setAlertMessage={setAlertMessage}/></div>
-        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none" : ""}`}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering}/></div>      
+        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete}/></div>
+        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} /></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 
@@ -158,7 +183,7 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
                     <div>Đơn vị bị xóa sẽ <span style={{ color: '#FD7676' }}>KHÔNG</span> thể khôi phục lại.</div>
                 </div>
                 </div>
-                <div className='w-[100%] h-[20%] flex border-[#C3C3C3] border-t-[0.12rem] cursor-pointer' onClick={() => (setShowAlertBox(false))}>
+                <div className='w-[100%] h-[20%] flex border-[#C3C3C3] border-t-[0.12rem] cursor-pointer' onClick={() => (unConfirmDelete())}>
                   <div className='w-[50%] flex justify-center items-center border-[#C3C3C3] border-r-[0.12rem]'>
                   <div className='text-[16px] font-[600] text-[#959DB3] '>KHÔNG XOÁ</div>
                     </div>
@@ -171,6 +196,7 @@ const Content = ({contentData , setIsFuncDisable, setAlertMessage}) => {
         
         </div> : ""
         }
+        
         
         
     </div>      

@@ -34,3 +34,8 @@
   .checkboxes:checked + .checkbox-label:before {
     transform: translate(-50%, -50%) scale(1); 
   }
+
+  .status-hover:hover{
+    border-width: 2px;
+    border-color: #008000;
+  }
