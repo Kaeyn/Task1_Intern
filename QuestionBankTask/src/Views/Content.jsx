@@ -24,7 +24,9 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   const [resetStatusFunc, setResetStatusFunc] = useState(false);
   const [isFuncFilterDisable, setIsFuncFilterDisable] = useState(false);
   const [resetContentTrig, setResetContentTrig] = useState(false);
-
+  const [disableFocus, setDisableFocus] = useState(false);
+  const [isActionClicked, setIsActionClicked] = useState(false);
+  const [actionedData, setActionedData] = useState([]);
   const filterData = () =>{
 
     let filterByStatus = [];
@@ -53,6 +55,35 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
     
     setFilteredData(filterBySearch);
     setBaseData(filterBySearch)
+    setPreFilteredData(filterBySearch);
+  }
+
+  const filterActionedData = () =>{
+
+    let filterByStatus = [];
+    if (statusFilter.length === 0) {
+      filterByStatus = contentData;
+    } else {
+      let updatedStatusFilter = [...statusFilter]; 
+      if (updatedStatusFilter.includes(0)) {
+          updatedStatusFilter.push(4);
+      }
+      const tempListData = actionedData.filter(item => updatedStatusFilter.includes(parseInt(item.status)));
+      filterByStatus = tempListData;
+    }
+
+    let filterBySearch = [];
+    if(searchInputFilter.trim() === ""){
+      filterBySearch = filterByStatus;
+    }else{
+      let searchText = searchInputFilter.toLowerCase();
+      // filterBySearch = filterByStatus.filter(item => statusFilter.includes(item.id.toLowerCase().includes(searchText) && item.stringques.toLowerCase().includes(searchText)));
+      filterBySearch = filterByStatus.filter(item =>
+        item.id.toLowerCase().includes(searchText) ||
+        item.stringques.toLowerCase().includes(searchText)
+      );
+    }
+    
     setPreFilteredData(filterBySearch);
   }
 
@@ -97,6 +128,11 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
     setResetStatusFunc(!resetStatusFunc)
     filterData();
   }
+
+  const handleDocumentClick = () => {
+    setDisableFocus(!disableFocus);
+    console.log("clicked")
+  };
 
 
   const Icon = ({ classIcon, color }) => {
@@ -146,14 +182,18 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
     resetFilter();
   }, [resetContentTrig])
 
+  useEffect(() => {
+    filterData();
+  }, [isActionClicked, actionedData]);
+
   return (
     <div className=' h-[100%] relative wrapper'>
-        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
+        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
+        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete}/></div>
-        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} /></div>      
+        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked}/></div>
+        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} /></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 

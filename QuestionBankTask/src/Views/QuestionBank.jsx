@@ -34,7 +34,7 @@ const QuestionBank = () => {
       setCategoryData([])
       setChildCategoryData([]);
     }
-   
+    
   };
 
 
@@ -105,7 +105,6 @@ const QuestionBank = () => {
             </div>
             {/* <AlertMessage/> */}
             <ToastContainer
-            
                 closeButton={false}
                 toastClassName={(context) =>
                 contextClass[context?.type || "default"] +

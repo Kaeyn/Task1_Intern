@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/DataList.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRotateLeft, faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash} from "@fortawesome/free-solid-svg-icons"
-const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisable, showToast}) => {
+const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisable, showToast, disableFocus, onclickDisableFocus, isActionClicked, actionedData}) => {
 
   const [datafContent, setDataFContent] = useState([]);
   const [isHoverOrFocus, setIsHoverOrFocus] = useState(false);
@@ -17,6 +17,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
   const [checkBoxList, setCheckBoxList] = useState([]);
   const [isAllChecked, setIsAllChecked] = useState(false);
   // const [listActionedItem, setListActionedItem] = useState([])
+  const [prevState, setPrevState] = useState(false);
 
 
   const handleToolTipClick = (status, index, id) =>{
@@ -407,6 +408,12 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       listFunc.sort((a, b) => a.id - b.id);    
       setListMultiToolFunc(listFunc)
     }
+
+    const handleLoseFocus = () =>{
+      setSelectedTooltipID(-1)
+      setShowTooltip(false)
+      setIsHoverOrFocus(false);
+    }
     
 
     const iconFuncList = [
@@ -527,6 +534,10 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     const handleActionClicked = (action, dataid) =>{
         action(dataid)
         setShowTooltip(false)
+        setIsHoverOrFocus(false)
+        isActionClicked(!prevState)
+        setPrevState(!false)
+        actionedData(datafContent)
     }
 
     const handleMultitoolActionClicked = (action) =>{
@@ -572,6 +583,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
 
     useEffect(() => {     
       setDataFContent(dataFromContent);
+      console.log(dataFromContent)
     }, [dataFromContent])
 
     useEffect(() => {        
@@ -602,13 +614,19 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     useEffect(() =>{
       getListMultitool();
     },[checkBoxList])
+
+    useEffect(() =>{
+      setSelectedTooltipID(-1)
+      setShowTooltip(false)
+      setIsHoverOrFocus(false);
+    }, [disableFocus])
     
   return (
     <div className='w-[100%] h-[100%]'>
-        <div className='w-[100%] h-[8%] grid grid-cus p-[5px] pb-[2px]'>
+        <div className='w-[100%] h-[8%] grid grid-cus p-[5px] pb-[2px]' onClick={onclickDisableFocus}>
             <div className='w-[100%]'>
                 <div className='flex justify-center items-center h-[100%] gap-2'>
-                  <div><input type="checkbox" name="" id="" className='parentCheckBox' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}} checked={isAllChecked} /></div>
+                  <div><input type="checkbox" name="" id="" className='parentCheckBox' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}}  /></div>
                 </div>
             </div>
             <div className='w-[100%]'>
@@ -659,15 +677,15 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
           
           
           {datafContent ? datafContent.map((data,index) => (                  
-              <div className='w-[100%] h-[90px] grid grid-cus p-[5px] cursor-pointer' key={index}  >                
-                <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px]` } onClick={() =>{handleCheckBoxCheck(data.id)}} >
+              <div className='w-[100%] h-[90px] grid grid-cus p-[5px] cursor-pointer' key={index}>                
+                <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px]` } onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
                     <div className='flex justify-center items-center h-[100%] gap-2 '>
                       <div clas>
                             <input type="checkbox" name="" id={data.id.length == 0 ? "emptyIDCheckBox" : data.id} className='datacheckBox ' onChange={() =>(handleCheckBoxCheck(data.id))}/>
                       </div>
                     </div>
                 </div>  
-                  <div className={`${checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox") ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px] `} onClick={() =>{handleCheckBoxCheck(data.id)}} >
+                  <div className={`${checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox") ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px] `} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
                     
                       <div className='flex items-center h-[100%] gap-2 '>
                         
@@ -681,22 +699,21 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
                           </div>
                       </div>
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id)}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
                     <div className='flex items-center h-[100%]'>
                       <div className='' title={data.type}>Thương hiệu, văn hoá cty</div>
                     </div>              
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id)}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
                     <div className='flex h-[100%] justify-center items-center'>
                       <div className='font-[700]' title={`${formatTime(data.timelimit)}`}>{data.timelimit.length == 0 ? "" : formatTime(data.timelimit)}</div>
                     </div> 
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id)}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
                     <div className='flex justify-end items-center h-[100%] w-[76%]'>
                         <div className={`${data.status == "0" ? "" : data.status == "1" ? "text-[#31ADFF]" : data.status =="2" ? "text-[#008000]" : data.status == "3" ? "text-[#FB311C]" : data.status == "4" ? "text-[#B7B92F]" : "text-black"} `} title={formatStatus(data.status)}>{formatStatus(data.status)}</div>
                         </div> 
-                  </div>
-                  
+                  </div>          
                   <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] ml-[1px] p-[9px]`}>
                     <div className='flex justify-center items-center h-[100%] gap-2 '>
                     <div className={`${(selectedTooltipID === data.id && isHoverOrFocus) ? "bg-[#BDC2D2] text-white": ""} w-[50px] rounded-[3px] text-center three-dots-hover text-black cursor-pointer relative`} key={index}>
