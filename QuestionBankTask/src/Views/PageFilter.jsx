@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from 'react'
 import '../css/PageFilter.css'
 
-const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete}) => {
+const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete, isPageChanging, contentIsEmpty}) => {
     const [isItemLimitShowed, setIsItemLimitShowed] = useState(false);
     const [itemsLimit, setItemsLimit] = useState(5);
     const [allItemTotalPage, setAllItemTotalPage] = useState([]);
@@ -51,7 +51,8 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
             currentPageItems = Data.slice(startIndex, endIndex);
         }
         setCurpageData(currentPageItems)
-        setPrevState(!prevState)
+        isPageChanging(!prevState)
+        setPrevState(!prevState)  
         setIsPageFilter(!prevState)  
     
     }
@@ -71,6 +72,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
     const handleListItemLimitSelected = (item) =>{
         setIsItemLimitShowed(item);
         setItemsLimit(item)
+        goToPage(1)
         const tempList = origLimitList.filter((limit) => limit != item)
         setlimitList(tempList);  
         handleItemLimitSelector(); 
@@ -119,10 +121,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
             let startPage = Math.max(1, currentPage - 1);
             let endPage = Math.min(totalPage, currentPage + 1);
 
+
             if (currentPage >= 3) {
                 if (currentPage == totalPage){
                     paginationButtons.push(
-                        <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage + 3)}>
+                        <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage - 3)}>
                             ...
                         </div>
                     );
@@ -155,7 +158,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
             
             
             if (currentPage <= totalPage - 2) {
-                if (currentPage == 1 && currentPage <= totalPage - 2 ){
+                if (currentPage == 1){
                     paginationButtons.push(
                         <div key={'rightEllipsis'} className='flex w-[25px] h-[33px]  justify-center items-center rounded-[3px] cursor-pointer hover-page-child' onClick={() => goToPage(currentPage + 3)}>
                             ...
@@ -187,6 +190,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
 
     useEffect(() => {
         getCurrentPageItems();
+        
     }, [currentPage]);
 
     useEffect(() =>{
@@ -202,12 +206,17 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
     useEffect(() =>{
         getTotalPage();
     },[isDelete, baseData])
+
+    useEffect(() =>{
+        goToPage(1)
+        console.log("no")
+    },[contentIsEmpty])
   return (
-    <div className='w-[100%] h-[100%] flex justify-between pl-2 pr-2'>
-        <div className='w-[50%] h-[100%] flex gap-1 pl-[8px]'>
-            <div className='w-[20vh] self-center'>Hiển thị mỗi trang</div>
-            <div className='w-[100%] flex'>
-                <div className='w-[70px] flex self-center justify-center items-center gap-2 hover:bg-[#F5F6F8] cursor-pointer pt-[6px] pb-[6px]' onClick={handleItemLimitSelector}>
+    <div className='w-[100%] h-[100%] flex self-end justify-between pl-2 pr-2'>
+        <div className='h-[100%] flex justify-between gap-1 pl-[8px] whitespace-nowrap'>
+            <div className=' self-center'>Hiển thị mỗi trang</div>
+            <div className='flex'>
+                <div className='w-[70px] flex self-center justify-center items-center gap-2 hover:bg-[#F5F6F8] cursor-pointer pt-[6px] pb-[6px] rounded' onClick={handleItemLimitSelector}>
                     <div>{itemsLimit}</div>
                     <Icon16px classIcon={faChevronUp} color={"#959DB3"} />
                 </div>
@@ -233,19 +242,7 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
                     <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md ${currentPage === 1 ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={prevPage} disabled={currentPage === 1 ? true : false}>
                         <FontAwesomeIcon icon={faChevronLeft} />
                     </div>
-                    {/* {currentPage > 3? 
-                    <div className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]'>
-                        ...
-                    </div>: ""}
-                    {currentPageList.map((page, index) => (
-                    <div key={index} className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]' onClick={() => goToPage(page)}>
-                        {page === 1 && currentPage > 3 ? "..." : page} 
-                    </div>))} */}
-                    {generatePaginationButtons()}
-                    {/* {currentPageList[currentPageList.length - 1] < totalPage - 2 ?
-                    <div className='flex w-[25px] h-[33px] bg-red-500 justify-center items-center rounded-[3px]'>
-                        ...
-                    </div>: ""}  */}
+                    {generatePaginationButtons()}           
                     <div className={`flex w-[25px] h-[33px] bg-[#F4F5F7] text-[#959DB3] justify-center items-center rounded-[3px] shadow-md  ${currentPage === totalPage ? "opacity-70": "cursor-pointer bg-[#FFFFFF] hover-page-child"}`} onClick={nextPage} disabled={currentPage === totalPage ? true : false}>
                         <FontAwesomeIcon icon={faChevronRight} />
                     </div>                   

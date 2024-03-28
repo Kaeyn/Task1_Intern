@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/DataList.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRotateLeft, faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash} from "@fortawesome/free-solid-svg-icons"
-const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisable, showToast, disableFocus, onclickDisableFocus, isActionClicked, actionedData}) => {
+const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisable, showToast, disableFocus, onclickDisableFocus, isActionClicked, actionedData, contentIsEmpty, originData}) => {
 
   const [datafContent, setDataFContent] = useState([]);
   const [isHoverOrFocus, setIsHoverOrFocus] = useState(false);
@@ -30,7 +30,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       else{
         setShowTooltip(true)
         setIsHoverOrFocus(true)
-      }
+      }   
     }
 
   const handleCloseMultiToolTip = () =>{
@@ -67,20 +67,46 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       const checkboxes = document.querySelectorAll('.datacheckBox');
       if(!isAllChecked){
         checkAllBoxes(checkboxes)
+        
       }else{
-        unCheckAllBoxes(checkboxes)
+        
+        unCheckAllBoxes(checkboxes)   
       }   
 
     }
 
     const handleCheckBoxUpdate = () =>{
+      if(checkBoxList != null){
+        checkBoxList.forEach(checkboxID => {
+          const checkBox = document.getElementById(checkboxID);
+          if(checkBox != null){
+            checkBox.checked = true;
+          }
+        });
+        handleIsAllChecked();
+      }
       
-      checkBoxList.forEach(checkboxID => {
-        const checkBox = document.getElementById(checkboxID);
-        if(checkBox != null){
-        checkBox.checked = true;
+    }
+
+    const handleIsAllChecked = () =>{
+      let count = 0;
+      const checkboxes = document.querySelectorAll('.datacheckBox');
+      
+      checkboxes.forEach(checkBox => {
+        if(checkBox.checked == true){
+          count+= 1;      
         }
       });
+      if(datafContent.length == 0){
+        setIsAllChecked(false)
+      }else{
+        if(count == datafContent.length){
+          setIsAllChecked(true)
+        }else{
+          setIsAllChecked(false)
+        }
+      }
+     
     }
 
     const checkAllBoxes = (checkboxes) =>{
@@ -91,27 +117,40 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
 
         }else{
           checkbox.checked = true;
-          newCheckedList.push(checkbox.id)
+          const isExist = checkBoxList.some((item) => item === checkbox.id)
+          if(!isExist){
+            newCheckedList.push(checkbox.id)
+          }
+          
         }
          
         
       });
       setIsAllChecked(true);
-      setCheckBoxList(newCheckedList);
+      setCheckBoxList([...checkBoxList, ...newCheckedList]);
     }
 
     const unCheckAllBoxes = (checkboxes) =>{
-      checkboxes.forEach((checkbox) => {   
-        if(checkbox.id == "" || checkbox.id == "emptyIDCheckBox"){
-
-        }else{
-        if(checkbox != null){
-          checkbox.checked = false; 
-        }             
-      }    
+      setIsAllChecked(false);   
+      const allCheckBox = document.querySelectorAll(".datacheckBox");
+      allCheckBox.forEach(checkbox => {
+        const isExist = checkBoxList.some((item) => item === checkbox.id)
+        if(isExist){
+          setCheckBoxList((prevList) => prevList.filter((item) => item !== checkbox.id));
+        }
       });
-      setIsAllChecked(false);
-      setCheckBoxList([]);
+      
+    }
+
+    const reloadCheckBox = () =>{
+      const allCheckBox = document.querySelectorAll(".datacheckBox");
+      allCheckBox.forEach(checkBox => {
+        
+        if(checkBox != null){
+          checkBox.checked = false;
+        }
+      });
+      handleCheckBoxUpdate();
     }
     
     const unCheckBoxesOnCloseToolTip = () =>{
@@ -124,20 +163,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       setIsAllChecked(false);
       setCheckBoxList([]);
     }
-
-
-
-    const handleBoxesChecking = () =>{
-      const parentcheckBox = document.querySelector('.parentCheckBox');
-      if(checkBoxList.length === datafContent.length){
-        parentcheckBox.checked = true;
-        
-      }
-      else{
-        parentcheckBox.checked = false;
-        
-      }   
-    }
+    
 
 
 
@@ -154,7 +180,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     }
 
     const requestApproveItem = (id) =>{
-      const item = datafContent.find(item => item.id === id);
+      const item = originData.find(item => item.id === id);
         if (item.id ==='' || item.stringques === '' || item.type === '' || item.group === '' || item.timelimit === '') {
           
           const message = "Đã xảy ra lỗi khi gửi duyệt với item: " +id
@@ -163,9 +189,9 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
           return 0;
         }
 
-      const index = datafContent.findIndex(item => item.id === id);
+      const index = originData.findIndex(item => item.id === id);
       if (index !== -1) {
-        datafContent[index].status = "1";
+        originData[index].status = "1";
         setDataFContent([...datafContent]);
         if(isMultiToolAction === false){
           const message = "Gửi duyệt thành công item: " +id
@@ -178,8 +204,8 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     }
 
     const approveItem = (id) =>{
-      const index = datafContent.findIndex(item => item.id === id);
-      const item = datafContent.find(item => item.id === id);
+      const index = originData.findIndex(item => item.id === id);
+      const item = originData.find(item => item.id === id);
       if (!item || !item.id || !item.stringques || !item.type || !item.group || !item.timelimit) {
           const message = "Đã xảy ra lỗi khi phê duyệt với item: " +id
           const type = "error"
@@ -187,7 +213,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
           return 0;
       }else{
         if (index !== -1) {
-          datafContent[index].status = "2";
+          originData[index].status = "2";
           setDataFContent([...datafContent]);
           
           if(isMultiToolAction === false){
@@ -204,9 +230,9 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     }
 
     const stopDisplayItem = (id) =>{
-      const index = datafContent.findIndex(item => item.id === id);
+      const index = originData.findIndex(item => item.id === id);
       if (index !== -1) {
-        datafContent[index].status = "3";
+        originData[index].status = "3";
         setDataFContent([...datafContent]);
         if(isMultiToolAction === false){
           const message = "Ngưng hiển thị thành công item: " +id
@@ -220,9 +246,9 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
 
     
     const returnItem = (id) =>{
-      const index = datafContent.findIndex(item => item.id === id);
+      const index = originData.findIndex(item => item.id === id);
       if (index !== -1) {
-        datafContent[index].status = "4";
+        originData[index].status = "4";
         setDataFContent([...datafContent]);
         if(isMultiToolAction === false){
           const message = "Trả về thành công item: " +id
@@ -238,17 +264,21 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       
       let successCount = 0;
       let failCount = 0;
+      isMultiToolAction = true;
       checkBoxList.forEach(itemID => {
         const status = getItemStatus(itemID);     
+        
         if(status != null && (status === "0" || status === "4")){
+          
           let count = requestApproveItem(itemID)
           successCount += count
+          
           if(count == 0){
             failCount += 1
           }
         }                       
       });
-
+      isMultiToolAction  = false;
       if(successCount > 0){
         const succesMessage = "Gửi duyệt thành công! "
         const successType = "success"
@@ -260,21 +290,25 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       listActionedItem = []
     }
 
+    
     const approveListItem = () =>{
+      let successCount = 0;
       isMultiToolAction = true;
-      console.log(isMultiToolAction)
       checkBoxList.forEach(itemID => {
         const status = getItemStatus(itemID);
         if(status != null && (status === "1" || status === "3")){
-          approveItem(itemID)
+          let count = approveItem(itemID)
+          successCount += count
         }
         
       });
       isMultiToolAction  = false;
-      const message = "Phê duyệt thành công "
-      const type = "success"
-      showToast(message, type)
-      console.log("Phê duyệt: " + [...listActionedItem])
+      if(successCount > 0){
+        const message = "Phê duyệt thành công "
+        const type = "success"
+        showToast(message, type)
+        console.log("Phê duyệt: " + [...listActionedItem])
+      }
       unCheckBoxesOnCloseToolTip();
       listActionedItem = []
     }
@@ -324,7 +358,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       let emptyIDCount = 0;
       checkBoxList.forEach(id => {
         
-        const itemToDelete = datafContent.find(item => item.id === id); 
+        const itemToDelete = originData.find(item => item.id === id); 
         if(id == "emptyIDCheckBox" || id == ""){
           emptyIDCount += 1
         }else{
@@ -354,12 +388,12 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
   }
 
     const getItemStatus = (id) =>{
-      const item = datafContent.find(item => item.id === id);
+      const item = originData.find(item => item.id === id);
       return item ? item.status : null;
     }
 
     const deleteItem = (id) =>{
-        const itemToDelete = datafContent.find(item => item.id === id);
+        const itemToDelete = originData.find(item => item.id === id);
         let questionList = []
         if(id.length == 0){
           const message = "Đã xảy ra lỗi khi xoá item: " +id +" câu hỏi có ID rỗng";
@@ -533,17 +567,27 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     
     const handleActionClicked = (action, dataid) =>{
         action(dataid)
-        setShowTooltip(false)
-        setIsHoverOrFocus(false)
-        isActionClicked(!prevState)
-        setPrevState(!false)
-        actionedData(datafContent)
+        if(showMultiTooltip){
+          setShowMultiTooltip(false);
+          setCheckBoxList([])
+        }
+        reloadData()
     }
 
     const handleMultitoolActionClicked = (action) =>{
-      action()   
+      action()  
+      reloadData()
+
   }
 
+  const reloadData = ()=>{
+    setShowTooltip(false)
+    setIsHoverOrFocus(false)
+    isActionClicked(!prevState) 
+    actionedData(datafContent)       
+    setPrevState(!false)
+    
+  }
 
     const formatTime = (seconds) => {
       if (seconds < 60) {
@@ -582,13 +626,17 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
 
 
     useEffect(() => {     
-      setDataFContent(dataFromContent);
-      console.log(dataFromContent)
+      setDataFContent(dataFromContent);      
     }, [dataFromContent])
 
-    useEffect(() => {        
-      
-      handleBoxesChecking();     
+    useEffect(() =>{
+      handleIsAllChecked();
+      if(datafContent.length == 0){
+        contentIsEmpty(prevState)
+      }
+    },[datafContent])
+    useEffect(() => {     
+      reloadCheckBox();
     }, [checkBoxList])
 
     useEffect(() => {     
@@ -608,12 +656,14 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     }, [checkBoxList])
 
     useEffect(() =>{
-        handleCloseMultiToolTip()   
+      reloadCheckBox();
     },[isConfirmDelete, dataFromContent])
 
     useEffect(() =>{
       getListMultitool();
+      
     },[checkBoxList])
+
 
     useEffect(() =>{
       setSelectedTooltipID(-1)
@@ -622,11 +672,11 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     }, [disableFocus])
     
   return (
-    <div className='w-[100%] h-[100%]'>
-        <div className='w-[100%] h-[8%] grid grid-cus p-[5px] pb-[2px]' onClick={onclickDisableFocus}>
+    <div className='w-[100%] h-[100%] x-scroll-container'>
+        <div className='w-[1614px] h-[8%] grid grid-cus p-[5px] pb-[2px]' onClick={onclickDisableFocus}>
             <div className='w-[100%]'>
                 <div className='flex justify-center items-center h-[100%] gap-2'>
-                  <div><input type="checkbox" name="" id="" className='parentCheckBox' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}}  /></div>
+                  <div><input type="checkbox" name="" id="" className='parentCheckBox' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}} checked={isAllChecked} /></div>
                 </div>
             </div>
             <div className='w-[100%]'>
@@ -655,37 +705,37 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
                 </div>
             </div>
         </div>
-        <div className='w-[100%] h-[64vh] z-0 scroll-container '>
+        <div className='w-[1614px] z-0 scroll-container whitespace-nowrap'>
           {showMultiTooltip === true ? 
           <div  className='h-[100px] bg-white fixed top-[62%] -translate-x-1/2 left-[58%] -translate-y-1/2 rounded-[6px] shadow-md'>
             
                     <div className='h-[100%]  flex items-center'>
-                          <div className='w-[120px] h-[100%] bg-[#008000] mr-[10px] flex flex-col justify-center items-center text-white rounded-l-[6px]'>
+                          <div className='w-[120px] h-[100%] bg-[#008000] flex flex-col justify-center items-center text-white rounded-l-[6px]'>
                             <div className='font-bold text-[26px]'>{checkBoxList.length}</div>
                             <div className=''>Đã chọn</div>
                           </div>             
                       {listMultiToolFunc.map((item, index) => (           
-                        <div key={index} className={`w-[120px] h-[85%] ml-[10px] mr-[10px] flex flex-col justify-center items-center text-[15px] gap-1 ${item.id == 5 ? "text-[#FD7676]" : "text-[#26282E]"} cursor-pointer hover:bg-[#26282e18] `} onClick={() => handleMultitoolActionClicked(item.action)}>
+                        <div key={index} className={`w-[120px] h-[100%] flex flex-col justify-center items-center text-[15px] gap-1 ${item.id == 5 ? "text-[#FD7676]" : "text-[#26282E]"} cursor-pointer hover:bg-[#26282e18] `} onClick={() => handleMultitoolActionClicked(item.action)}>
                             <div><Icon20px classIcon={item.icon} color={item.id == 5 ? "#FD7676" : "#959DB3"} ></Icon20px></div>
                             <div>{item.text}</div>
                           </div> 
                           ))}                                           
-                          <div className='w-[100px] h-[85%]  ml-[10px] flex justify-center items-center border-[#BDC2D2] border-l-2 text-[25px] text-[#26282E] cursor-pointer hover:bg-[#26282e18] rounded-r-[4px]' onClick={() => handleCloseMultiToolTip()}>
+                          <div className='w-[100px] h-[100%] flex justify-center items-center border-[#BDC2D2] border-l-2 text-[25px] text-[#26282E] cursor-pointer hover:bg-[#26282e18] rounded-r-[4px]' onClick={() => handleCloseMultiToolTip()}>
                           <div>X</div>
                           </div>
                     </div></div> : ""} 
           
           
-          {datafContent ? datafContent.map((data,index) => (                  
-              <div className='w-[100%] h-[90px] grid grid-cus p-[5px] cursor-pointer' key={index}>                
-                <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px]` } onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
+          {datafContent.length > 0 ? datafContent.map((data,index) => (                  
+              <div className='w-[169vh] h-[90px] grid grid-cus p-[5px] cursor-pointer list_item_hover' key={index}>                
+                <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[9px] ` } onClick={() =>{handleLoseFocus()}} >
                     <div className='flex justify-center items-center h-[100%] gap-2 '>
                       <div clas>
-                            <input type="checkbox" name="" id={data.id.length == 0 ? "emptyIDCheckBox" : data.id} className='datacheckBox ' onChange={() =>(handleCheckBoxCheck(data.id))}/>
+                            <input type="checkbox" name="" id={data.id.length == 0 ? "emptyIDCheckBox" : data.id} className='datacheckBox' onChange={() =>(handleCheckBoxCheck(data.id))} checked={checkBoxList.includes(data.id)}/>
                       </div>
                     </div>
                 </div>  
-                  <div className={`${checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox") ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px] `} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
+                  <div className={`${checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox") ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[9px] pt-[9px] pb-[9px] `} onClick={() =>{handleLoseFocus()}} >
                     
                       <div className='flex items-center h-[100%] gap-2 '>
                         
@@ -699,22 +749,35 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
                           </div>
                       </div>
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleLoseFocus()}} >
                     <div className='flex items-center h-[100%]'>
-                      <div className='' title={data.type}>Thương hiệu, văn hoá cty</div>
+                    {data.group && data.group.length > 0 && (
+                      <div className='break-words' title={data.group.join(', ')}>
+                        {data.group.map((item, index) => (
+                          <React.Fragment key={index}>                      
+                          <span                              
+                              className={`whitespace-pre-wrap ${index < 1 ? 'font-bold text-[16px]' : 'font-normal text-base'} ${index > 1 ? 'text-[15px]' : ''}`}>
+                              {index === 0 ? `${item}\n` : index === 1 ? `${item},..` : ""}
+                          </span>                         
+                          
+                        </React.Fragment>
+                         
+                        ))}                       
+                      </div>
+                    )}
                     </div>              
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[10px] pt-[9px] pb-[9px]`} onClick={() =>{handleLoseFocus()}} >
                     <div className='flex h-[100%] justify-center items-center'>
                       <div className='font-[700]' title={`${formatTime(data.timelimit)}`}>{data.timelimit.length == 0 ? "" : formatTime(data.timelimit)}</div>
                     </div> 
                   </div>
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] p-[9px] pt-[9px] pb-[9px]`} onClick={() =>{handleCheckBoxCheck(data.id); handleLoseFocus()}} >
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[9px] pt-[9px] pb-[9px]`} onClick={() =>{handleLoseFocus()}} >
                     <div className='flex justify-end items-center h-[100%] w-[76%]'>
                         <div className={`${data.status == "0" ? "" : data.status == "1" ? "text-[#31ADFF]" : data.status =="2" ? "text-[#008000]" : data.status == "3" ? "text-[#FB311C]" : data.status == "4" ? "text-[#B7B92F]" : "text-black"} `} title={formatStatus(data.status)}>{formatStatus(data.status)}</div>
                         </div> 
                   </div>          
-                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF]'} w-[100%] ml-[1px] p-[9px]`}>
+                  <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] ml-[1px] p-[9px]`}>
                     <div className='flex justify-center items-center h-[100%] gap-2 '>
                     <div className={`${(selectedTooltipID === data.id && isHoverOrFocus) ? "bg-[#BDC2D2] text-white": ""} w-[50px] rounded-[3px] text-center three-dots-hover text-black cursor-pointer relative`} key={index}>
                         {(selectedTooltipID === data.id && showTooltip) ?

@@ -3,3 +3,7 @@
     background-size: cover;
     
 }
+.header_module_hover:hover .module .module_text{
+    color: #008000;
+    
+}

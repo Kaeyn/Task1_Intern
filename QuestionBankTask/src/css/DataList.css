@@ -1,10 +1,14 @@
 .grid-cus {
-    grid-template-columns: 3% 52% 14% 14% 14% 3%;
+    grid-template-columns: 48px 780px 240px 240px 240px 48px;
     
 }
 .three-dots-hover:hover{
     background-color: #BDC2D2;
     color: white;
+}
+
+.list_item_hover:hover .child_item{
+  background-color: #1A6634B2;
 }
 
 .func-parent > div:hover {
@@ -22,12 +26,11 @@
   input[type = "checkbox"]{
       accent-color: #008000;
   }
- 
-
 
 .scroll-container {
-  height: calc(100vh - header-height);
+  height: calc(100vh - 37vh); 
   overflow-y: auto;
+  overflow-x: hidden;
   padding-right: 5px;
 }
 
@@ -58,9 +61,153 @@
   border-radius: 5px; 
 }
 
+.x-scroll-container{
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+
+.scroll-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+.scroll-container *::-scrollbar {
+  width: 10px; 
+}
+
+.scroll-container *::-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.scroll-container *::-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px; 
+}
+
+.x-scroll-container::-webkit-scrollbar {
+  width: 10px;
+  height: 8px;
+}
+
+.x-scroll-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.x-scroll-container::-webkit-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px;
+}
+
+.x-scroll-container *::-scrollbar {
+  width: 10px; 
+}
+
+.x-scroll-container *::-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+.x-scroll-container *::-scrollbar-thumb {
+  background: #888; 
+  border-radius: 5px; 
+}
+
 .question-text-limit {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   width: 650px; 
+}
+
+
+@media screen and (max-width: 1746px) {
+  /* .scroll-container {
+    height: calc(100vh - 38vh);
+    overflow-y: auto;
+    padding-right: 5px;
+  } */
+  .dataList_container{
+    height: calc(100vh - 32vh);
+  }
+  
+}
+
+@media screen and (max-width: 1537px) {
+  /* .scroll-container {
+    height: calc(100vh - 40.2vh);
+    
+    overflow-y: auto;
+    overflow-x: auto;
+    padding-right: 5px;
+  } */
+  
+  .dataList_container{
+    height: calc(100vh - 34.5vh);
+  }
+  
+}
+
+@media screen and (max-width: 1441px) {
+  /* .scroll-container {
+    height: calc(100vh - 42.5vh);
+    overflow-y: auto;
+    padding-right: 5px;
+  } */
+  .dataList_container{
+    height: calc(100vh - 35.7vh);
+  }
+  
+}
+
+@media screen and (max-width: 1372px) {
+  /* .scroll-container {
+    height: calc(100vh - 44vh);
+    overflow-y: auto;
+    padding-right: 5px;
+  } */
+  .dataList_container{
+    height: calc(100vh - 37vh);
+  }
+  
+}
+
+@media screen and (max-width: 1281px) {
+  /* .scroll-container {
+    height: calc(100vh - 46vh);
+    overflow-y: auto;
+    padding-right: 5px;
+  } */
+  .dataList_container{
+    height: calc(100vh - 38.7vh);
+  }
+  
+}
+@media screen and (max-width: 1098px) {
+  /* .scroll-container {
+    height: calc(100vh - 50vh);
+    overflow-y: auto;
+    padding-right: 5px;
+  } */
+  .dataList_container{
+    height: calc(100vh - 44vh);
+  }
+  
+}
+
+@media screen and (min-width: 1920px){
+  .grid-cus{
+    grid-template-columns: 3.5% 50% 15.3% 14% 14% 3.2%; 
+    width: 100%;
+  }
+  .scroll-container{
+    width: 100%;
+  }
 }

@@ -2,6 +2,34 @@
     "Module":[
       {
         "id":"M.001",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.002",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.003",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.004",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.005",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.006",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.007",
+        "moduleName":"------------"
+      },
+      {
+        "id":"M.008",
         "moduleName":"NHÂN SỰ",
         "category":[
                   {
@@ -18,7 +46,7 @@
                             "id" : "Q.001",
                             "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Có bao nhiêu mặt hàng",
                             "type" : "",
-                            "group" : ["Thương hiệu, văn hoá cty"],
+                            "group" : ["Thương hiệu văn hoá cty", "văn hoá cty văn hoá cty", "văn hoá cty", "văn hoá cty", "văn hoá cty"],
                             "timelimit" : "30",
                             "status" : "0"                        
                           },
@@ -26,7 +54,7 @@
                             "id" : "Q.002",
                             "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
                             "type" : "Dạng một câu lựa chọn",
-                            "group" : ["Thương hiệu, văn hoá cty"],
+                            "group" : ["Thương hiệu văn hoá cty"],
                             "timelimit" : "30",
                             "status" : "0"                        
                           },
@@ -41,9 +69,9 @@
                           {
                             "id": "Q.004",
                             "stringques": "Sứ mệnh của Hachi Hachi là gì?",
-                            "type": "",
+                            "type": "Dạng một câu lựa chọn",
                             "group": [],
-                            "timelimit": "", 
+                            "timelimit": "40", 
                             "status": "3"
                           },
                           {
@@ -152,7 +180,7 @@
                           },
                           {
                             "id": "Q.019",
-                            "stringques": "",
+                            "stringques": "Ưu điểm của mua hàng online tại Hachi Hachi là gì?",
                             "type": "Dạng một câu lựa chọn",
                             "group": ["Thương mại điện tử"],
                             "timelimit": "45",  

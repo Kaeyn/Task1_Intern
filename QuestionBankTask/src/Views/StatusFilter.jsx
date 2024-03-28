@@ -46,14 +46,14 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
     },[resetStatus])
     return (
       <div className='h-[100%]'>
-          <div className='flex justify-between items-center h-[100%]'>
-            <div className=''>
-              <ul className='flex'>
+          <div className='flex items-center h-[100%]'>
+            <div className='w-[60%] overflow-x-auto overflow-y-hidden whitespace-nowrap'>
+              <ul className='flex items-center'>
                 {filerCategory.map((data, index)=>{
                   const isChecked = checkedList.some((checkboxID) => checkboxID === index);
                   // const isChecked = checkedList[index] || false;
                   return (               
-                    <li key={index} className='pr-4 pl-[5px]'>
+                    <li key={index} className='pr-4 pl-[5px] pb-[2px]'>
                       <div className={`${isChecked ? 'border-2 border-[#008000]' : 'border-2 border-transparent'} status-hover transition ease-in-out duration-300 flex items-center gap-3 shadow rounded-[25px] h-[40px] p-4 bg-white text-[#959DB3] cursor-pointer` } title={data} onClick={() => onCheckBoxChecked(index)}>
                         <div className='text-[16px]'>{data}</div>
                         <input type="checkbox" className='checkboxes w-[17px] h-[17px] statusCheckBoxes' id={`checkBox${index}`} onChange={() => onCheckBoxChecked(index)} disabled/> 
@@ -65,11 +65,11 @@ const StatusFilter = ({listStatusFilter, resetStatus}) => {
                 })}    
             </ul>
           </div>
-          <div>
-            <ul className='flex gap-4 pr-[18px]'>
-                <li><div className='w-[42px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer hover:border-[2px]'  title='Import Excel'><img src="./assest/Import.png" alt="" className='w-[18px] h-[21px] self-center'/></div></li>
-                <li><div className='w-[120px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer gap-2 hover:border-[2px]'  title='Export Excel'><img src="./assest/export.png" alt="" className='w-[18px] h-[21px] self-center' /><div className='self-center text-[#959DB3]'>Template</div></div></li>
-                <li><div className='w-[130px] h-[40px] bg-[#1A6634] shadow-lg shadow-[#ADDEF6] rounded-[3px] flex justify-center gap-2 cursor-pointer'  title='Thêm mới'><img src="./assest/add.png" alt="" className='w-[18px] h-[21px] self-center '/><div className='self-center text-white'>Thêm mới</div></div></li>
+          <div className='w-[40%] justify-end flex'>
+            <ul className='flex gap-4 pr-[18px] pb-[2px]'>
+                <li><div className='w-[42px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer  excel_function_hover'  title='Import Excel'><img src="./assest/Import.png" alt="" className='w-[18px] h-[21px] self-center'/></div></li>
+                <li><div className='w-[120px] h-[40px] bg-white shadow rounded-[3px] flex justify-center cursor-pointer gap-2  excel_function_hover'  title='Export Excel'><img src="./assest/export.png" alt="" className='w-[18px] h-[21px] self-center' /><div className='self-center text-[#959DB3]'>Template</div></div></li>
+                <li><div className='w-[130px] h-[40px] bg-[#1A6634] shadow-lg shadow-[#ADDEF6] rounded-[3px] flex justify-center gap-2 cursor-pointer addnew_function_hover'  title='Thêm mới'><img src="./assest/add.png" alt="" className='w-[18px] h-[21px] self-center '/><div className='self-center text-white'>Thêm mới</div></div></li>
             </ul>
           </div>
             

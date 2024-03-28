@@ -16,6 +16,8 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   const [isFiltering, setIsFiltering] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
   const [isConfirmDelete, setIsConfirmDelete] = useState(false);
+  const [isPageChanging, setIsPageChanging] = useState(false);
+  const [contentIsEmpty, setContentIsEmpty] = useState(false);
   const [statusFilter, setstatusFilter] = useState([]);
   const [searchInputFilter, setSearchInputFilter] = useState("");
   const [alertBoxData, setAlertBoxData] = useState([]);
@@ -123,7 +125,6 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   }
 
   const resetFilter = () =>{
-    console.log("Reset")
     setFilteredData(Data)
     setResetStatusFunc(!resetStatusFunc)
     filterData();
@@ -131,7 +132,6 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
 
   const handleDocumentClick = () => {
     setDisableFocus(!disableFocus);
-    console.log("clicked")
   };
 
 
@@ -187,13 +187,13 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   }, [isActionClicked, actionedData]);
 
   return (
-    <div className=' h-[100%] relative wrapper'>
-        <div className={`w-[100%] h-[8%] max-h-[8%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
+    <div className='relative wrapper whitespace-nowrap'>
+        <div className={`w-[100%] py-[1.5vh] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className={`w-[100%] h-[9%] max-h-[9%] flex pb-[4px] ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
+        <div className={`w-[100%] py-[1.5vh] flex ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[76%] max-h-[76%] flex p-[4px]'><DataList dataFromContent={preFilteredData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked}/></div>
-        <div className={`w-[100%] h-[7%] max-h-[76%] flex p-[4px] `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} /></div>      
+        <div className='w-[100%] h-[68.13vh] flex p-[0.4vh] dataList_container'><DataList dataFromContent={preFilteredData} originData={contentData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked} isPageChanging={isPageChanging} contentIsEmpty={setContentIsEmpty}/></div>
+        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh]  `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 

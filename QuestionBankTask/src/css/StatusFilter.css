@@ -24,8 +24,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    line-height: 17px;
-    padding-left: 1px;
+    line-height: 16px;
+    font-size: 12px;
+    padding-left: 3px;
     transform: translate(-50%, -50%) scale(0); 
     transition: transform 0.3s ease;
     
@@ -38,4 +39,17 @@
   .status-hover:hover{
     border-width: 2px;
     border-color: #008000;
+  }
+  .status-hover:hover .checkbox-label{
+    background-color: #008000;
+    transition: ease-in-out 0.1s;
+  }
+
+  .excel_function_hover:hover{
+    border-width: 2px;
+    border-color: #008000;
+  }
+  .addnew_function_hover:hover{
+    border-width: 2px;
+    border-color: #a2ddfa;
   }

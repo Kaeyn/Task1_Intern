@@ -24,7 +24,6 @@ const QuestionBank = () => {
     const categories = moduleData.flatMap(module => module.category || []);
     const childCategories = categories.flatMap(category => category.catechild || []);
     const selectedChildCategories = childCategories.filter(child => child.id === childCateId);
-
     if (selectedChildCategories.length > 0) {
       setContentData(selectedChildCategories[0].content || []);
       setCategoryData(categories)
@@ -93,17 +92,17 @@ const QuestionBank = () => {
     setDataList(data);
     
   }, [dataList])
+  
 
 
   return (
     <div className='Home'>
         <div className='sidebar-header display: flex  bg-[#EDEFF3] select-none '>                 
-            <div className='w-[15%] min-h-[100vh] pt-[5px]'><Sidebar sidebarData={dataList} selectedCate={selectedCategory} selectedChildCate={setSelectedCategoryChild}/></div>
-            <div className='w-[85%] min-h-[100vh] p-[5px] flex flex-col'>
-              <div className={`w-[100%] h-[7%] max-h-[7%] bg-white flex flex-col justify-center ${isFuncDisable ? "" : ""}`}><Header setSelectedCate={setSelectedCategory}/></div>
-                {(selectedCategory === cateNhanSu && selectedCategoryChild === childCategoryData[0]?.id)  && <Content contentData={contentData} setIsFuncDisable ={setIsFuncDisable} showToast ={showToast}/>}          
+            <div className='w-[15%] pt-[0.5vh]'><Sidebar sidebarData={dataList} selectedCate={selectedCategory} selectedChildCate={setSelectedCategoryChild}/></div>
+            <div className='w-[85%] pl-[5px] pr-[5px] pt-[0.5vh] flex flex-col'>
+              <div className={`w-[100%] bg-white flex flex-col justify-center ${isFuncDisable ? "" : ""}`}><Header setSelectedCate={setSelectedCategory} Data={dataList}/></div>
+                {(selectedCategoryChild === childCategoryData[0]?.id)  && <Content contentData={contentData} setIsFuncDisable ={setIsFuncDisable} showToast ={showToast}/>}          
             </div>
-            {/* <AlertMessage/> */}
             <ToastContainer
                 closeButton={false}
                 toastClassName={(context) =>
