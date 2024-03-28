@@ -129,11 +129,11 @@
 
 
 @media screen and (max-width: 1746px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 38vh);
     overflow-y: auto;
     padding-right: 5px;
-  } */
+  }
   .dataList_container{
     height: calc(100vh - 32vh);
   }
@@ -141,13 +141,11 @@
 }
 
 @media screen and (max-width: 1537px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 40.2vh);
-    
     overflow-y: auto;
-    overflow-x: auto;
     padding-right: 5px;
-  } */
+  }
   
   .dataList_container{
     height: calc(100vh - 34.5vh);
@@ -156,11 +154,11 @@
 }
 
 @media screen and (max-width: 1441px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 42.5vh);
     overflow-y: auto;
     padding-right: 5px;
-  } */
+  }
   .dataList_container{
     height: calc(100vh - 35.7vh);
   }
@@ -168,11 +166,11 @@
 }
 
 @media screen and (max-width: 1372px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 44vh);
     overflow-y: auto;
     padding-right: 5px;
-  } */
+  }
   .dataList_container{
     height: calc(100vh - 37vh);
   }
@@ -180,22 +178,22 @@
 }
 
 @media screen and (max-width: 1281px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 46vh);
     overflow-y: auto;
     padding-right: 5px;
-  } */
+  }
   .dataList_container{
     height: calc(100vh - 38.7vh);
   }
   
 }
 @media screen and (max-width: 1098px) {
-  /* .scroll-container {
+  .scroll-container {
     height: calc(100vh - 50vh);
     overflow-y: auto;
     padding-right: 5px;
-  } */
+  }
   .dataList_container{
     height: calc(100vh - 44vh);
   }
@@ -204,7 +202,7 @@
 
 @media screen and (min-width: 1920px){
   .grid-cus{
-    grid-template-columns: 3.5% 50% 15.3% 14% 14% 3.2%; 
+    grid-template-columns: 3.5% 51% 14.3% 14% 14% 3.2%; 
     width: 100%;
   }
   .scroll-container{

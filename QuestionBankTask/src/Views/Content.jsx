@@ -60,34 +60,34 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
     setPreFilteredData(filterBySearch);
   }
 
-  const filterActionedData = () =>{
+  // const filterActionedData = () =>{
 
-    let filterByStatus = [];
-    if (statusFilter.length === 0) {
-      filterByStatus = contentData;
-    } else {
-      let updatedStatusFilter = [...statusFilter]; 
-      if (updatedStatusFilter.includes(0)) {
-          updatedStatusFilter.push(4);
-      }
-      const tempListData = actionedData.filter(item => updatedStatusFilter.includes(parseInt(item.status)));
-      filterByStatus = tempListData;
-    }
+  //   let filterByStatus = [];
+  //   if (statusFilter.length === 0) {
+  //     filterByStatus = contentData;
+  //   } else {
+  //     let updatedStatusFilter = [...statusFilter]; 
+  //     if (updatedStatusFilter.includes(0)) {
+  //         updatedStatusFilter.push(4);
+  //     }
+  //     const tempListData = actionedData.filter(item => updatedStatusFilter.includes(parseInt(item.status)));
+  //     filterByStatus = tempListData;
+  //   }
 
-    let filterBySearch = [];
-    if(searchInputFilter.trim() === ""){
-      filterBySearch = filterByStatus;
-    }else{
-      let searchText = searchInputFilter.toLowerCase();
-      // filterBySearch = filterByStatus.filter(item => statusFilter.includes(item.id.toLowerCase().includes(searchText) && item.stringques.toLowerCase().includes(searchText)));
-      filterBySearch = filterByStatus.filter(item =>
-        item.id.toLowerCase().includes(searchText) ||
-        item.stringques.toLowerCase().includes(searchText)
-      );
-    }
+  //   let filterBySearch = [];
+  //   if(searchInputFilter.trim() === ""){
+  //     filterBySearch = filterByStatus;
+  //   }else{
+  //     let searchText = searchInputFilter.toLowerCase();
+  //     // filterBySearch = filterByStatus.filter(item => statusFilter.includes(item.id.toLowerCase().includes(searchText) && item.stringques.toLowerCase().includes(searchText)));
+  //     filterBySearch = filterByStatus.filter(item =>
+  //       item.id.toLowerCase().includes(searchText) ||
+  //       item.stringques.toLowerCase().includes(searchText)
+  //     );
+  //   }
     
-    setPreFilteredData(filterBySearch);
-  }
+  //   setPreFilteredData(filterBySearch);
+  // }
 
   const ShowAlertBox = (questList)=>{
     setListItemToDelete(questList)
@@ -100,21 +100,26 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   }
 
   const confirmDeleteItem = () =>{
+    
     const idsToDelete = listItemToDelete.map(question => question.id);
+    console.log(idsToDelete)
     const updatedFilteredData = preFilteredData.filter(item => !idsToDelete.includes(item.id));
+    console.log(updatedFilteredData)
     const updatedFilteredBaseData = baseData.filter(item => !idsToDelete.includes(item.id));
+    console.log(updatedFilteredBaseData)
     const message = "Xoá thành công " + listItemToDelete.length +" item"
     const type = "success"
+    setIsConfirmDelete(true);
+    setShowAlertBox(false);
     showToast(message, type)
     setBaseData(updatedFilteredBaseData)
     setIsDelete(true);
-    setIsConfirmDelete(true);
     setPreFilteredData(updatedFilteredData);
   }
 
   const unConfirmDelete = () =>{
-    setShowAlertBox(false)
-    setIsConfirmDelete(false)
+    setShowAlertBox(false);
+    setIsConfirmDelete(false);
   }
   
   const getAlertBoxContent = (questList) =>{
@@ -184,7 +189,8 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
 
   useEffect(() => {
     filterData();
-  }, [isActionClicked, actionedData]);
+  }, [isActionClicked]);
+
 
   return (
     <div className='relative wrapper whitespace-nowrap'>
@@ -193,7 +199,7 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
         <div className={`w-[100%] py-[1.5vh] flex ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
         <div className='w-[100%] h-[68.13vh] flex p-[0.4vh] dataList_container'><DataList dataFromContent={preFilteredData} originData={contentData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked} isPageChanging={isPageChanging} contentIsEmpty={setContentIsEmpty}/></div>
-        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh]  `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty}/></div>      
+        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh]  `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty} isActionClicked={isActionClicked}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 
@@ -223,11 +229,11 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
                     <div>Đơn vị bị xóa sẽ <span style={{ color: '#FD7676' }}>KHÔNG</span> thể khôi phục lại.</div>
                 </div>
                 </div>
-                <div className='w-[100%] h-[20%] flex border-[#C3C3C3] border-t-[0.12rem] cursor-pointer' onClick={() => (unConfirmDelete())}>
-                  <div className='w-[50%] flex justify-center items-center border-[#C3C3C3] border-r-[0.12rem]'>
-                  <div className='text-[16px] font-[600] text-[#959DB3] '>KHÔNG XOÁ</div>
+                <div className='w-[100%] h-[20%] flex border-[#C3C3C3] border-t-[0.12rem] cursor-pointer' >
+                  <div className='w-[50%] flex justify-center items-center border-[#C3C3C3] border-r-[0.12rem]' onClick={unConfirmDelete}>
+                      <div className='text-[16px] font-[600] text-[#959DB3] '>KHÔNG XOÁ</div>
                     </div>
-                  <div className='w-[50%] flex justify-center items-center gap-3 bg-red-400 cursor-pointer' onClick={() => {confirmDeleteItem()}}>
+                  <div className='w-[50%] flex justify-center items-center gap-3 bg-red-400 cursor-pointer' onClick={confirmDeleteItem}>
                       <div className=''> <Icon24px classIcon={faTrash} color={"#FFFFFF"}/></div>      
                       <div className='text-[16px] font-[550] text-[#FFFFFF]'>XOÁ</div>         
                   </div>

@@ -585,7 +585,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
     setIsHoverOrFocus(false)
     isActionClicked(!prevState) 
     actionedData(datafContent)       
-    setPrevState(!false)
+    setPrevState(!prevState)
     
   }
 
@@ -657,11 +657,14 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
 
     useEffect(() =>{
       reloadCheckBox();
+      if(isConfirmDelete==true){
+        handleCloseMultiToolTip();
+      }
     },[isConfirmDelete, dataFromContent])
+
 
     useEffect(() =>{
       getListMultitool();
-      
     },[checkBoxList])
 
 

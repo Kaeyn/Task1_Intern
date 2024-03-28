@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from 'react'
 import '../css/PageFilter.css'
 
-const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete, isPageChanging, contentIsEmpty}) => {
+const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete, isPageChanging, contentIsEmpty, isActionClicked}) => {
     const [isItemLimitShowed, setIsItemLimitShowed] = useState(false);
     const [itemsLimit, setItemsLimit] = useState(5);
     const [allItemTotalPage, setAllItemTotalPage] = useState([]);
@@ -190,8 +190,11 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
 
     useEffect(() => {
         getCurrentPageItems();
-        
     }, [currentPage]);
+
+    useEffect(() =>{
+        getCurrentPageItems();
+    },[isActionClicked])
 
     useEffect(() =>{
         getTotalPage();
@@ -209,7 +212,6 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
 
     useEffect(() =>{
         goToPage(1)
-        console.log("no")
     },[contentIsEmpty])
   return (
     <div className='w-[100%] h-[100%] flex self-end justify-between pl-2 pr-2'>
