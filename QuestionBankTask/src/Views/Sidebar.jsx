@@ -49,8 +49,8 @@ const Sidebar = ({sidebarData, selectedCate, selectedChildCate}) => {
     <div className='w-[100%]  bg-[#5A6276]'>
         <div className='h-[6.5vh] imgContainer bg-white'>
             <div className='h-[100%] flex items-center px-4 gap-6' title='HachiHachi'>
-                <img src="./assest/Hachilogo.png" alt="" className='w-[50vh] h-[100%] cursor-pointer' />
-                <img src="./assest/down-arrow.png" alt="" className='size-5 self-center cursor-pointer'/>
+                <img src="./assest/Hachilogo.png" alt="" className='w-[20vh] h-[100%] cursor-pointer' />
+                <img src="./assest/down-arrow.png" alt="" className='size-5 self-center cursor-pointer hachi_Arrow'/>
             </div>
         </div>
         

@@ -94,6 +94,10 @@
         width: 16px !important;
         height: 16px !important;
     }   
+    .hachi_Arrow{
+        width: 18px !important;
+        height: 18px !important;
+    }
     
   }
   
@@ -116,6 +120,10 @@
         width: 15px !important;
         height: 15px !important;
     }   
+    .hachi_Arrow{
+        width: 17px !important;
+        height: 17px !important;
+    }
   }
   @media screen and (max-width: 1098px) {
     .sidebar_catename{
@@ -136,4 +144,8 @@
         width: 14px !important;
         height: 14px !important;
     }   
+    .hachi_Arrow{
+        width: 15px !important;
+        height: 15px !important;
+    }
   }

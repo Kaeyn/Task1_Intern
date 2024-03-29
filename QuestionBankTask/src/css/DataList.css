@@ -23,8 +23,55 @@
     display: none; /* Hide the default checkbox */
   }
   
-  input[type = "checkbox"]{
+  /* input[type = "checkbox"]{
       accent-color: #008000;
+  } */
+
+  .datacheckBox{
+    display: none;
+  }
+  .parentCheckBox{
+    display: none;
+  }
+  .datacheckBox-label {
+    display: block;
+    width: 15px;
+    height: 15px;
+    background-color: white;
+    border: 1px solid #959DB3;
+    border-radius: 4px;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .datacheckBox-label:before {
+    content: '\2714';
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #008000; 
+    color: white;
+    border-radius: 4px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    line-height: 16px;
+    font-size: 12px;
+    padding-left: 3.5px;
+    transform: translate(-50%, -50%) scale(0); 
+    
+  }
+
+  .datacheckBox-label:hover{
+    background-color: #008000; 
+  }
+  
+  .parentCheckBox:checked + .datacheckBox-label:before {
+    transform: translate(-50%, -50%) scale(1); 
+  }
+
+  .datacheckBox:checked + .datacheckBox-label:before {
+    transform: translate(-50%, -50%) scale(1); 
   }
 
 .scroll-container {
@@ -135,7 +182,7 @@
     padding-right: 5px;
   }
   .dataList_container{
-    height: calc(100vh - 32vh);
+    height: calc(100vh - 34vh);
   }
   
 }
@@ -148,7 +195,7 @@
   }
   
   .dataList_container{
-    height: calc(100vh - 34.5vh);
+    height: calc(100vh - 35.5vh);
   }
   
 }
@@ -160,7 +207,7 @@
     padding-right: 5px;
   }
   .dataList_container{
-    height: calc(100vh - 35.7vh);
+    height: calc(100vh - 36.7vh);
   }
   
 }
@@ -172,7 +219,7 @@
     padding-right: 5px;
   }
   .dataList_container{
-    height: calc(100vh - 37vh);
+    height: calc(100vh - 38vh);
   }
   
 }
@@ -184,7 +231,7 @@
     padding-right: 5px;
   }
   .dataList_container{
-    height: calc(100vh - 38.7vh);
+    height: calc(100vh - 39.7vh);
   }
   
 }
@@ -195,7 +242,7 @@
     padding-right: 5px;
   }
   .dataList_container{
-    height: calc(100vh - 44vh);
+    height: calc(100vh - 45vh);
   }
   
 }

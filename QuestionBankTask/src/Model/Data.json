@@ -70,7 +70,7 @@
                             "id": "Q.004",
                             "stringques": "Sứ mệnh của Hachi Hachi là gì?",
                             "type": "Dạng một câu lựa chọn",
-                            "group": [],
+                            "group": ["Thương hiệu, văn hoá cty"],
                             "timelimit": "40", 
                             "status": "3"
                           },
@@ -289,7 +289,566 @@
                             "group": ["Hỗ trợ kỹ thuật"],
                             "timelimit": "35",
                             "status": "4"
-                          }                
+                          },
+                          {
+                            "id": "Q.033",
+                            "stringques": "Có phương thức thanh toán nào được chấp nhận trên Hachi Hachi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.034",
+                            "stringques": "Làm thế nào để thay đổi địa chỉ giao hàng sau khi đặt hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giao hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.035",
+                            "stringques": "Có thể hủy đơn hàng đã đặt trên Hachi Hachi không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đơn hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.036",
+                            "stringques": "Làm thế nào để đổi/trả hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đổi/Trả hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.037",
+                            "stringques": "Có chính sách vận chuyển miễn phí không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Vận chuyển"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.038",
+                            "stringques": "Làm thế nào để kiểm tra tình trạng đơn hàng của tôi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đơn hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.039",
+                            "stringques": "Có thể sử dụng phiếu quà tặng để thanh toán không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.040",
+                            "stringques": "Làm thế nào để cập nhật thông tin cá nhân của tôi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.041",
+                            "stringques": "Hachi Hachi có chính sách bảo mật thông tin cá nhân như thế nào?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Bảo mật"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.042",
+                            "stringques": "Làm thế nào để đăng ký nhận thông tin khuyến mãi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.043",
+                            "stringques": "Có chính sách hoàn tiền không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Hoàn tiền"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.044",
+                            "stringques": "Làm thế nào để đánh giá sản phẩm đã mua?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đánh giá"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.045",
+                            "stringques": "Có chính sách đổi trả hàng đã giảm giá không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đổi/Trả hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.046",
+                            "stringques": "Làm thế nào để đặt hàng nhanh?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.047",
+                            "stringques": "Có chính sách hủy đơn hàng sau khi đã xác nhận không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đơn hàng"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.048",
+                            "stringques": "Làm thế nào để theo dõi mã vận đơn của đơn hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Vận chuyển"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.049",
+                            "stringques": "Có thể đặt hàng từ nước ngoài không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.050",
+                            "stringques": "Làm thế nào để xem danh sách sản phẩm yêu thích?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Yêu thích"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.051",
+                            "stringques": "Có chính sách vận chuyển quốc tế không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Vận chuyển"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.052",
+                            "stringques": "Làm thế nào để đặt hàng trước?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.053",
+                            "stringques": "Có chính sách đổi trả hàng trong bao lâu kể từ ngày mua?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đổi/Trả hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.054",
+                            "stringques": "Làm thế nào để đổi ngôn ngữ trên trang web?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Ngôn ngữ"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.055",
+                            "stringques": "Có chính sách hoàn tiền khi sản phẩm hỏng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Hoàn tiền"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.056",
+                            "stringques": "Làm thế nào để thêm sản phẩm vào giỏ hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giỏ hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.057",
+                            "stringques": "Có thể sử dụng nhiều mã giảm giá cho một đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.058",
+                            "stringques": "Làm thế nào để đăng xuất khỏi tài khoản?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.059",
+                            "stringques": "Có thể thay đổi đơn hàng đã xác nhận không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đơn hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.060",
+                            "stringques": "Làm thế nào để tìm kiếm sản phẩm theo danh mục?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tìm kiếm"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },{
+                            "id": "Q.061",
+                            "stringques": "Có thể đặt hàng từ ứng dụng di động của Hachi Hachi không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Ứng dụng di động"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.062",
+                            "stringques": "Làm thế nào để xem lịch sử mua hàng của tôi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Lịch sử mua hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.063",
+                            "stringques": "Có thể sử dụng nhiều hình thức vận chuyển cho một đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Vận chuyển"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.064",
+                            "stringques": "Làm thế nào để kiểm tra tính khả dụng của một sản phẩm?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Sản phẩm"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.065",
+                            "stringques": "Có thể đặt hàng bằng cách gọi điện thoại không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.066",
+                            "stringques": "Làm thế nào để yêu cầu hỗ trợ trực tuyến?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Hỗ trợ trực tuyến"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.067",
+                            "stringques": "Có thể sử dụng thẻ quà tặng để thanh toán trực tuyến không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.068",
+                            "stringques": "Làm thế nào để thêm một địa chỉ mới vào danh sách địa chỉ của tôi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Địa chỉ"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.069",
+                            "stringques": "Có thể đặt hàng trước ngày phát hành sản phẩm không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.070",
+                            "stringques": "Làm thế nào để sử dụng mã giảm giá khi thanh toán?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.071",
+                            "stringques": "Có thể đặt hàng trực tuyến và nhận hàng trực tiếp tại cửa hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.072",
+                            "stringques": "Làm thế nào để thay đổi số lượng sản phẩm trong giỏ hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giỏ hàng"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.073",
+                            "stringques": "Có thể sử dụng nhiều phiếu quà tặng cho một đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.074",
+                            "stringques": "Làm thế nào để theo dõi trạng thái vận chuyển của đơn hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Vận chuyển"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.075",
+                            "stringques": "Có thể đặt hàng tại cửa hàng với giá online không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.076",
+                            "stringques": "Làm thế nào để đặt hàng có thể nhận được ưu đãi?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Ưu đãi"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.077",
+                            "stringques": "Có thể đặt hàng trước một khoảng thời gian cố định không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.078",
+                            "stringques": "Làm thế nào để đặt hàng mà không cần tài khoản?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.079",
+                            "stringques": "Có thể sử dụng nhiều hình thức thanh toán cho một đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.080",
+                            "stringques": "Làm thế nào để xem các chương trình khuyến mãi đang diễn ra?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.081",
+                            "stringques": "Có thể thay đổi địa chỉ giao hàng sau khi đã xác nhận đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giao hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.082",
+                            "stringques": "Làm thế nào để xác định thời gian giao hàng dự kiến?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giao hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.083",
+                            "stringques": "Có thể đặt hàng từ nhiều quốc gia khác nhau không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.084",
+                            "stringques": "Làm thế nào để đặt hàng mà không cần đăng ký tài khoản?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.085",
+                            "stringques": "Có thể sử dụng mã giảm giá sau khi đã đặt hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.086",
+                            "stringques": "Làm thế nào để tìm kiếm thông tin sản phẩm dựa trên giá?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tìm kiếm"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.087",
+                            "stringques": "Có thể yêu cầu giao hàng đến địa chỉ khác với địa chỉ thanh toán không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Giao hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.088",
+                            "stringques": "Làm thế nào để đánh giá chất lượng sản phẩm?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đánh giá"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.089",
+                            "stringques": "Có thể tìm kiếm sản phẩm dựa trên thương hiệu không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tìm kiếm"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.090",
+                            "stringques": "Làm thế nào để sử dụng mã giảm giá được gửi qua email?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.091",
+                            "stringques": "Có thể đặt hàng và chuyển đến nhiều địa chỉ khác nhau không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.092",
+                            "stringques": "Làm thế nào để yêu cầu việc đóng gói quà tặng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đóng gói quà tặng"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.093",
+                            "stringques": "Có thể yêu cầu đặt hàng qua điện thoại không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.094",
+                            "stringques": "Làm thế nào để đặt hàng mà không cần truy cập internet?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.095",
+                            "stringques": "Có thể đặt hàng với số lượng lớn không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.096",
+                            "stringques": "Làm thế nào để xem thông tin sản phẩm chi tiết?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Sản phẩm"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.097",
+                            "stringques": "Có thể đặt hàng và nhận hàng tại cửa hàng sau khi đặt trực tuyến không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.098",
+                            "stringques": "Làm thế nào để xác nhận việc đặt hàng?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Đặt hàng"],
+                            "timelimit": "45",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.099",
+                            "stringques": "Có thể sử dụng nhiều phiếu quà tặng cho một đơn hàng không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Thanh toán"],
+                            "timelimit": "30",
+                            "status": "3"
+                          },
+                          {
+                            "id": "Q.100",
+                            "stringques": "Làm thế nào để tìm kiếm sản phẩm theo màu sắc?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tìm kiếm"],
+                            "timelimit": "35",
+                            "status": "4"
+                          },
+                          {
+                            "id": "Q.101",
+                            "stringques": "Có thể sử dụng mã giảm giá trên cả sản phẩm giảm giá không?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Khuyến mãi"],
+                            "timelimit": "40",
+                            "status": "1"
+                          },
+                          {
+                            "id": "Q.102",
+                            "stringques": "Làm thế nào để đặt hàng nhanh khi đã có tài khoản?",
+                            "type": "Dạng một câu lựa chọn",
+                            "group": ["Tài khoản"],
+                            "timelimit": "45",
+                            "status": "1"
+                          }
                         ]
                       }
                     ]

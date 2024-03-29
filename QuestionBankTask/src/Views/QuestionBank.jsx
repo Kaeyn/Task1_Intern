@@ -5,7 +5,6 @@ import Content from './Content'
 import data from'../Model/Data.json'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
-import AlertMessage from './AlertMessage'
 import { Flip, ToastContainer, Zoom, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 const QuestionBank = () => {

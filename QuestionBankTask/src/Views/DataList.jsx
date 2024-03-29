@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../css/DataList.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faArrowRotateLeft, faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash} from "@fortawesome/free-solid-svg-icons"
-const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisable, showToast, disableFocus, onclickDisableFocus, isActionClicked, actionedData, contentIsEmpty, originData}) => {
+const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsConfirmDelete, setIsFuncDisable, showToast, disableFocus, onclickDisableFocus, isActionClicked, actionedData, contentIsEmpty, originData}) => {
 
   const [datafContent, setDataFContent] = useState([]);
   const [isHoverOrFocus, setIsHoverOrFocus] = useState(false);
@@ -659,6 +659,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
       reloadCheckBox();
       if(isConfirmDelete==true){
         handleCloseMultiToolTip();
+        setIsConfirmDelete(false)
       }
     },[isConfirmDelete, dataFromContent])
 
@@ -679,7 +680,10 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
         <div className='w-[1614px] h-[8%] grid grid-cus p-[5px] pb-[2px]' onClick={onclickDisableFocus}>
             <div className='w-[100%]'>
                 <div className='flex justify-center items-center h-[100%] gap-2'>
-                  <div><input type="checkbox" name="" id="" className='parentCheckBox' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}} checked={isAllChecked} /></div>
+                  <div>
+                    <input type="checkbox" id="parentcheckBoxID" className='parentCheckBox cursor-pointer' title={"Chọn tất cả"} onChange={() => {handleCheckAllBoxes()}} checked={isAllChecked} />
+                    <label htmlFor="parentcheckBoxID" className='datacheckBox-label' ></label>
+                    </div>
                 </div>
             </div>
             <div className='w-[100%]'>
@@ -710,7 +714,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
         </div>
         <div className='w-[1614px] z-0 scroll-container whitespace-nowrap'>
           {showMultiTooltip === true ? 
-          <div  className='h-[100px] bg-white fixed top-[62%] -translate-x-1/2 left-[58%] -translate-y-1/2 rounded-[6px] shadow-md'>
+          <div  className='h-[100px] bg-white fixed top-[62%] -translate-x-1/2 left-[58%] -translate-y-1/2 rounded-[6px] shadow-lg'>
             
                     <div className='h-[100%]  flex items-center'>
                           <div className='w-[120px] h-[100%] bg-[#008000] flex flex-col justify-center items-center text-white rounded-l-[6px]'>
@@ -730,11 +734,12 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
           
           
           {datafContent.length > 0 ? datafContent.map((data,index) => (                  
-              <div className='w-[169vh] h-[90px] grid grid-cus p-[5px] cursor-pointer list_item_hover' key={index}>                
+              <div className='w-[169vh] h-[90px] grid grid-cus p-[5px] list_item_hover' key={index}>                
                 <div className={`${(checkBoxList.includes(data.id) || checkBoxList.includes("emptyIDCheckBox")) ? 'bg-[#1A6634B2]' : 'bg-[#FFFFFF] child_item'} w-[100%] p-[9px] ` } onClick={() =>{handleLoseFocus()}} >
                     <div className='flex justify-center items-center h-[100%] gap-2 '>
-                      <div clas>
-                            <input type="checkbox" name="" id={data.id.length == 0 ? "emptyIDCheckBox" : data.id} className='datacheckBox' onChange={() =>(handleCheckBoxCheck(data.id))} checked={checkBoxList.includes(data.id)}/>
+                      <div >
+                            <input type="checkbox" name="" id={data.id.length == 0 ? "emptyIDCheckBox" : data.id} className='datacheckBox cursor-pointer' onChange={() =>(handleCheckBoxCheck(data.id))} checked={checkBoxList.includes(data.id)}/>
+                            <label htmlFor={`${data.id}`} className='datacheckBox-label' ></label>
                       </div>
                     </div>
                 </div>  
@@ -759,6 +764,7 @@ const DataList = ({dataFromContent, ShowAlertBox, isConfirmDelete, setIsFuncDisa
                         {data.group.map((item, index) => (
                           <React.Fragment key={index}>                      
                           <span                              
+                              // className={`whitespace-pre-wrap text-[16px]`}>
                               className={`whitespace-pre-wrap ${index < 1 ? 'font-bold text-[16px]' : 'font-normal text-base'} ${index > 1 ? 'text-[15px]' : ''}`}>
                               {index === 0 ? `${item}\n` : index === 1 ? `${item},..` : ""}
                           </span>                         
