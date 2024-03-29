@@ -12,7 +12,7 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
   const [baseData, setBaseData] = useState([]);
   const [preFilteredData, setPreFilteredData] = useState([]);
   const [FilteredData, setFilteredData] = useState([]);
-  const [isPageFilter, setIsPageFilter] = useState(true);
+
   const [isNoFilter, setIsNoFilter] = useState(false);
   const [isFiltering, setIsFiltering] = useState(true);
   const [isDelete, setIsDelete] = useState(false);
@@ -169,8 +169,8 @@ const Content = ({contentData , setIsFuncDisable, showToast}) => {
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
         <div className={`w-[100%] py-[1.5vh] flex ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
         <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[68.13vh] flex p-[0.4vh] dataList_container'><DataList dataFromContent={preFilteredData} originData={contentData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} setIsConfirmDelete={setIsConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked} isPageChanging={isPageChanging} contentIsEmpty={setContentIsEmpty}/></div>
-        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh] fixed bottom-0 `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} setIsPageFilter={setIsPageFilter} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty} isActionClicked={isActionClicked} isNoFilter={isNoFilter}/></div>      
+        <div className='w-[100%] h-[68.13vh] flex p-[0.4vh] dataList_container'><DataList dataFromContent={preFilteredData} originData={contentData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} setIsConfirmDelete={setIsConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked} contentIsEmpty={setContentIsEmpty}/></div>
+        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh] fixed bottom-0 `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty} isActionClicked={isActionClicked} isNoFilter={isNoFilter}/></div>      
         {showAlertBox ? 
         <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
         {alertBoxData ? alertBoxData.map((questdata, index) => 

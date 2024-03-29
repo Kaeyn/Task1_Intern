@@ -3,14 +3,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import React, { useEffect, useState } from 'react'
 import '../css/PageFilter.css'
 
-const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, contentIsFilter, baseData, isDelete, isPageChanging, contentIsEmpty, isActionClicked}) => {
+const PageFilter = ({Data , setCurpageData, originData, contentIsFilter, baseData, isDelete, contentIsEmpty, isActionClicked}) => {
     const [isItemLimitShowed, setIsItemLimitShowed] = useState(false);
     const [itemsLimit, setItemsLimit] = useState(25);
-    const [allItemTotalPage, setAllItemTotalPage] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
-    const [currentPageList, setCurrentPageList] = useState([]);
     const [totalPage, setTotalPage] = useState(0);
-    const [prevState, setPrevState] = useState(true);
     const origLimitList = [25, 50, 75, 100]
     const [limitList, setlimitList] = useState([
         50, 75, 100
@@ -53,20 +50,13 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
         }
 
         setCurpageData(currentPageItems)
-        isPageChanging(!prevState)
-        setPrevState(!prevState)  
-        setIsPageFilter(!prevState)  
-    
     }
 
     const getPageList = (totalPage) => {
         const pageList = [];
         for (let i = 1; i <= totalPage; i++) {
             pageList.push(i);
-        }
-
-        setCurrentPageList(pageList);
-        
+        }       
     };
 
     
@@ -200,7 +190,6 @@ const PageFilter = ({Data , setCurpageData, originData, setIsPageFilter, content
 
     useEffect(() =>{
         getTotalPage();
-        setAllItemTotalPage(originData);
     },[originData])
 
     useEffect(() =>{
