@@ -1,19 +1,20 @@
 .content-container{
+    height: 880px;
     padding: 10px
 }
 .competence-frame-container{
-    width: 1610px;
-    height: 400px;
+    width: 145vh;
+    height: 49vh;
 }
 
 .competence-frame{
     width: 100%;
-    height: 100%;
+    height: 43.3vh;
     display: flex;
 }
 
 .competence-container{
-    height: 100%;
+    height: 43.3vh;
     background: #D1E0D6;
     display: flex;
     flex-direction: column; 
@@ -33,7 +34,8 @@
 .competence-items{
     display: flex;
     position: relative;
-    width: 1380px;
+    width: 145vh;
+    
     background-color: #D1E0D6;
     border-top: 1px solid #81AA8F;
     border-bottom: 1px solid #81AA8F;
@@ -76,9 +78,13 @@
 
 
 .position-items{
+    overflow: auto;
     display: flex;
     flex-direction: column;  
     background-color: #D1E0D6;
+    white-space: nowrap;
+    height: 31vh;
+    overflow-y: auto;
 }
 
 .position-item{
@@ -118,10 +124,11 @@
 }
 
 .competence-level-container{
-    width: 1380px;
-    height: 680px;
+    width: 145vh;
+    height: 38vh;
     background-color: white;
     display: flex;
+    overflow: auto;
 }
 
 .competence-level-item{
@@ -210,22 +217,51 @@
     color: black;
 }
 
+.competence-name-input:hover{
+    border: 2px solid black;
+    border-radius: 4px;
+}
+.competence-detail-input:hover{
+
+    border: 2px solid black;
+    border-radius: 4px;
+}
+
 .competence-cate-func{
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #C9CEDB;
+    padding-top: 5px;
+    padding-bottom: 10px;
+    white-space: nowrap;
+    overflow-x: auto;
 }
 
 .competence-cate{
     display: flex;
     gap: 0.3rem;
-    
-    padding-top: 13px;
-    padding-bottom: 13px;
+    height: 50px;
+    align-items: center;
 }
 .competence-func{
     display: flex;
-    gap: 0.3rem;
-    padding-top: 13px;
-    padding-bottom: 13px;
+    gap: 0.6rem;
+    height: 45px;
+    align-items: center;
+}
+
+.func-item{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-radius: 4px;
+    color: #ffffff;
+    gap: 0.4rem;
+    cursor: pointer;
+    box-shadow: 0px 3px 6px 1px #A9DCF7;
+    font-size: 15px;
+}
+
+.func-item:hover{
+    box-shadow: 2px 3px 7px 1px #74caf8;
 }

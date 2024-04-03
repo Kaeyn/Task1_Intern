@@ -4,7 +4,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle, faChevronRight, faCircleCheck, faCircleMinus, faCirclePlus, faEye, faInfoCircle, faPencil, faShare, faTrash, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
+import { faArrowRight, faArrowRightRotate, faCheckCircle, faChevronRight, faCircleCheck, faCircleMinus, faCirclePlus, faEye, faInfoCircle, faPencil, faPlus, faShare, faTrash, faTrashCan, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
 const Content = ({ contentData, setIsFuncDisable, showToast }) => {
   const [baseData, setBaseData] = useState([]);
@@ -71,14 +71,13 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
 
     setBaseData(updatedBaseData)
     setUpdatedValue(true);
-
-    if (e.target.value <= 0 || e.target.value > 10) {
-      showToast("Vui lòng nhập giá trị trong khoảng 0 - 10 !", "error")
-    } else if (newValue != oldValue) {
-      showToast("Cập nhập khung năng lực thành công!\n " + positionName + " - " + competenceName)
-    }
-
-
+    if(e.target.value.trim() != ""){
+      if (e.target.value <= 0 || e.target.value > 10) {
+        showToast("Vui lòng nhập giá trị trong khoảng 0 - 10 !", "error")
+      } else if (newValue != oldValue) {
+        showToast("Cập nhập khung năng lực thành công!\n " + positionName + " - " + competenceName)
+      }
+    } 
   }
   const Icon = ({ classIcon, color, size }) => {
     const iconSize = {
@@ -135,23 +134,23 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
     <div className='content-container'>
       <div className='competence-cate-func'>
         <div className="competence-cate">
-          <div className='font-[700] text-[#1A6634]'>ĐÁNH GIÁ NHÂN SỰ</div>
+          <div className='font-[700] text-[#1A6634] cursor-pointer' title='ĐÁNH GIÁ NHÂN SỰ'>ĐÁNH GIÁ NHÂN SỰ</div>
           <div><Icon classIcon={faChevronRight} color={"#1A6634"} size={"16px"}></Icon></div>
-          <div className='font-[700] text-[#1A6634]'>KHUNG NĂNG LỰC</div>
+          <div className='font-[700] text-[#1A6634] cursor-pointer' title='KHUNG NĂNG LỰC'>KHUNG NĂNG LỰC</div>
           <div><Icon classIcon={faChevronRight} color={"#BDC2D2"} size={"16px"}></Icon></div>
-          <div className='font-[700] text-[#959DB3]' >CHI TIẾT KHUNG NĂNG LỰC</div> 
+          <div className='font-[700] text-[#959DB3] cursor-pointer' title='CHI TIẾT KHUNG NĂNG LỰC'>CHI TIẾT KHUNG NĂNG LỰC</div> 
         </div>
         <div className='competence-func'>
-          <div>
-            <div>ICON</div>
+          <div className='func-item bg-[#EB273A] ml-[10px]'>
+            <div className='h-full flex self-center'><Icon classIcon={faTrashCan} color={"#ffffff"} size={"20px"} /></div>
             <div>XOÁ KHUNG NL</div>
           </div>
-          <div>
-            <div>ICON</div>
+          <div className='func-item bg-[#1A6634]'>
+            <div className='h-full flex self-center'><Icon classIcon={faShare} color={"#ffffff"} size={"20px"} /></div>
             <div>GỬI DUYỆT</div>
           </div>
-          <div>
-            <div>ICON</div>
+          <div className='func-item bg-[#1A6634]'>
+            <div className='h-full flex self-center'><Icon classIcon={faPlus} color={"#ffffff"} size={"20px"} /></div>
             <div>THÊM MỚI</div>
           </div>
         </div>
@@ -227,7 +226,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
               </div>
             </div>
             <div className='competence-level-container'>
-              {!updatedValue && competenceLevelList.map((data, index) => (
+              {competenceLevelList.map((data, index) => (
                 <div className={`flex flex-col ${index % 2 != 0 ? "bg-[#DBDEE7]" : ""}`} key={index}>
                   {positionList.map((item, i) => {
                     return ((data[i] && data[i].length > 0) ? (<div className='competence-level-item row-item-height' key={i}>
