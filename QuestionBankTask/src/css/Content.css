@@ -1,20 +1,20 @@
 .content-container{
-    height: 880px;
-    padding: 10px
+    height: 88vh;
+    padding: 10px;
 }
 .competence-frame-container{
-    width: 145vh;
-    height: 49vh;
+    width: 100%;
+    height: 460px;
 }
 
 .competence-frame{
     width: 100%;
-    height: 43.3vh;
+    height: 89%;
     display: flex;
 }
 
 .competence-container{
-    height: 43.3vh;
+    height: 100%;
     background: #D1E0D6;
     display: flex;
     flex-direction: column; 
@@ -32,10 +32,11 @@
 }
 
 .competence-items{
+    background-color: red;
     display: flex;
+    justify-content: space-between;
     position: relative;
-    width: 145vh;
-    
+    width: 100%x;
     background-color: #D1E0D6;
     border-top: 1px solid #81AA8F;
     border-bottom: 1px solid #81AA8F;
@@ -52,14 +53,15 @@
 }
 
 .add-competence-item{
+    width: 170px;
+    height: 90%;
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
-    position: absolute;
-    right: 0;
     padding-right: 15px;
     color: #1A6634;
+    background-color: #D1E0D6;
 }
 
 .level-container{
@@ -83,8 +85,9 @@
     flex-direction: column;  
     background-color: #D1E0D6;
     white-space: nowrap;
-    height: 31vh;
+    height: 85%;
     overflow-y: auto;
+    justify-content: space-between;
 }
 
 .position-item{
@@ -102,14 +105,11 @@
 
 .add-item-position{
     display: flex;
-    position: absolute;
-    bottom: 0;
     gap: 0.5rem;
     justify-content: center;
     align-items: center;
     color: #1A6634;
     height: 30px;
-    margin-bottom: 15px;
 }
 
 .title-container{ 
@@ -119,16 +119,18 @@
 }
 
 .position-level-container{
+    width: 100%;
     display: flex;
     flex-direction: column;
+    overflow: auto;
 }
 
 .competence-level-container{
-    width: 145vh;
-    height: 38vh;
+    width: 100%;
+    height: 100%;
     background-color: white;
     display: flex;
-    overflow: auto;
+    
 }
 
 .competence-level-item{
@@ -265,3 +267,52 @@
 .func-item:hover{
     box-shadow: 2px 3px 7px 1px #74caf8;
 }
+
+
+.scroll-container{
+    min-height: 100px;
+    max-height: 800px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+@media screen and (max-width: 1746px) {
+    .scroll-container{
+        max-height: calc(800px - 90px);
+    }
+    
+  }
+  
+  @media screen and (max-width: 1537px) {
+    .scroll-container{
+        max-height: calc(800px - 180px);
+    }
+    
+  }
+  
+  @media screen and (max-width: 1441px) {
+    .scroll-container{
+        max-height: calc(800px - 225px);
+    }
+  }
+  
+  @media screen and (max-width: 1372px) {
+    .scroll-container{
+        max-height: calc(800px - 255px);
+    }
+  }
+  
+  @media screen and (max-width: 1281px) {
+    .scroll-container{
+        max-height: calc(800px - 295px);
+    }
+  }
+  @media screen and (max-width: 1098px) {
+    .scroll-container{
+        max-height: calc(800px - 385px);
+    }
+  }
+  
+  @media screen and (min-width: 1920px){
+    
+  }

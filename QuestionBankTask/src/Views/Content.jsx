@@ -25,6 +25,8 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
         newCompetenceList.push(data)
       }
     });
+    console.log(newPositionList)
+    console.log(newCompetenceList)
     setPositionList(newPositionList)
     setCompetenceList(newCompetenceList)
   }
@@ -141,20 +143,21 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
           <div className='font-[700] text-[#959DB3] cursor-pointer' title='CHI TIẾT KHUNG NĂNG LỰC'>CHI TIẾT KHUNG NĂNG LỰC</div> 
         </div>
         <div className='competence-func'>
-          <div className='func-item bg-[#EB273A] ml-[10px]'>
+          <div className='func-item bg-[#EB273A] ml-[10px]' title='XOÁ KHUNG NL'>
             <div className='h-full flex self-center'><Icon classIcon={faTrashCan} color={"#ffffff"} size={"20px"} /></div>
             <div>XOÁ KHUNG NL</div>
           </div>
-          <div className='func-item bg-[#1A6634]'>
+          <div className='func-item bg-[#1A6634]' title='GỬI DUYỆT'>
             <div className='h-full flex self-center'><Icon classIcon={faShare} color={"#ffffff"} size={"20px"} /></div>
             <div>GỬI DUYỆT</div>
           </div>
-          <div className='func-item bg-[#1A6634]'>
+          <div className='func-item bg-[#1A6634]' title='THÊM MỚI'>
             <div className='h-full flex self-center'><Icon classIcon={faPlus} color={"#ffffff"} size={"20px"} /></div>
             <div>THÊM MỚI</div>
           </div>
         </div>
       </div>
+      <div className='scroll-container'>
       <div className='competence-detail-container'>
         <div className='detail-title-text'>THÔNG TIN KHUNG NĂNG LỰC </div>
         <div className='detail-frame'>
@@ -189,6 +192,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
               <div className='h-[49.5%] text-left ml-[30px] text-[#5A6276] font-[600]'>Chức danh</div>
             </div>
             <div className='position-items'>
+              <div className=''>
               {positionList.map((item, index) => (
                 <div className='position-item col-position-width row-item-height '>
                   <div className='truncate' title={item.PositionID}>{item.PositionID}</div>
@@ -196,6 +200,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
                   <div className='truncate' title={item.PositionName}>{item.PositionName}</div>
                 </div>
               ))}
+              </div>
               <div className='col-position-width add-item-position cursor-pointer' title='Thêm chức danh' onClick={() => showToast("Chọn chức năng thêm chức danh")}>
                 <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
                 <div className=''>Thêm chức danh</div>
@@ -205,6 +210,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
           </div>
           <div className='position-level-container'>
             <div className='competence-items row-item-height'>
+              <div className='flex '>
               {competenceList.map((item, index) => (
                 <div className='competence-item row-item-height'>
                   <div className='h-[50%] relative font-[700] truncate' title={`${item.CompetenceName}`}>
@@ -217,6 +223,8 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
                   </div>
                 </div>
               ))}
+              </div>
+              
               <div className='flex items-center justify-center row-item-height'>
                 <div className='add-competence-item cursor-pointer' title='Thêm năng lực' onClick={() => showToast("Chọn chức năng thêm năng lực")}>
                   <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
@@ -247,6 +255,8 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
           </div>
         </div>
       </div>
+      </div>
+      
     </div>
   )
 }
