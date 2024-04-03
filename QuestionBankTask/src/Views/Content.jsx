@@ -73,13 +73,13 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
 
     setBaseData(updatedBaseData)
     setUpdatedValue(true);
-    if(e.target.value.trim() != ""){
+    if (e.target.value.trim() != "") {
       if (e.target.value <= 0 || e.target.value > 10) {
         showToast("Vui lòng nhập giá trị trong khoảng 0 - 10 !", "error")
       } else if (newValue != oldValue) {
         showToast("Cập nhập khung năng lực thành công!\n " + positionName + " - " + competenceName)
       }
-    } 
+    }
   }
   const Icon = ({ classIcon, color, size }) => {
     const iconSize = {
@@ -140,7 +140,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
           <div><Icon classIcon={faChevronRight} color={"#1A6634"} size={"16px"}></Icon></div>
           <div className='font-[700] text-[#1A6634] cursor-pointer' title='KHUNG NĂNG LỰC'>KHUNG NĂNG LỰC</div>
           <div><Icon classIcon={faChevronRight} color={"#BDC2D2"} size={"16px"}></Icon></div>
-          <div className='font-[700] text-[#959DB3] cursor-pointer' title='CHI TIẾT KHUNG NĂNG LỰC'>CHI TIẾT KHUNG NĂNG LỰC</div> 
+          <div className='font-[700] text-[#959DB3] cursor-pointer' title='CHI TIẾT KHUNG NĂNG LỰC'>CHI TIẾT KHUNG NĂNG LỰC</div>
         </div>
         <div className='competence-func'>
           <div className='func-item bg-[#EB273A] ml-[10px]' title='XOÁ KHUNG NL'>
@@ -158,105 +158,107 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
         </div>
       </div>
       <div className='scroll-container'>
-      <div className='competence-detail-container'>
-        <div className='detail-title-text'>THÔNG TIN KHUNG NĂNG LỰC </div>
-        <div className='detail-frame'>
-          <div className='datetime-status'>
-            <div className='font-[700]'>Ngày hiệu lực khung năng lực</div>
-            <div className=''>
-              <LocalizationProvider dateAdapter={AdapterDayjs}>
-                <DatePicker label="" sx={{
-                  width: '43%',
-                  backgroundColor: "#EDEFF3",
-                }} />
-              </LocalizationProvider>
-            </div>
-            <div className='font-[700]'>Tình trạng</div>
-            <div className='text-[#1A6634] font-[700]'>Đã phê duyệt</div>
-          </div>
-          <div className='name-des'>
-                <div className='font-[700]'>Tên khung năng lực</div>
-                <div className=''><input type="text" name="" id="" className='competence-name-input'/></div>
-                <div className='font-[700]'>Diễn giải</div>
-                <div><textarea name="" id="" className='competence-detail-input' ></textarea></div>
-          </div>
-        </div>
-      </div>
-      <div className='competence-frame-container'>
-        <div className='detail-title-text'>CHI TIẾT KHUNG NĂNG LỰC</div>
-        <div className='competence-frame'>
-          <div className='competence-container'>
-            <div className='title-container col-position-width row-item-height'>
-              <div className='h-[49.5%] text-right mr-[30px]  text-[#5A6276] font-[600]'>Năng lực</div>
-              <div className='split-line'></div>
-              <div className='h-[49.5%] text-left ml-[30px] text-[#5A6276] font-[600]'>Chức danh</div>
-            </div>
-            <div className='position-items'>
+        <div className='competence-detail-container'>
+          <div className='detail-title-text'>THÔNG TIN KHUNG NĂNG LỰC </div>
+          <div className='detail-frame shadow-md'>
+            <div className='datetime-status'>
+              <div className='font-[700]'>Ngày hiệu lực khung năng lực</div>
               <div className=''>
-              {positionList.map((item, index) => (
-                <div className='position-item col-position-width row-item-height '>
-                  <div className='truncate' title={item.PositionID}>{item.PositionID}</div>
-                  <div className={`w-[2px] h-[18px] bg-[#C4C4C4] rounded-[3px]`}></div>
-                  <div className='truncate' title={item.PositionName}>{item.PositionName}</div>
-                </div>
-              ))}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <DatePicker label="" sx={{
+                    width: '43%',
+                    backgroundColor: "#EDEFF3",
+                  }} />
+                </LocalizationProvider>
               </div>
-              <div className='col-position-width add-item-position cursor-pointer' title='Thêm chức danh' onClick={() => showToast("Chọn chức năng thêm chức danh")}>
-                <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
-                <div className=''>Thêm chức danh</div>
-              </div>
+              <div className='font-[700]'>Tình trạng</div>
+              <div className='text-[#1A6634] font-[700]'>Đã phê duyệt</div>
             </div>
-
+            <div className='name-des'>
+              <div className='font-[700]'>Tên khung năng lực</div>
+              <div className=''><input type="text" name="" id="" className='competence-name-input' /></div>
+              <div className='font-[700]'>Diễn giải</div>
+              <div><textarea name="" id="" className='competence-detail-input' ></textarea></div>
+            </div>
           </div>
-          <div className='position-level-container'>
-            <div className='competence-items row-item-height'>
-              <div className='flex '>
-              {competenceList.map((item, index) => (
-                <div className='competence-item row-item-height'>
-                  <div className='h-[50%] relative font-[700] truncate' title={`${item.CompetenceName}`}>
-                    {item.CompetenceName}
-                    {/* <div className={`absolute `}><Icon classIcon={faInfoCircle} color={"#31ADFF"} size={"8px"}/></div> */}
-                  </div>
-                  <div className='level-container'>
-                    <div className='min-max-item'>Min</div>
-                    <div className='min-max-item'>Max</div>
-                  </div>
-                </div>
-              ))}
+        </div>
+        <div className='competence-frame-container'>
+          <div className='detail-title-text'>CHI TIẾT KHUNG NĂNG LỰC</div>
+          <div className='competence-frame'>
+            <div className='competence-container'>
+              <div className='title-container col-position-width row-item-height'>
+                <div className='h-[49.5%] text-right mr-[30px]  text-[#5A6276] font-[600]'>Năng lực</div>
+                <div className='split-line'></div>
+                <div className='h-[49.5%] text-left ml-[30px] text-[#5A6276] font-[600]'>Chức danh</div>
               </div>
-              
-              <div className='flex items-center justify-center row-item-height'>
-                <div className='add-competence-item cursor-pointer' title='Thêm năng lực' onClick={() => showToast("Chọn chức năng thêm năng lực")}>
+              <div className='position-items'>
+                <div className=''>
+                  {positionList.map((item, index) => (
+                    <div className='position-item col-position-width row-item-height '>
+                      <div className='truncate' title={item.PositionID}>{item.PositionID}</div>
+                      <div className={`w-[2px] h-[18px] bg-[#C4C4C4] rounded-[3px]`}></div>
+                      <div className='truncate' title={item.PositionName}>{item.PositionName}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className='col-position-width add-item-position cursor-pointer' title='Thêm chức danh' onClick={() => showToast("Chọn chức năng thêm chức danh")}>
                   <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
-                  <div className=''>Thêm năng lực</div>
+                  <div className=''>Thêm chức danh</div>
                 </div>
-
               </div>
+
             </div>
-            <div className='competence-level-container'>
-              {competenceLevelList.map((data, index) => (
-                <div className={`flex flex-col ${index % 2 != 0 ? "bg-[#DBDEE7]" : ""}`} key={index}>
-                  {positionList.map((item, i) => {
-                    return ((data[i] && data[i].length > 0) ? (<div className='competence-level-item row-item-height' key={i}>
-                      {/* {console.log("Min: " + data[i][0].CompetenceLevel + " Max: " + data[i][0].CompetenceLevelMax)} */}
-
-                      <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Min"} type="number" value={data[i][0].CompetenceLevel} onChange={(e) => handleChangeValue(e, index, i, 0)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevel')} onFocus={() => setOldValue(data[i][0].CompetenceLevel)} /></div>
-                      <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Max"} type="number" value={data[i][0].CompetenceLevelMax} onChange={(e) => handleChangeValue(e, index, i, 1)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevelMax')} onFocus={() => setOldValue(data[i][0].CompetenceLevelMax)} /></div>
-                      {/* <div className='min-max-item'>{data[i][0].CompetenceLevel == null ? "null" : data[i][0].CompetenceLevel}</div>
-                    <div className='min-max-item'>{data[i][0].CompetenceLevelMax == null ? "null" : data[i][0].CompetenceLevelMax}</div> */}
-                    </div>) : "")
-
-
-                  })}
+            <div className='position-level-container'>
+              <div className='competence-items row-item-height'>
+                <div className='flex '>
+                  {competenceList.map((item, index) => (
+                    <div className='competence-item row-item-height'>
+                      <div className='h-[50%] relative font-[700] truncate flex justify-center items-end' title={`${item.CompetenceName}`}>
+                        <div className='flex gap-[0.1rem] text-[17px]'>
+                          <div className='ml-[6px]'>{item.CompetenceName}</div>
+                          <Icon classIcon={faInfoCircle} color={"#31ADFF"} size={"10px"} />
+                        </div>
+                      </div>
+                      <div className='level-container'>
+                        <div className='min-max-item'>Min</div>
+                        <div className='min-max-item'>Max</div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
 
+                <div className='flex items-center justify-center row-item-height'>
+                  <div className='add-competence-item cursor-pointer' title='Thêm năng lực' onClick={() => showToast("Chọn chức năng thêm năng lực")}>
+                    <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
+                    <div className=''>Thêm năng lực</div>
+                  </div>
+
+                </div>
+              </div>
+              <div className='competence-level-container'>
+                {competenceLevelList.map((data, index) => (
+                  <div className={`flex flex-col ${index % 2 != 0 ? "bg-[#DBDEE7]" : ""}`} key={index}>
+                    {positionList.map((item, i) => {
+                      return ((data[i] && data[i].length > 0) ? (<div className='competence-level-item row-item-height' key={i}>
+                        {/* {console.log("Min: " + data[i][0].CompetenceLevel + " Max: " + data[i][0].CompetenceLevelMax)} */}
+
+                        <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Min"} type="number" value={data[i][0].CompetenceLevel} onChange={(e) => handleChangeValue(e, index, i, 0)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevel')} onFocus={() => setOldValue(data[i][0].CompetenceLevel)} /></div>
+                        <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Max"} type="number" value={data[i][0].CompetenceLevelMax} onChange={(e) => handleChangeValue(e, index, i, 1)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevelMax')} onFocus={() => setOldValue(data[i][0].CompetenceLevelMax)} /></div>
+                        {/* <div className='min-max-item'>{data[i][0].CompetenceLevel == null ? "null" : data[i][0].CompetenceLevel}</div>
+                    <div className='min-max-item'>{data[i][0].CompetenceLevelMax == null ? "null" : data[i][0].CompetenceLevelMax}</div> */}
+                      </div>) : "")
+
+
+                    })}
+                  </div>
+                ))}
+              </div>
+
+            </div>
           </div>
         </div>
       </div>
-      </div>
-      
+
     </div>
   )
 }
