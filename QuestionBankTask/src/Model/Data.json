@@ -39,817 +39,274 @@
                     "catechild" : [
                       {
                         "id" : "B.001",
-                        "name": "Ngân hàng câu hỏi",
+                        "name": "Quản lý đợt đánh giá",
                         "icon":["question-white.png"],
                         "content" : [
                           {
-                            "id" : "Q.001",
-                            "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng? Có bao nhiêu mặt hàng",
-                            "type" : "",
-                            "group" : ["Thương hiệu văn hoá cty", "văn hoá cty văn hoá cty", "văn hoá cty", "văn hoá cty", "văn hoá cty"],
-                            "timelimit" : "30",
-                            "status" : "0"                        
-                          },
-                          {
-                            "id" : "Q.002",
-                            "stringques" : "Hệ thống cửa hàng Hachi Hachi có mặt từ năm nào? Hiện nay có bao nhiêu cửa hàng ?",
-                            "type" : "Dạng một câu lựa chọn",
-                            "group" : ["Thương hiệu văn hoá cty"],
-                            "timelimit" : "30",
-                            "status" : "0"                        
-                          },
-                          {
-                            "id" : "Q.003",
-                            "stringques" : "",
-                            "type" : "Dạng một câu lựa chọn",
-                            "group" : ["Thương hiệu, văn hoá cty"],
-                            "timelimit" : "30",
-                            "status" : "0"                        
-                          },
-                          {
-                            "id": "Q.004",
-                            "stringques": "Sứ mệnh của Hachi Hachi là gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương hiệu, văn hoá cty"],
-                            "timelimit": "40", 
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.005",
-                            "stringques": "",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương hiệu, văn hoá cty"],
-                            "timelimit": "180",  
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.006",
-                            "stringques": "Hachi Hachi có bán sản phẩm gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "120",  
-                            "status": "0"
-                          },
-                          {
-                            "id": "Q.007",
-                            "stringques": "Sản phẩm nào bán chạy nhất của Hachi Hachi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "135",  
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.008",
-                            "stringques": "Giá cả sản phẩm của Hachi Hachi như thế nào?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "150",  
-                            "status": "2"
-                          },
-                          {
-                            "id": "Q.009",
-                            "stringques": "Chất lượng sản phẩm của Hachi Hachi có tốt không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "165",  
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.010",
-                            "stringques": "Hachi Hachi có chương trình khuyến mãi nào không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "180",  
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.011",
-                            "stringques": "Hachi Hachi có dịch vụ giao hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Dịch vụ"],
-                            "timelimit": "120",  
-                            "status": "0"
-                          },
-                          {
-                            "id": "Q.013",
-                            "stringques": "Thời gian giao hàng của Hachi Hachi là bao lâu?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Dịch vụ"],
-                            "timelimit": "60",  
-                            "status": "0"
-                          },
-                          {
-                            "id": "Q.014",
-                            "stringques": "Hachi Hachi có chính sách đổi trả hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Dịch vụ"],
-                            "timelimit": "65",  
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.015",
-                            "stringques": "Phương thức thanh toán nào được chấp nhận tại Hachi Hachi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Dịch vụ"],
-                            "timelimit": "70",  
-                            "status": "2"
-                          },
-                          {
-                            "id": "Q.016",
-                            "stringques": "Hachi Hachi có cửa hàng online không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương mại điện tử"],
-                            "timelimit": "30",  
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.017",
-                            "stringques": "Ưu điểm của mua hàng online tại Hachi Hachi là gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương mại điện tử"],
-                            "timelimit": "35", 
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.018",
-                            "stringques": "Nhược điểm của mua hàng online tại Hachi Hachi là gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương mại điện tử"],
-                            "timelimit": "40",  
-                            "status": "0"
-                          },
-                          {
-                            "id": "Q.019",
-                            "stringques": "Ưu điểm của mua hàng online tại Hachi Hachi là gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương mại điện tử"],
-                            "timelimit": "45",  
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.020",
-                            "stringques": "Cách sử dụng mã giảm giá của Hachi Hachi như thế nào?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thương mại điện tử"],
-                            "timelimit": "50", 
-                            "status": "2"
-                          },
-                          {
-                            "id": "Q.021",
-                            "stringques": "Hachi Hachi có hỗ trợ khách hàng qua kênh nào?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Chăm sóc khách hàng"],
-                            "timelimit": "30",  
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.022",
-                            "stringques": "Thời gian hoạt động của bộ phận chăm sóc khách hàng? Thời gian hoạt động của bộ phận chăm sóc khách hàng? Thời gian hoạt động của bộ phận chăm sóc khách hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Chăm sóc khách hàng"],
-                            "timelimit": "35", 
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.023",
-                            "stringques": "Làm thế nào để liên hệ với bộ phận kỹ thuật?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Hỗ trợ kỹ thuật"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.024",
-                            "stringques": "Các phương thức thanh toán được chấp nhận là gì?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "25",
-                            "status": "2"
-                          },
-                          {
-                            "id": "Q.025",
-                            "stringques": "Chính sách đổi trả hàng của Hachi Hachi như thế nào?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Chính sách đổi trả"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.026",
-                            "stringques": "Làm thế nào để đăng ký tài khoản thành viên?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.027",
-                            "stringques": "Bộ phận chăm sóc khách hàng làm việc vào các ngày nào trong tuần?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Chăm sóc khách hàng"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.028",
-                            "stringques": "Làm thế nào để kiểm tra tình trạng đơn hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đơn hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.029",
-                            "stringques": "Hachi Hachi có cung cấp dịch vụ giao hàng tận nơi không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giao hàng"],
-                            "timelimit": "25",
-                            "status": "2"
-                          },
-                          {
-                            "id": "Q.030",
-                            "stringques": "Làm thế nào để tra cứu thông tin về sản phẩm?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.031",
-                            "stringques": "Có cần phải đăng ký tài khoản để mua hàng trên Hachi Hachi không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.032",
-                            "stringques": "Làm thế nào để liên hệ với bộ phận hỗ trợ kỹ thuật?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Hỗ trợ kỹ thuật"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.033",
-                            "stringques": "Có phương thức thanh toán nào được chấp nhận trên Hachi Hachi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.034",
-                            "stringques": "Làm thế nào để thay đổi địa chỉ giao hàng sau khi đặt hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giao hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.035",
-                            "stringques": "Có thể hủy đơn hàng đã đặt trên Hachi Hachi không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đơn hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.036",
-                            "stringques": "Làm thế nào để đổi/trả hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đổi/Trả hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.037",
-                            "stringques": "Có chính sách vận chuyển miễn phí không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Vận chuyển"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.038",
-                            "stringques": "Làm thế nào để kiểm tra tình trạng đơn hàng của tôi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đơn hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.039",
-                            "stringques": "Có thể sử dụng phiếu quà tặng để thanh toán không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.040",
-                            "stringques": "Làm thế nào để cập nhật thông tin cá nhân của tôi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.041",
-                            "stringques": "Hachi Hachi có chính sách bảo mật thông tin cá nhân như thế nào?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Bảo mật"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.042",
-                            "stringques": "Làm thế nào để đăng ký nhận thông tin khuyến mãi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.043",
-                            "stringques": "Có chính sách hoàn tiền không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Hoàn tiền"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.044",
-                            "stringques": "Làm thế nào để đánh giá sản phẩm đã mua?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đánh giá"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.045",
-                            "stringques": "Có chính sách đổi trả hàng đã giảm giá không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đổi/Trả hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.046",
-                            "stringques": "Làm thế nào để đặt hàng nhanh?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.047",
-                            "stringques": "Có chính sách hủy đơn hàng sau khi đã xác nhận không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đơn hàng"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.048",
-                            "stringques": "Làm thế nào để theo dõi mã vận đơn của đơn hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Vận chuyển"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.049",
-                            "stringques": "Có thể đặt hàng từ nước ngoài không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.050",
-                            "stringques": "Làm thế nào để xem danh sách sản phẩm yêu thích?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Yêu thích"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.051",
-                            "stringques": "Có chính sách vận chuyển quốc tế không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Vận chuyển"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.052",
-                            "stringques": "Làm thế nào để đặt hàng trước?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.053",
-                            "stringques": "Có chính sách đổi trả hàng trong bao lâu kể từ ngày mua?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đổi/Trả hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.054",
-                            "stringques": "Làm thế nào để đổi ngôn ngữ trên trang web?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Ngôn ngữ"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.055",
-                            "stringques": "Có chính sách hoàn tiền khi sản phẩm hỏng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Hoàn tiền"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.056",
-                            "stringques": "Làm thế nào để thêm sản phẩm vào giỏ hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giỏ hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.057",
-                            "stringques": "Có thể sử dụng nhiều mã giảm giá cho một đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.058",
-                            "stringques": "Làm thế nào để đăng xuất khỏi tài khoản?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.059",
-                            "stringques": "Có thể thay đổi đơn hàng đã xác nhận không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đơn hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.060",
-                            "stringques": "Làm thế nào để tìm kiếm sản phẩm theo danh mục?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tìm kiếm"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },{
-                            "id": "Q.061",
-                            "stringques": "Có thể đặt hàng từ ứng dụng di động của Hachi Hachi không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Ứng dụng di động"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.062",
-                            "stringques": "Làm thế nào để xem lịch sử mua hàng của tôi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Lịch sử mua hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.063",
-                            "stringques": "Có thể sử dụng nhiều hình thức vận chuyển cho một đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Vận chuyển"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.064",
-                            "stringques": "Làm thế nào để kiểm tra tính khả dụng của một sản phẩm?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.065",
-                            "stringques": "Có thể đặt hàng bằng cách gọi điện thoại không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.066",
-                            "stringques": "Làm thế nào để yêu cầu hỗ trợ trực tuyến?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Hỗ trợ trực tuyến"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.067",
-                            "stringques": "Có thể sử dụng thẻ quà tặng để thanh toán trực tuyến không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.068",
-                            "stringques": "Làm thế nào để thêm một địa chỉ mới vào danh sách địa chỉ của tôi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Địa chỉ"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.069",
-                            "stringques": "Có thể đặt hàng trước ngày phát hành sản phẩm không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.070",
-                            "stringques": "Làm thế nào để sử dụng mã giảm giá khi thanh toán?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.071",
-                            "stringques": "Có thể đặt hàng trực tuyến và nhận hàng trực tiếp tại cửa hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.072",
-                            "stringques": "Làm thế nào để thay đổi số lượng sản phẩm trong giỏ hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giỏ hàng"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.073",
-                            "stringques": "Có thể sử dụng nhiều phiếu quà tặng cho một đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.074",
-                            "stringques": "Làm thế nào để theo dõi trạng thái vận chuyển của đơn hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Vận chuyển"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.075",
-                            "stringques": "Có thể đặt hàng tại cửa hàng với giá online không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.076",
-                            "stringques": "Làm thế nào để đặt hàng có thể nhận được ưu đãi?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Ưu đãi"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.077",
-                            "stringques": "Có thể đặt hàng trước một khoảng thời gian cố định không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.078",
-                            "stringques": "Làm thế nào để đặt hàng mà không cần tài khoản?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.079",
-                            "stringques": "Có thể sử dụng nhiều hình thức thanh toán cho một đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.080",
-                            "stringques": "Làm thế nào để xem các chương trình khuyến mãi đang diễn ra?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.081",
-                            "stringques": "Có thể thay đổi địa chỉ giao hàng sau khi đã xác nhận đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giao hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.082",
-                            "stringques": "Làm thế nào để xác định thời gian giao hàng dự kiến?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giao hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.083",
-                            "stringques": "Có thể đặt hàng từ nhiều quốc gia khác nhau không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.084",
-                            "stringques": "Làm thế nào để đặt hàng mà không cần đăng ký tài khoản?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.085",
-                            "stringques": "Có thể sử dụng mã giảm giá sau khi đã đặt hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.086",
-                            "stringques": "Làm thế nào để tìm kiếm thông tin sản phẩm dựa trên giá?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tìm kiếm"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.087",
-                            "stringques": "Có thể yêu cầu giao hàng đến địa chỉ khác với địa chỉ thanh toán không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Giao hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.088",
-                            "stringques": "Làm thế nào để đánh giá chất lượng sản phẩm?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đánh giá"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.089",
-                            "stringques": "Có thể tìm kiếm sản phẩm dựa trên thương hiệu không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tìm kiếm"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.090",
-                            "stringques": "Làm thế nào để sử dụng mã giảm giá được gửi qua email?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.091",
-                            "stringques": "Có thể đặt hàng và chuyển đến nhiều địa chỉ khác nhau không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.092",
-                            "stringques": "Làm thế nào để yêu cầu việc đóng gói quà tặng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đóng gói quà tặng"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.093",
-                            "stringques": "Có thể yêu cầu đặt hàng qua điện thoại không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.094",
-                            "stringques": "Làm thế nào để đặt hàng mà không cần truy cập internet?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.095",
-                            "stringques": "Có thể đặt hàng với số lượng lớn không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.096",
-                            "stringques": "Làm thế nào để xem thông tin sản phẩm chi tiết?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Sản phẩm"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.097",
-                            "stringques": "Có thể đặt hàng và nhận hàng tại cửa hàng sau khi đặt trực tuyến không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.098",
-                            "stringques": "Làm thế nào để xác nhận việc đặt hàng?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Đặt hàng"],
-                            "timelimit": "45",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.099",
-                            "stringques": "Có thể sử dụng nhiều phiếu quà tặng cho một đơn hàng không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Thanh toán"],
-                            "timelimit": "30",
-                            "status": "3"
-                          },
-                          {
-                            "id": "Q.100",
-                            "stringques": "Làm thế nào để tìm kiếm sản phẩm theo màu sắc?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tìm kiếm"],
-                            "timelimit": "35",
-                            "status": "4"
-                          },
-                          {
-                            "id": "Q.101",
-                            "stringques": "Có thể sử dụng mã giảm giá trên cả sản phẩm giảm giá không?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Khuyến mãi"],
-                            "timelimit": "40",
-                            "status": "1"
-                          },
-                          {
-                            "id": "Q.102",
-                            "stringques": "Làm thế nào để đặt hàng nhanh khi đã có tài khoản?",
-                            "type": "Dạng một câu lựa chọn",
-                            "group": ["Tài khoản"],
-                            "timelimit": "45",
-                            "status": "1"
-                          }
-                        ]
+                                    "PositionID": "ACAD",
+                                    "PositionName": "Admin cửa hàng",
+                                    "DepartmentName": "Kế toán",
+                                    "CompetenceID": "add1",
+                                    "CompetenceName": "add1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "AC",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 8,
+                                    "Code": 10686,
+                                    "Framework": 10103,
+                                    "Competence": 13,
+                                    "Position": 40,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:03.67",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "BDGD",
+                                    "PositionName": "Giám đốc",
+                                    "DepartmentName": "Ban Giám đốc",
+                                    "CompetenceID": "add1",
+                                    "CompetenceName": "add1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "BD",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 2,
+                                    "Code": 10682,
+                                    "Framework": 10103,
+                                    "Competence": 13,
+                                    "Position": 1,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:57:52.233",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "LGWE",
+                                    "PositionName": "Nhân viên kho",
+                                    "DepartmentName": "Hội đồng thành viên",
+                                    "CompetenceID": "add1",
+                                    "CompetenceName": "add1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "BOM",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 1,
+                                    "Code": 10690,
+                                    "Framework": 10103,
+                                    "Competence": 13,
+                                    "Position": 53,
+                                    "CompetenceLevel": 3,
+                                    "CompetenceLevelMax": 3,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:06.39",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "ACAD",
+                                    "PositionName": "Admin cửa hàng",
+                                    "DepartmentName": "Kế toán",
+                                    "CompetenceID": "test1",
+                                    "CompetenceName": "năng lực 1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "AC",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 8,
+                                    "Code": 10684,
+                                    "Framework": 10103,
+                                    "Competence": 3,
+                                    "Position": 40,
+                                    "CompetenceLevel": 1,
+                                    "CompetenceLevelMax": 3,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:03.67",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "BDGD",
+                                    "PositionName": "Giám đốc",
+                                    "DepartmentName": "Ban Giám đốc",
+                                    "CompetenceID": "test1",
+                                    "CompetenceName": "năng lực 1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "BD",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 2,
+                                    "Code": 10680,
+                                    "Framework": 10103,
+                                    "Competence": 3,
+                                    "Position": 1,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:57:46.593",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "LGWE",
+                                    "PositionName": "Nhân viên kho",
+                                    "DepartmentName": "Hội đồng thành viên",
+                                    "CompetenceID": "test1",
+                                    "CompetenceName": "năng lực 1",
+                                    "CategoryName": "Cốt lõi",
+                                    "DepartmentID": "BOM",
+                                    "CategoryID": "CL",
+                                    "Category": 3,
+                                    "Department": 1,
+                                    "Code": 10688,
+                                    "Framework": 10103,
+                                    "Competence": 3,
+                                    "Position": 53,
+                                    "CompetenceLevel": 1,
+                                    "CompetenceLevelMax": 4,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:06.39",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "ACAD",
+                                    "PositionName": "Admin cửa hàng",
+                                    "DepartmentName": "Kế toán",
+                                    "CompetenceID": "Mô tả 1test",
+                                    "CompetenceName": "Mô tả 1test",
+                                    "CategoryName": "Năng lực bổ trợ",
+                                    "DepartmentID": "AC",
+                                    "CategoryID": "BT",
+                                    "Category": 4,
+                                    "Department": 8,
+                                    "Code": 10685,
+                                    "Framework": 10103,
+                                    "Competence": 5,
+                                    "Position": 40,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:03.67",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "BDGD",
+                                    "PositionName": "Giám đốc",
+                                    "DepartmentName": "Ban Giám đốc",
+                                    "CompetenceID": "Mô tả 1test",
+                                    "CompetenceName": "Mô tả 1test",
+                                    "CategoryName": "Năng lực bổ trợ",
+                                    "DepartmentID": "BD",
+                                    "CategoryID": "BT",
+                                    "Category": 4,
+                                    "Department": 2,
+                                    "Code": 10681,
+                                    "Framework": 10103,
+                                    "Competence": 5,
+                                    "Position": 1,
+                                    "CompetenceLevel": 3,
+                                    "CompetenceLevelMax": 5,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:57:48.53",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "LGWE",
+                                    "PositionName": "Nhân viên kho",
+                                    "DepartmentName": "Hội đồng thành viên",
+                                    "CompetenceID": "Mô tả 1test",
+                                    "CompetenceName": "Mô tả 1test",
+                                    "CategoryName": "Năng lực bổ trợ",
+                                    "DepartmentID": "BOM",
+                                    "CategoryID": "BT",
+                                    "Category": 4,
+                                    "Department": 1,
+                                    "Code": 10689,
+                                    "Framework": 10103,
+                                    "Competence": 5,
+                                    "Position": 53,
+                                    "CompetenceLevel": 2,
+                                    "CompetenceLevelMax": 5,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:06.39",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "ACAD",
+                                    "PositionName": "Admin cửa hàng",
+                                    "DepartmentName": "Kế toán",
+                                    "CompetenceID": "test3",
+                                    "CompetenceName": "năng lực 3",
+                                    "CategoryName": "Năng lực marketing",
+                                    "DepartmentID": "AC",
+                                    "CategoryID": "MA",
+                                    "Category": 5,
+                                    "Department": 8,
+                                    "Code": 10687,
+                                    "Framework": 10103,
+                                    "Competence": 8,
+                                    "Position": 40,
+                                    "CompetenceLevel": 1,
+                                    "CompetenceLevelMax": 1,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:03.67",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "BDGD",
+                                    "PositionName": "Giám đốc",
+                                    "DepartmentName": "Ban Giám đốc",
+                                    "CompetenceID": "test3",
+                                    "CompetenceName": "năng lực 3",
+                                    "CategoryName": "Năng lực marketing",
+                                    "DepartmentID": "BD",
+                                    "CategoryID": "MA",
+                                    "Category": 5,
+                                    "Department": 2,
+                                    "Code": 10683,
+                                    "Framework": 10103,
+                                    "Competence": 8,
+                                    "Position": 1,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:57:55.42",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                },
+                                {
+                                    "PositionID": "LGWE",
+                                    "PositionName": "Nhân viên kho",
+                                    "DepartmentName": "Hội đồng thành viên",
+                                    "CompetenceID": "test3",
+                                    "CompetenceName": "năng lực 3",
+                                    "CategoryName": "Năng lực marketing",
+                                    "DepartmentID": "BOM",
+                                    "CategoryID": "MA",
+                                    "Category": 5,
+                                    "Department": 1,
+                                    "Code": 10691,
+                                    "Framework": 10103,
+                                    "Competence": 8,
+                                    "Position": 53,
+                                    "CompetenceLevel": null,
+                                    "CompetenceLevelMax": null,
+                                    "CreateBy": "Nguyễn Văn Hachi",
+                                    "CreateTime": "2024-03-29T16:58:06.39",
+                                    "LastModifiedBy": null,
+                                    "LastModifiedTime": null
+                                }
+                        ]          
                       }
                     ]
                     

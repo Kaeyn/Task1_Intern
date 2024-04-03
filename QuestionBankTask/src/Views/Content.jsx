@@ -1,219 +1,254 @@
 import React, { useEffect, useState } from 'react'
-import StatusFilter from './StatusFilter'
-import DataFilter from './DataFilter'
-import DataList from './DataList'
-import PageFilter from './PageFilter'
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import '../css/Content.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faCheckCircle, faCircleCheck, faCircleMinus, faEye, faPencil, faShare, faTrash, faTriangleExclamation} from "@fortawesome/free-solid-svg-icons"
+import { faCheckCircle, faChevronRight, faCircleCheck, faCircleMinus, faCirclePlus, faEye, faInfoCircle, faPencil, faShare, faTrash, faTriangleExclamation } from "@fortawesome/free-solid-svg-icons"
 
-const Content = ({contentData , setIsFuncDisable, showToast}) => {
-  const [Data, setData] = useState([]);
+const Content = ({ contentData, setIsFuncDisable, showToast }) => {
   const [baseData, setBaseData] = useState([]);
-  const [preFilteredData, setPreFilteredData] = useState([]);
-  const [FilteredData, setFilteredData] = useState([]);
+  const [positionList, setPositionList] = useState([])
+  const [competenceList, setCompetenceList] = useState([])
+  const [competenceLevelList, setCompetenceLevelList] = useState([])
+  const [updatedValue, setUpdatedValue] = useState(false);
+  const [oldValue, setOldValue] = useState(0);
 
-  const [isNoFilter, setIsNoFilter] = useState(false);
-  const [isFiltering, setIsFiltering] = useState(true);
-  const [isDelete, setIsDelete] = useState(false);
-  const [isConfirmDelete, setIsConfirmDelete] = useState(false);
-  const [isPageChanging, setIsPageChanging] = useState(false);
-  const [contentIsEmpty, setContentIsEmpty] = useState(false);
-  const [statusFilter, setstatusFilter] = useState([]);
-  const [searchInputFilter, setSearchInputFilter] = useState("");
-  const [alertBoxData, setAlertBoxData] = useState([]);
-  const [showAlertBox, setShowAlertBox] = useState(false);
-  const [listItemToDelete, setListItemToDelete] = useState([]);
-  const [resetStatusFunc, setResetStatusFunc] = useState(false);
-  const [isFuncFilterDisable, setIsFuncFilterDisable] = useState(false);
-  const [resetContentTrig, setResetContentTrig] = useState(false);
-  const [disableFocus, setDisableFocus] = useState(false);
-  const [isActionClicked, setIsActionClicked] = useState(false);
-  const [actionedData, setActionedData] = useState([]);
-  const filterData = () =>{
-
-    let filterByStatus = [];
-    if (statusFilter.length === 0) {
-      filterByStatus = contentData;
-    } else {
-      let updatedStatusFilter = [...statusFilter]; 
-      if (updatedStatusFilter.includes(0)) {
-          updatedStatusFilter.push(4);
+  const getFrameData = () => {
+    const newPositionList = [];
+    const newCompetenceList = [];
+    baseData.forEach(data => {
+      if (!newPositionList.some(item => item.PositionID === data.PositionID)) {
+        newPositionList.push(data)
       }
-      const tempListData = Data.filter(item => updatedStatusFilter.includes(parseInt(item.status)));
-      filterByStatus = tempListData;
+      if (!newCompetenceList.some(item => item.CompetenceID === data.CompetenceID)) {
+        newCompetenceList.push(data)
+      }
+    });
+    setPositionList(newPositionList)
+    setCompetenceList(newCompetenceList)
+  }
+
+  const getLevel = () => {
+    let competenceLevelList = Array.from({ length: competenceList.length }, () => Array(positionList.length).fill().map(() => []));
+
+    for (let i = 0; i < competenceList.length; i++) {
+      for (let j = 0; j < positionList.length; j++) {
+        baseData.forEach(data => {
+          if (competenceList[i].CompetenceID === data.CompetenceID && positionList[j].PositionID === data.PositionID) {
+            competenceLevelList[i][j].push(data)
+          }
+        })
+      }
+    }
+    // competenceLevelList = competenceLevelList.map(row => row.filter(item => item.length > 0));
+
+    setCompetenceLevelList(competenceLevelList)
+    setUpdatedValue(false);
+    console.log(competenceLevelList)
+  }
+
+  const updateValue = (e, datacode, field) => {
+    let positionName, competenceName;
+    const newValue = (e.target.value.trim() === "" || e.target.value <= 0 || e.target.value > 10) ? oldValue : parseInt(e.target.value);
+    const updatedBaseData = baseData.map((item) => {
+      if (item.Code === datacode) {
+        positionName = item.PositionName;
+        competenceName = item.CompetenceName;
+        let updatedItem = { ...item, [field]: newValue };
+
+        if (field === "CompetenceLevel" && (item.CompetenceLevelMax === "" || item.CompetenceLevelMax === null || item.CompetenceLevelMax < newValue)) {
+          updatedItem = { ...updatedItem, CompetenceLevelMax: newValue };
+        } else if (field === "CompetenceLevelMax" && (item.CompetenceLevel === "" || item.CompetenceLevel === null)) {
+          updatedItem = { ...updatedItem, CompetenceLevel: newValue };
+        }
+
+        return updatedItem
+      } else {
+        return item;
+      }
+    });
+
+    setBaseData(updatedBaseData)
+    setUpdatedValue(true);
+
+    if (e.target.value <= 0 || e.target.value > 10) {
+      showToast("Vui lòng nhập giá trị trong khoảng 0 - 10 !", "error")
+    } else if (newValue != oldValue) {
+      showToast("Cập nhập khung năng lực thành công!\n " + positionName + " - " + competenceName)
     }
 
-    let filterBySearch = [];
-    if(searchInputFilter.trim() === ""){
-      filterBySearch = filterByStatus;
-    }else{
-      let searchText = searchInputFilter.toLowerCase();
-      filterBySearch = filterByStatus.filter(item =>
-        item.id.toLowerCase().includes(searchText) ||
-        item.stringques.toLowerCase().includes(searchText)
-      );
-    }
-    
-    setFilteredData(filterBySearch);
-    setBaseData(filterBySearch)
-    setPreFilteredData(filterBySearch);
 
   }
-
-  const ShowAlertBox = (questList)=>{
-    setListItemToDelete(questList)
-    setAlertBoxData(getAlertBoxContent(questList));
-    setShowAlertBox(true);
+  const Icon = ({ classIcon, color, size }) => {
+    const iconSize = {
+      width: size,
+      height: size,
+      color: color,
+      cursor: "pointer"
+    };
+    return (
+      <FontAwesomeIcon icon={classIcon} style={iconSize} />
+    )
   }
 
-  const handleFormartMessage = (messageInput, typeInput) =>{
-    return [{message : messageInput, type : typeInput}]
-  }
 
-  const confirmDeleteItem = () =>{
-    
-    const idsToDelete = listItemToDelete.map(question => question.id);
-    const updatedFilteredData = preFilteredData.filter(item => !idsToDelete.includes(item.id));
-    const updatedFilteredBaseData = baseData.filter(item => !idsToDelete.includes(item.id));
-    const message = "Xoá thành công " + listItemToDelete.length +" item"
-    const type = "success"
-    setIsConfirmDelete(true);
-    setShowAlertBox(false);
-    showToast(message, type)
-    setBaseData(updatedFilteredBaseData)
-    setIsDelete(true);
-    setPreFilteredData(updatedFilteredData);
-  }
 
-  const unConfirmDelete = () =>{
-    setShowAlertBox(false);
-    setIsConfirmDelete(false);
-  }
-  
-  const getAlertBoxContent = (questList) =>{
-    const contentList = questList.slice(0, 3).map(question => {
-      const limitedContent = question.stringques.slice(0, 38);
-      return limitedContent;});
-    return contentList;
-  }
+  const calcIconPos = (text) => {
+    const textLength = text.length;
+    // Assuming initial right position
+    let rightPosition = 35 - (textLength - 3) * 3;
 
-  const resetFilter = () =>{
-    setFilteredData(Data)
-    setResetStatusFunc(!resetStatusFunc)
-    filterData();
-  }
+    // Set a minimum right position to prevent negative values
 
-  const handleDocumentClick = () => {
-    setDisableFocus(!disableFocus);
+    return `${rightPosition}px`;
   };
 
+  const handleChangeValue = (e, competenceIndex, positionIndex, minormax) => {
+    const { value } = e.target;
+    const updatedCompetenceLevelList = [...competenceLevelList];
+    if (minormax == 0) {
+      updatedCompetenceLevelList[competenceIndex][positionIndex][0].CompetenceLevel = value;
+    }
+    else {
+      updatedCompetenceLevelList[competenceIndex][positionIndex][0].CompetenceLevelMax = value;
+    }
+    setCompetenceLevelList(updatedCompetenceLevelList);
+  };
 
-  const Icon = ({ classIcon, color }) => {
-    const iconSize = {
-        width: "30px",
-        height: "30px",
-        color: color,
-        cursor: ""
-    };
-    return (
-        <FontAwesomeIcon icon={classIcon} style={iconSize} />
-    )
-  }
+  //Lấy data từ Module AssessmentManage
+  useEffect(() => {
+    setBaseData(contentData)
 
-  const Icon24px = ({ classIcon, color }) => {
-    const iconSize = {
-        width: "24x",
-        height: "24px",
-        color: color,
-        cursor: ""
-    };
-    return (
-        <FontAwesomeIcon icon={classIcon} style={iconSize} />
-    )
-  }
-
-  useEffect(() => {     
-    setData(contentData);
   }, [contentData])
 
- 
-  useEffect(() =>{
-    filterData();
-    setIsFiltering(!isFiltering)
-  },[statusFilter,contentData])
-
-  useEffect(() =>{
-    filterData();
-    setIsFiltering(!isFiltering)
-  },[searchInputFilter, contentData])
-
-  useEffect(() =>{
-      setIsFuncDisable(isFuncFilterDisable)
-  }, [isFuncFilterDisable])
-
-  useEffect(() =>{
-    resetFilter();
-  }, [resetContentTrig])
+  //Xử lí data từ Module AssessmentManage
+  useEffect(() => {
+    getFrameData()
+  }, [baseData])
 
   useEffect(() => {
-    if(statusFilter.length != 0){
-      filterData();
-    }  
-  }, [isActionClicked]);
-
+    getLevel();
+  }, [positionList, competenceList])
 
   return (
-    <div className='relative wrapper whitespace-nowrap'>
-        <div className={`w-[100%] flex flex-col ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><StatusFilter listStatusFilter={setstatusFilter} resetStatus={resetStatusFunc} /></div>
-        <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className={`w-[100%] py-[1.5vh] flex ${isFuncFilterDisable ? "pointer-events-none opacity-80" : ""}`} onClick={handleDocumentClick}><DataFilter searchInput={setSearchInputFilter} resetContent={setResetContentTrig}/></div>
-        <div className='border-b-[0.12rem] border-[#BDC2D2] w-[100%]'></div>
-        <div className='w-[100%] h-[68.13vh] flex p-[0.4vh] dataList_container'><DataList dataFromContent={preFilteredData} originData={contentData} ShowAlertBox={ShowAlertBox} setIsFuncDisable={setIsFuncFilterDisable} showToast={showToast} isConfirmDelete={isConfirmDelete} setIsConfirmDelete={setIsConfirmDelete} disableFocus={disableFocus} onclickDisableFocus={handleDocumentClick} actionedData={setActionedData} isActionClicked={setIsActionClicked} contentIsEmpty={setContentIsEmpty}/></div>
-        <div className={`w-[100%] h-[6.8vh] flex pl-[0.4vh] pr-[0.4vh] fixed bottom-0 `} onClick={handleDocumentClick}><PageFilter Data={FilteredData} setCurpageData={setPreFilteredData} originData={contentData} contentIsFilter={isFiltering} isDelete={isDelete} baseData={baseData} isPageChanging={setIsPageChanging} contentIsEmpty={contentIsEmpty} isActionClicked={isActionClicked} isNoFilter={isNoFilter}/></div>      
-        {showAlertBox ? 
-        <div className='absolute inset-0 flex items-center justify-center bg-black bg-opacity-50'>  
-        {alertBoxData ? alertBoxData.map((questdata, index) => 
-          <div className='flex flex-col w-[30%] h-[35%] bg-[#FFFFFF] shadow-md absolute top-1/2 -translate-x-1/2 left-1/2 -translate-y-1/2 alertbox'>
-                <div className='flex w-[100%] h-[20%] border-[#C3C3C3] border-b-[0.12rem] justify-center items-center gap-3'>
-                <div><Icon classIcon={faTriangleExclamation} color={"#FD7676"}/></div>
-                <div className='font-[650] text-[#FD7676] text-[18px]'>XOÁ CÂU HỎI</div>
+    <div className='content-container'>
+      <div className='competence-cate-func'>
+        <div className="competence-cate">
+          <div className='font-[700] text-[#1A6634]'>ĐÁNH GIÁ NHÂN SỰ</div>
+          <div><Icon classIcon={faChevronRight} color={"#1A6634"} size={"16px"}></Icon></div>
+          <div className='font-[700] text-[#1A6634]'>KHUNG NĂNG LỰC</div>
+          <div><Icon classIcon={faChevronRight} color={"#BDC2D2"} size={"16px"}></Icon></div>
+          <div className='font-[700] text-[#959DB3]' >CHI TIẾT KHUNG NĂNG LỰC</div> 
+        </div>
+        <div className='competence-func'>
+          <div>
+            <div>ICON</div>
+            <div>XOÁ KHUNG NL</div>
+          </div>
+          <div>
+            <div>ICON</div>
+            <div>GỬI DUYỆT</div>
+          </div>
+          <div>
+            <div>ICON</div>
+            <div>THÊM MỚI</div>
+          </div>
+        </div>
+      </div>
+      <div className='competence-detail-container'>
+        <div className='detail-title-text'>THÔNG TIN KHUNG NĂNG LỰC </div>
+        <div className='detail-frame'>
+          <div className='datetime-status'>
+            <div className='font-[700]'>Ngày hiệu lực khung năng lực</div>
+            <div className=''>
+              <LocalizationProvider dateAdapter={AdapterDayjs}>
+                <DatePicker label="" sx={{
+                  width: '43%',
+                  backgroundColor: "#EDEFF3",
+                }} />
+              </LocalizationProvider>
+            </div>
+            <div className='font-[700]'>Tình trạng</div>
+            <div className='text-[#1A6634] font-[700]'>Đã phê duyệt</div>
+          </div>
+          <div className='name-des'>
+                <div className='font-[700]'>Tên khung năng lực</div>
+                <div className=''><input type="text" name="" id="" className='competence-name-input'/></div>
+                <div className='font-[700]'>Diễn giải</div>
+                <div><textarea name="" id="" className='competence-detail-input' ></textarea></div>
+          </div>
+        </div>
+      </div>
+      <div className='competence-frame-container'>
+        <div className='detail-title-text'>CHI TIẾT KHUNG NĂNG LỰC</div>
+        <div className='competence-frame'>
+          <div className='competence-container'>
+            <div className='title-container col-position-width row-item-height'>
+              <div className='h-[49.5%] text-right mr-[30px]  text-[#5A6276] font-[600]'>Năng lực</div>
+              <div className='split-line'></div>
+              <div className='h-[49.5%] text-left ml-[30px] text-[#5A6276] font-[600]'>Chức danh</div>
+            </div>
+            <div className='position-items'>
+              {positionList.map((item, index) => (
+                <div className='position-item col-position-width row-item-height '>
+                  <div className='truncate' title={item.PositionID}>{item.PositionID}</div>
+                  <div className={`w-[2px] h-[18px] bg-[#C4C4C4] rounded-[3px]`}></div>
+                  <div className='truncate' title={item.PositionName}>{item.PositionName}</div>
                 </div>
-                <div className='w-[100%] h-[60%] flex flex-col justify-center'>
-                <div className='flex-col justify-center text-center items-center p-[7px]'>
-                  <div className='text-[17px]'>Bạn chắc chắn muốn xóa phân nhóm</div>
-                  {alertBoxData.length == 1 && <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>}
-                  {alertBoxData.length == 2 && 
-                                              <div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
-                                              </div>                  
-                  } 
-                  {alertBoxData.length >= 3 && 
-                                              <div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>{questdata}</div>
-                                                <div className='text-[16px] text-[#36C8CF] font-bold'>...</div>
-                                              </div>                  
-                  }      
-
-                    <div>Đơn vị bị xóa sẽ <span style={{ color: '#FD7676' }}>KHÔNG</span> thể khôi phục lại.</div>
-                </div>
-                </div>
-                <div className='w-[100%] h-[20%] flex border-[#C3C3C3] border-t-[0.12rem] cursor-pointer' >
-                  <div className='w-[50%] flex justify-center items-center border-[#C3C3C3] border-r-[0.12rem]' onClick={unConfirmDelete}>
-                      <div className='text-[16px] font-[600] text-[#959DB3] '>KHÔNG XOÁ</div>
-                    </div>
-                  <div className='w-[50%] flex justify-center items-center gap-3 bg-red-400 cursor-pointer' onClick={confirmDeleteItem}>
-                      <div className=''> <Icon24px classIcon={faTrash} color={"#FFFFFF"}/></div>      
-                      <div className='text-[16px] font-[550] text-[#FFFFFF]'>XOÁ</div>         
-                  </div>
+              ))}
+              <div className='col-position-width add-item-position cursor-pointer' title='Thêm chức danh' onClick={() => showToast("Chọn chức năng thêm chức danh")}>
+                <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
+                <div className=''>Thêm chức danh</div>
               </div>
-            </div>) : ""}     
-        
-        </div> : ""
-        }       
-    </div>      
+            </div>
+
+          </div>
+          <div className='position-level-container'>
+            <div className='competence-items row-item-height'>
+              {competenceList.map((item, index) => (
+                <div className='competence-item row-item-height'>
+                  <div className='h-[50%] relative font-[700] truncate' title={`${item.CompetenceName}`}>
+                    {item.CompetenceName}
+                    {/* <div className={`absolute `}><Icon classIcon={faInfoCircle} color={"#31ADFF"} size={"8px"}/></div> */}
+                  </div>
+                  <div className='level-container'>
+                    <div className='min-max-item'>Min</div>
+                    <div className='min-max-item'>Max</div>
+                  </div>
+                </div>
+              ))}
+              <div className='flex items-center justify-center row-item-height'>
+                <div className='add-competence-item cursor-pointer' title='Thêm năng lực' onClick={() => showToast("Chọn chức năng thêm năng lực")}>
+                  <div className='h-full flex flex-col justify-center'><Icon classIcon={faCirclePlus} color={"#1A6634"} size={"20px"} /></div>
+                  <div className=''>Thêm năng lực</div>
+                </div>
+
+              </div>
+            </div>
+            <div className='competence-level-container'>
+              {!updatedValue && competenceLevelList.map((data, index) => (
+                <div className={`flex flex-col ${index % 2 != 0 ? "bg-[#DBDEE7]" : ""}`} key={index}>
+                  {positionList.map((item, i) => {
+                    return ((data[i] && data[i].length > 0) ? (<div className='competence-level-item row-item-height' key={i}>
+                      {/* {console.log("Min: " + data[i][0].CompetenceLevel + " Max: " + data[i][0].CompetenceLevelMax)} */}
+
+                      <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Min"} type="number" value={data[i][0].CompetenceLevel} onChange={(e) => handleChangeValue(e, index, i, 0)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevel')} onFocus={() => setOldValue(data[i][0].CompetenceLevel)} /></div>
+                      <div data-code={data[i][0].Code} className='min-max-item'><input className='input-competence' id={data[i][0].Code + "Max"} type="number" value={data[i][0].CompetenceLevelMax} onChange={(e) => handleChangeValue(e, index, i, 1)} onBlur={(e) => updateValue(e, data[i][0].Code, 'CompetenceLevelMax')} onFocus={() => setOldValue(data[i][0].CompetenceLevelMax)} /></div>
+                      {/* <div className='min-max-item'>{data[i][0].CompetenceLevel == null ? "null" : data[i][0].CompetenceLevel}</div>
+                    <div className='min-max-item'>{data[i][0].CompetenceLevelMax == null ? "null" : data[i][0].CompetenceLevelMax}</div> */}
+                    </div>) : "")
+
+
+                  })}
+                </div>
+              ))}
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

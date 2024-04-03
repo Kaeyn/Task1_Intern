@@ -1,0 +1,231 @@
+.content-container{
+    padding: 10px
+}
+.competence-frame-container{
+    width: 1610px;
+    height: 400px;
+}
+
+.competence-frame{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.competence-container{
+    height: 100%;
+    background: #D1E0D6;
+    display: flex;
+    flex-direction: column; 
+    position: relative; 
+    border-left: 1px solid #81AA8F;
+    border-right: 1px solid #81AA8F;
+    border-bottom: 1px solid #81AA8F;
+}
+
+.split-line{
+    width: 100%;
+    border-bottom: 1px dashed black;
+    transform: rotate(14deg);
+    
+}
+
+.competence-items{
+    display: flex;
+    position: relative;
+    width: 1380px;
+    background-color: #D1E0D6;
+    border-top: 1px solid #81AA8F;
+    border-bottom: 1px solid #81AA8F;
+    border-right: 1px solid #81AA8F;
+}
+
+.competence-item{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    width: 130px;
+    color: #5A6276;
+}
+
+.add-competence-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    position: absolute;
+    right: 0;
+    padding-right: 15px;
+    color: #1A6634;
+}
+
+.level-container{
+    display: flex;
+    height: 50%;
+}
+
+.min-max-item{
+    width: 50%;
+    text-align: center;
+}
+
+.row-item-height{
+    height: 60px;
+}
+
+
+.position-items{
+    display: flex;
+    flex-direction: column;  
+    background-color: #D1E0D6;
+}
+
+.position-item{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 0.5rem;
+    padding-left: 13px;
+    font-size: 15px;
+}
+
+.col-position-width{
+    width: 220px;
+}
+
+.add-item-position{
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    color: #1A6634;
+    height: 30px;
+    margin-bottom: 15px;
+}
+
+.title-container{ 
+    background-color: #ACC7B5;
+    border-top: 1px solid #81AA8F;
+    border-bottom: 1px solid #81AA8F;
+}
+
+.position-level-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.competence-level-container{
+    width: 1380px;
+    height: 680px;
+    background-color: white;
+    display: flex;
+}
+
+.competence-level-item{
+    width: 130px;
+    display: flex;
+    align-items: center;
+}
+
+.input-competence{ 
+    width: 40px;
+    outline: 1px black;
+    text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    background-color: transparent;
+}
+
+.input-competence:focus-visible{
+    outline: 1px solid black;
+}
+.input-competence:hover{
+    outline: 1px solid black;
+}
+
+.input-competence::-webkit-inner-spin-button, 
+.input-competence::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+.detail-title-text{
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.competence-detail-container{
+    height: 330px;
+}
+
+.detail-frame{
+    height: 280px;
+    background-color: white;
+    display: flex;
+    padding: 20px;
+}
+
+.datetime-status{
+    color: #959DB3;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.name-des{
+    width: 75%;
+    color: #959DB3;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.competence-name-input{
+    width: 100%;
+    border: 2px solid #DBDEE7;
+    border-radius: 4px;
+    color: black;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.competence-detail-input{
+    min-width: 100%;
+    min-height: 140px;
+    max-width: 100%;
+    max-height: 140px;
+    border: 2px solid #DBDEE7;
+    border-radius: 4px;
+    color: black;
+}
+
+.competence-cate-func{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #C9CEDB;
+}
+
+.competence-cate{
+    display: flex;
+    gap: 0.3rem;
+    
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+.competence-func{
+    display: flex;
+    gap: 0.3rem;
+    padding-top: 13px;
+    padding-bottom: 13px;
+}

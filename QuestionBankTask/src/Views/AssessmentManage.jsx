@@ -8,7 +8,6 @@ import { faCheckCircle, faXmarkCircle } from '@fortawesome/free-solid-svg-icons'
 import { Flip, ToastContainer, Zoom, toast } from 'react-toastify';
   import 'react-toastify/dist/ReactToastify.css';
 const QuestionBank = () => {
-  const [cateNhanSu, setCateNhanSu] = useState(7)
   const [dataList, setDataList] = useState();
   const [selectedCategory, setSelectedCategory] = useState(1);
   const [selectedCategoryChild, setSelectedCategoryChild] = useState(-1);
@@ -23,8 +22,9 @@ const QuestionBank = () => {
     const categories = moduleData.flatMap(module => module.category || []);
     const childCategories = categories.flatMap(category => category.catechild || []);
     const selectedChildCategories = childCategories.filter(child => child.id === childCateId);
+    
     if (selectedChildCategories.length > 0) {
-      setContentData(selectedChildCategories[0].content || []);
+      setContentData(selectedChildCategories[0]?.content || []);
       setCategoryData(categories)
       setChildCategoryData(selectedChildCategories);
     } else {
@@ -83,13 +83,10 @@ const QuestionBank = () => {
   },[selectedCategoryChild])
 
   useEffect(() =>{
-    
-    
   },[selectedCategory])
 
   useEffect(() => {     
     setDataList(data);
-    
   }, [dataList])
   
 
