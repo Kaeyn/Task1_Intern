@@ -75,7 +75,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
     setUpdatedValue(true);
     if (e.target.value.trim() != "") {
       if (e.target.value <= 0 || e.target.value > 10) {
-        showToast("Vui lòng nhập giá trị trong khoảng 0 - 10 !", "error")
+        showToast("Vui lòng nhập giá trị trong khoảng 1 - 10 !", "error")
       } else if (newValue != oldValue) {
         showToast("Cập nhập khung năng lực thành công!\n " + positionName + " - " + competenceName)
       }
@@ -167,6 +167,11 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <DatePicker label="" sx={{
                     width: '43%',
+                    '& .MuiInputBase-input': {
+                      fontSize: '13px',
+                      padding: "10px 14px"
+                       // Adjust the font size for placeholder text
+                    },
                     backgroundColor: "#EDEFF3",
                   }} />
                 </LocalizationProvider>
@@ -192,7 +197,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
                 <div className='h-[49.5%] text-left ml-[30px] text-[#5A6276] font-[600]'>Chức danh</div>
               </div>
               <div className='position-items'>
-                <div className=''>
+                <div className='h-[100%]'>
                   {positionList.map((item, index) => (
                     <div className='position-item col-position-width row-item-height '>
                       <div className='truncate' title={item.PositionID}>{item.PositionID}</div>
@@ -210,12 +215,12 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
             </div>
             <div className='position-level-container'>
               <div className='competence-items row-item-height'>
-                <div className='flex '>
+                <div className='flex'>
                   {competenceList.map((item, index) => (
                     <div className='competence-item row-item-height'>
                       <div className='h-[50%] relative font-[700] truncate flex justify-center items-end' title={`${item.CompetenceName}`}>
-                        <div className='flex gap-[0.1rem] text-[17px]'>
-                          <div className='ml-[6px]'>{item.CompetenceName}</div>
+                        <div className='flex gap-[0.1rem] text-[17px] truncate'>
+                          <div className='ml-[6px] truncate'>{item.CompetenceName}</div>
                           <Icon classIcon={faInfoCircle} color={"#31ADFF"} size={"10px"} />
                         </div>
                       </div>
@@ -236,7 +241,7 @@ const Content = ({ contentData, setIsFuncDisable, showToast }) => {
                 </div>
               </div>
               <div className='competence-level-container'>
-                {competenceLevelList.map((data, index) => (
+                {!updatedValue && competenceLevelList.map((data, index) => (
                   <div className={`flex flex-col ${index % 2 != 0 ? "bg-[#DBDEE7]" : ""}`} key={index}>
                     {positionList.map((item, i) => {
                       return ((data[i] && data[i].length > 0) ? (<div className='competence-level-item row-item-height' key={i}>
